@@ -21,7 +21,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --passWithNoTests",
+    "test:dev": "react-scripts test --watchAll",
+    "test-coverage": "react-scripts test --coverage --watchAll=false --passWithNoTests",
     "eject": "react-scripts eject",
     "prepare": "husky install"
   },
@@ -45,5 +47,15 @@
   },
   "devDependencies": {
     "husky": "^8.0.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.tsx",
+      "src/**/*.ts",
+      "!src/index.tsx",
+      "!src/react-app-env.d.ts",
+      "!src/app/hooks.ts",
+      "!src/app/store.ts"
+    ]
   }
 }
