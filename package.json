@@ -15,6 +15,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.5",
     "typescript": "^4.8.2",
@@ -23,9 +24,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --passWithNoTests",
+    "test": "react-scripts test",
     "test:dev": "react-scripts test --watchAll",
-    "test-coverage": "react-scripts test --coverage --watchAll=false --passWithNoTests",
+    "test-coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "prepare": "husky install"
   },
@@ -55,10 +56,7 @@
     "collectCoverageFrom": [
       "src/**/*.tsx",
       "src/**/*.ts",
-      "!src/index.tsx",
-      "!src/react-app-env.d.ts",
-      "!src/store/hooks.ts",
-      "!src/store/store.ts"
+      "!src/index.tsx"
     ]
   }
 }
