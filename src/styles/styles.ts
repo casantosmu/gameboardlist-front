@@ -17,7 +17,7 @@ const styles = {
       secondaryText: "#8c8c8c",
       disable: "#bfbfbf",
       border: "#d9d9d9",
-      background: "#f5f5f5",
+      background: "#ff0f2f5",
     },
   },
 };
