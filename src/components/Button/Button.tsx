@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 import StyledButton from "./StyledButton";
 
-export type ButtonProps<T extends ElementType> = {
+type ButtonProps<T extends ElementType> = {
   renderAs?: T;
   children: ReactNode;
 } & ComponentPropsWithoutRef<T>;
