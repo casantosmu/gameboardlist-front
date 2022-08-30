@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
+import StyledButton from "./StyledButton";
 
 export type ButtonProps<T extends ElementType> = {
   renderAs?: T;
@@ -11,9 +12,9 @@ const Button = <T extends ElementType = "button">({
   ...rest
 }: ButtonProps<T>): JSX.Element => {
   return (
-    <button as={renderAs as ElementType} {...rest}>
+    <StyledButton as={renderAs as ElementType} {...rest}>
       {children}
-    </button>
+    </StyledButton>
   );
 };
 
