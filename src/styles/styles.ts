@@ -18,6 +18,7 @@ const styles = {
       disable: "#bfbfbf",
       border: "#d9d9d9",
       backgroundBody: "#ff0f2f5",
+      light: "#fff",
     },
   },
 };
