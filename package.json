@@ -57,7 +57,6 @@
       "src/**/*.ts",
       "!src/index.tsx",
       "!src/react-app-env.d.ts",
-      "!src/store/hooks.ts",
       "!src/store/store.ts"
     ]
   }
