@@ -16,7 +16,7 @@ describe("Given a Button component", () => {
     });
   });
 
-  describe("When it receives render as anchor with a link", () => {
+  describe("When it renderd as anchor with a link", () => {
     test("Then it should render an anchor with the recived link", () => {
       const expectedLink = "www.some.com";
 
