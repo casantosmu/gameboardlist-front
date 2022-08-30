@@ -21,6 +21,13 @@ const styles = {
       light: "#fff",
     },
   },
+  breakpoints: {
+    small: "33.75rem",
+    medium: "45rem",
+    large: "60rem",
+  },
 };
+
+export type Breakpoints = keyof typeof styles.breakpoints;
 
 export default styles;

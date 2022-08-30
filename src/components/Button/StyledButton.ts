@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-interface StyledButtonProps {
-  as?: React.ElementType;
-}
-
-const StyledButton = styled.button<StyledButtonProps>`
+const StyledButton = styled.button`
   padding: 0.5rem 1rem;
   background-color: ${({ theme }) => theme.colors.brand.normal};
   color: ${({ theme }) => theme.colors.neutral.light};
