@@ -13,10 +13,8 @@ const StyledInput = styled.input`
     color: ${({ theme }) => theme.colors.neutral.secondaryText};
   }
 
-  &:active,
   &:focus {
-    outline: none;
-    border: ${({ theme }) => `1px solid ${theme.colors.brand.normal}}`};
+    outline: ${({ theme }) => `2px solid ${theme.colors.brand.normal}}`};
   }
 `;
 
