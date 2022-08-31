@@ -2,14 +2,14 @@ import { HTMLInputTypeAttribute } from "react";
 import Input from "../Input/Input";
 import StyledFormField from "./StyledFormField";
 
-export interface FormFieldProps {
+interface FormFieldProps {
   id: string;
-  label?: string;
-  placeholder?: string;
+  label: string;
   value: string;
   type: HTMLInputTypeAttribute;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  isRequired: boolean;
+  placeholder?: string;
+  isRequired?: boolean;
 }
 
 const FormField = ({
@@ -23,7 +23,11 @@ const FormField = ({
 }: FormFieldProps): JSX.Element => (
   <StyledFormField>
     <label htmlFor={id} className="form-field__label">
-      {isRequired ? <span className="form-field__required">*</span> : null}
+      {isRequired ? (
+        <span className="form-field__required" data-testid="required-span">
+          *
+        </span>
+      ) : null}
       {label}
     </label>
     <Input
