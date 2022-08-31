@@ -1,8 +1,10 @@
+import {
+  BASE_ENDPOINT,
+  REGISTER_USER_ENDPOINT,
+} from "../constants/endpointsConstants";
 import { AuthUser } from "../types/interfaces";
 
 class UserApi {
-  url = process.env.REACT_APP_API_URL;
-
   registerUser(user: AuthUser) {
     const postOptions = {
       method: "POST",
@@ -14,7 +16,10 @@ class UserApi {
 
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch(`${this.url}/register`, postOptions);
+        const response = await fetch(
+          `${BASE_ENDPOINT}${REGISTER_USER_ENDPOINT}`,
+          postOptions
+        );
         const data = await response.json();
 
         if (!response.ok) throw Error(data.error);
