@@ -61,7 +61,7 @@ const RegisterForm = (): JSX.Element => {
   ];
 
   return (
-    <form onSubmit={onSubmit} noValidate>
+    <form onSubmit={onSubmit} aria-label="Register form" noValidate>
       {formFields.map((formField) => (
         <FormField {...formField} />
       ))}
