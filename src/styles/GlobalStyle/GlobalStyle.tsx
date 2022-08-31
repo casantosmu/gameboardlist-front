@@ -13,11 +13,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Roboto", sans-serif;
     font-size: 14px;
   }
-
-  input {
-    font-family: inherit;
-    font-size: inherit;
-  }
 `;
 
 export default GlobalStyle;
