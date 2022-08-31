@@ -8,13 +8,15 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
-    color: ${({ theme }) => theme.colors.neutral.primaryText};
     background-color:  ${({ theme }) => theme.colors.neutral.backgroundBody};
+    color: ${({ theme }) => theme.colors.neutral.primaryText};
     font-family: "Roboto", sans-serif;
+    font-size: 14px;
   }
 
   input {
     font-family: inherit;
+    font-size: inherit;
   }
 `;
 
