@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 const StyledButton = styled.button`
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   background-color: ${({ theme }) => theme.colors.brand.normal};
   color: ${({ theme }) => theme.colors.neutral.light};
+  font-size: inherit;
+  font-family: inherit;
   text-align: center;
   border-radius: 2px;
   border: 1px solid ${({ theme }) => theme.colors.brand.normal};
@@ -19,7 +21,8 @@ const StyledButton = styled.button`
   }
 
   &:focus {
-    outline: ${({ theme }) => `2px solid ${theme.colors.brand.click}}`};
+    outline: 1px solid ${({ theme }) => theme.colors.brand.hover};
+    box-shadow: inset 0px 0px 0px 1px ${({ theme }) => theme.colors.brand.click};
   }
 `;
 
