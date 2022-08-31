@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledFormField = styled.form`
+const StyledFormField = styled.div`
   margin-bottom: 1.5rem;
 
   .form-field__label {
