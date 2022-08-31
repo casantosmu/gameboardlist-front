@@ -1,16 +1,6 @@
-import { HTMLInputTypeAttribute } from "react";
+import { FormField as IFormField } from "../../types/interfaces";
 import Input from "../Input/Input";
 import StyledFormField from "./StyledFormField";
-
-interface FormFieldProps {
-  id: string;
-  label: string;
-  value: string;
-  type: HTMLInputTypeAttribute;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
-  isRequired?: boolean;
-}
 
 const FormField = ({
   id,
@@ -20,7 +10,7 @@ const FormField = ({
   value,
   label,
   placeholder,
-}: FormFieldProps): JSX.Element => (
+}: IFormField): JSX.Element => (
   <StyledFormField>
     <label htmlFor={id} className="form-field__label">
       {isRequired ? (
