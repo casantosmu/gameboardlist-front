@@ -15,7 +15,7 @@ describe("Given a UserApi class", () => {
     name: "name",
   };
 
-  describe("When its invoked its registerUser function with a user", () => {
+  describe("When its invoked its postUser function with a user", () => {
     describe("And fetch resolve with ok status and a success message", () => {
       test("Then it should resolve with the success message", async () => {
         const expectMessage = { sucess: "User has been registered" };
@@ -28,7 +28,7 @@ describe("Given a UserApi class", () => {
         fetchMock.mockResolvedValue(fetchResponse);
 
         const userApi = new UserApi();
-        const result = await userApi.registerUser(user);
+        const result = await userApi.postUser(user, "/users/login");
 
         expect(result).toStrictEqual(expectMessage);
       });
@@ -37,10 +37,12 @@ describe("Given a UserApi class", () => {
     describe("And fetch resolve with not ok status and an error message", () => {
       test("Then it should reject with an error with the responed message", async () => {
         const errorMessage = "Ups!";
-        const expectedErrror = new Error(errorMessage);
+        const errorStatus = 400;
+        const expectedErrror = new Error(`${errorStatus}: ${errorMessage}`);
 
         const fetchResponse = {
           ok: false,
+          status: errorStatus,
           json: jest.fn().mockResolvedValue({ error: errorMessage }),
         };
 
@@ -48,7 +50,7 @@ describe("Given a UserApi class", () => {
 
         const userApi = new UserApi();
 
-        await expect(userApi.registerUser(user)).rejects.toThrow(
+        await expect(userApi.postUser(user, "/users/login")).rejects.toThrow(
           expectedErrror
         );
       });
@@ -63,7 +65,7 @@ describe("Given a UserApi class", () => {
 
         const userApi = new UserApi();
 
-        await expect(userApi.registerUser(user)).rejects.toThrow(
+        await expect(userApi.postUser(user, "/users/login")).rejects.toThrow(
           expectedErrror
         );
       });
