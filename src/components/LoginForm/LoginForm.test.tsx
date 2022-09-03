@@ -9,8 +9,24 @@ import styles from "../../styles/styles";
 import LoginForm from "./LoginForm";
 
 describe("Given a loginForm", () => {
+  const user = userEvent.setup();
+
+  describe("When its rendered and user and the user clicks on remember me", () => {
+    test("Then remember me it should go from false to true", async () => {
+      renderWithProviders(<LoginForm />);
+
+      const checkboxRemember =
+        screen.getByLabelText<HTMLInputElement>(/Remember me/);
+
+      expect(checkboxRemember.checked).toBe(false);
+
+      await user.click(checkboxRemember);
+
+      expect(checkboxRemember.checked).toBe(true);
+    });
+  });
+
   describe("When its rendered and user writes Carlos on an input", () => {
-    const user = userEvent.setup();
     const writtenText = "Carlos";
 
     test("Then it should display Carlos on the selected input", async () => {
