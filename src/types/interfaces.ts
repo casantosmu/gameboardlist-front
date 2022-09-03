@@ -1,7 +1,7 @@
 import { HTMLInputTypeAttribute } from "react";
 
 export interface AuthUser {
-  name: string;
+  name?: string;
   email: string;
   password: string;
 }

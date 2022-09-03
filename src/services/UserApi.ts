@@ -1,11 +1,15 @@
-import {
-  BASE_ENDPOINT,
-  REGISTER_USER_ENDPOINT,
-} from "../constants/endpointsConstants";
+import config from "../config";
 import { AuthUser } from "../types/interfaces";
 
+type postUserPathsUrl =
+  | typeof config.endpoints.loginPath
+  | typeof config.endpoints.registerPath;
+
 class UserApi {
-  registerUser(user: AuthUser) {
+  private baseUrl = config.endpoints.base;
+
+  postUser(user: AuthUser, pathUrl: postUserPathsUrl) {
+    const postUrl = `${this.baseUrl}${pathUrl}`;
     const postOptions = {
       method: "POST",
       headers: {
@@ -16,13 +20,12 @@ class UserApi {
 
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch(
-          `${BASE_ENDPOINT}${REGISTER_USER_ENDPOINT}`,
-          postOptions
-        );
+        const response = await fetch(postUrl, postOptions);
         const data = await response.json();
 
-        if (!response.ok) throw Error(data.error);
+        if (!response.ok) {
+          throw Error(`${response.status}: ${data.error}`);
+        }
 
         resolve(data);
       } catch (error) {
