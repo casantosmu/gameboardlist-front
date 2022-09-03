@@ -21,9 +21,9 @@ describe("Given a registerForm", () => {
 
       renderWithProviders(<RegisterPage />);
 
-      const heading = screen.getByRole("form", { name: expectedFormName });
+      const form = screen.getByRole("form", { name: expectedFormName });
 
-      expect(heading).toBeInTheDocument();
+      expect(form).toBeInTheDocument();
     });
   });
 });

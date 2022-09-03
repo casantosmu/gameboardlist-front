@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const StyledButton = styled.button`
+  display: inline-block;
   padding: 0.75rem 1rem;
   background-color: ${({ theme }) => theme.colors.brand.normal};
   color: ${({ theme }) => theme.colors.neutral.light};
