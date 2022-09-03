@@ -51,7 +51,8 @@
   "devDependencies": {
     "@testing-library/user-event": "^14.4.3",
     "@types/styled-components": "^5.1.26",
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "msw": "^0.46.1"
   },
   "jest": {
     "collectCoverageFrom": [
