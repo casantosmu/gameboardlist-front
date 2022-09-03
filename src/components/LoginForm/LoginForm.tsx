@@ -7,20 +7,26 @@ const LoginForm = (): JSX.Element => {
   const initialFormDataState = {
     email: "",
     password: "",
+    remember: false,
   };
 
   const [formData, setFormData] = useState(initialFormDataState);
-  const { email, password } = formData;
+  const { email, password, remember } = formData;
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [event.target.id]: event.target.value,
-    }));
+    event.target.type === "checkbox"
+      ? setFormData((prevState) => ({
+          ...prevState,
+          [event.target.id]: event.target.checked,
+        }))
+      : setFormData((prevState) => ({
+          ...prevState,
+          [event.target.id]: event.target.value,
+        }));
   };
 
   const formFields: Array<IFormField> = [
@@ -47,6 +53,14 @@ const LoginForm = (): JSX.Element => {
       {formFields.map((formField) => (
         <FormField {...formField} />
       ))}
+      <input
+        type="checkbox"
+        id="remember"
+        value={+remember}
+        checked={remember}
+        onChange={onChange}
+      />
+      <label htmlFor="remember">Remember me</label>
       <Button type="submit">Login</Button>
     </form>
   );
