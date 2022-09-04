@@ -4,10 +4,9 @@ const StyledLoginPage = styled.div`
   min-height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
 
   .login-page__heading {
-    padding-bottom: 1rem;
+    padding-bottom: 0.75rem;
     margin-bottom: 1rem;
     margin-top: 0;
     font-weight: 400;
