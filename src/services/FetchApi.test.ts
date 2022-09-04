@@ -4,7 +4,7 @@ describe("Given a FetchApi class", () => {
   const fetchApi = new FetchApi();
 
   describe("When instantated and invoked its method loginUser with a user", () => {
-    describe("And fetch to API login endpoint with method post and the user its ok", () => {
+    describe("And the fetch to login endpoint with a POST method and a user respone with ok status", () => {
       test("Then it should resolve with the user token", async () => {
         const user = {
           email: "email",
@@ -28,7 +28,7 @@ describe("Given a FetchApi class", () => {
       });
     });
 
-    describe("And fetch to API login endpoint with method post and the user its Bad Request", () => {
+    describe("And the fetch to login endpoint with a POST method and a user respone with 'Bad Request'", () => {
       test("Then it should reject with an error with 'Bad request'", async () => {
         const user = {
           email: "exists",

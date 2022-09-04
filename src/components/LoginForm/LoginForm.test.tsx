@@ -1,18 +1,19 @@
-import { render, screen } from "@testing-library/react";
-import React from "react";
+import { screen } from "@testing-library/react";
 import renderWithProviders from "../../utils/test-utils";
 import userEvent from "@testing-library/user-event";
-import { ThemeProvider } from "styled-components";
-import { Router } from "react-router-dom";
-import { createMemoryHistory } from "history";
-import styles from "../../styles/styles";
 import LoginForm from "./LoginForm";
+
+const mockLoginUser = jest.fn();
+
+jest.mock("../../store/hooks/useUser", () => () => ({
+  loginUser: mockLoginUser,
+}));
 
 describe("Given a loginForm", () => {
   const user = userEvent.setup();
 
   describe("When its rendered and user and the user clicks on remember me", () => {
-    test("Then remember me it should go from false to true", async () => {
+    test("Then remember me it should go from unchecked to checked", async () => {
       renderWithProviders(<LoginForm />);
 
       const checkboxRemember =
@@ -43,29 +44,31 @@ describe("Given a loginForm", () => {
       expect(inputEmail.value).toBe(writtenText);
       expect(inputPassword.value).toBe(writtenText);
     });
+  });
 
-    test("Then it should invoke the second item returned by useState", async () => {
-      const formData = {};
-      const setFormData = jest.fn();
+  describe("When its render and user submits form", () => {
+    test("Then it should call the function loginUser returned by useUser with the inputs values", async () => {
+      renderWithProviders(<LoginForm />);
 
-      React.useState = jest.fn().mockReturnValue([formData, setFormData]);
+      const email = "email";
+      const password = "password";
 
-      const history = createMemoryHistory();
+      const inputEmail = screen.getByLabelText<HTMLInputElement>(/Email/);
+      const inputPassword = screen.getByLabelText<HTMLInputElement>(/Password/);
+      const submitButton = screen.getByRole("button", {
+        name: /Login/,
+      });
 
-      render(
-        <ThemeProvider theme={styles}>
-          <Router location={history.location} navigator={history}>
-            <LoginForm />
-          </Router>
-        </ThemeProvider>
-      );
+      await user.click(inputEmail);
+      await user.keyboard(email);
+      await user.click(inputPassword);
+      await user.keyboard(password);
+      await user.click(submitButton);
 
-      const input = screen.getByLabelText<HTMLInputElement>(/Email/);
-
-      await user.click(input);
-      await user.keyboard(writtenText);
-
-      expect(setFormData).toHaveBeenCalled();
+      expect(mockLoginUser).toHaveBeenCalledWith({
+        email,
+        password,
+      });
     });
   });
 });

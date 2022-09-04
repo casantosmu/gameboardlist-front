@@ -1,4 +1,5 @@
 import { useState } from "react";
+import useUser from "../../store/hooks/useUser";
 import { FormField as IFormField } from "../../types/interfaces";
 import Button from "../Button/Button";
 import FormField from "../FormField/FormField";
@@ -11,11 +12,14 @@ const LoginForm = (): JSX.Element => {
     remember: false,
   };
 
+  const { loginUser } = useUser();
   const [formData, setFormData] = useState(initialFormDataState);
   const { email, password, remember } = formData;
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    loginUser({ email, password });
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +62,6 @@ const LoginForm = (): JSX.Element => {
         <input
           type="checkbox"
           id="remember"
-          value={+remember}
           checked={remember}
           onChange={onChange}
         />
