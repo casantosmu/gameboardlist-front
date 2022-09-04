@@ -27,10 +27,10 @@ describe("Given a loginForm", () => {
     });
   });
 
-  describe("When its rendered and user writes Carlos on an input", () => {
+  describe("When its rendered and user writes Carlos on inputs", () => {
     const writtenText = "Carlos";
 
-    test("Then it should display Carlos on the selected input", async () => {
+    test("Then it should display Carlos on inputs", async () => {
       renderWithProviders(<LoginForm />);
 
       const inputEmail = screen.getByLabelText<HTMLInputElement>(/Email/);

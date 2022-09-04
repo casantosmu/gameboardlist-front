@@ -42,6 +42,8 @@ const LoginForm = (): JSX.Element => {
       value: email,
       onChange: onChange,
       isRequired: true,
+      placeholder: "email",
+      fontAwesomeIcon: ["fas", "user"],
     },
     {
       id: "password",
@@ -50,6 +52,8 @@ const LoginForm = (): JSX.Element => {
       value: password,
       onChange: onChange,
       isRequired: true,
+      placeholder: "password",
+      fontAwesomeIcon: ["fas", "lock"],
     },
   ];
 
