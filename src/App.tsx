@@ -1,5 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+
+library.add(fas);
 
 const App = () => {
   return (
