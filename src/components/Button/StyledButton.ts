@@ -8,6 +8,7 @@ const StyledButton = styled.button`
   font-size: inherit;
   font-family: inherit;
   text-align: center;
+  text-decoration: none;
   border-radius: 2px;
   border: 1px solid ${({ theme }) => theme.colors.brand.normal};
   cursor: pointer;
