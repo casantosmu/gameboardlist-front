@@ -13,7 +13,7 @@ const StyledNotFoundPage = styled.div`
     background-color: ${({ theme }) => theme.colors.brand.normal};
     color: ${({ theme }) => theme.colors.neutral.light};
     font-size: 2rem;
-    border-radius: 60px;
+    border-radius: 50%;
   }
 
   .not-found-page__heading {

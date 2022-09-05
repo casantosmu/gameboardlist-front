@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
-import StyledNotFoundPage from "./NotFoundPage.styled";
+import StyledNotFoundPage from "./StyledNotFoundPage";
 
 const NotFoundPage = (): JSX.Element => {
   return (
