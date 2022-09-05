@@ -3,14 +3,16 @@ import userEvent from "@testing-library/user-event";
 import renderWithProviders from "../../utils/test-utils";
 import Dialog from "./Dialog";
 
-const keyCodes: any = {
+const keyCodes: { [key: string]: number } = {
   Escape: 27,
 };
+
 function patchKeyEvent(e: KeyboardEvent) {
   Object.defineProperty(e, "keyCode", {
     get: () => keyCodes[e.code] ?? 0,
   });
 }
+
 beforeAll(() => {
   document.addEventListener("keydown", patchKeyEvent, { capture: true });
 });
