@@ -12,13 +12,20 @@ export const handlers = [
       return request.user.email === "exists"
         ? res(ctx.status(400), ctx.json(null))
         : res(
-            ctx.status(201),
+            ctx.status(200),
             ctx.json({
               user: {
                 token: "token",
               },
             })
           );
+    }
+  ),
+
+  rest.post(
+    `${baseUrl}${config.endpoints.registerPath}`,
+    async (_, res, ctx) => {
+      return res(ctx.status(201), ctx.json(true));
     }
   ),
 ];
