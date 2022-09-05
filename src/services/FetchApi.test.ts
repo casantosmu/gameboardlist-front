@@ -1,3 +1,4 @@
+import { UserLogin, UserRegister } from "../types/interfaces";
 import FetchApi from "./FetchApi";
 
 describe("Given a FetchApi class", () => {
@@ -6,7 +7,7 @@ describe("Given a FetchApi class", () => {
   describe("When instantated and invoked its method loginUser with a user", () => {
     describe("And the fetch to login endpoint with a POST method and a user respone with a ok status", () => {
       test("Then it should resolve with the user token", async () => {
-        const user = {
+        const user: UserLogin = {
           email: "email",
           password: "password",
         };
@@ -42,6 +43,27 @@ describe("Given a FetchApi class", () => {
         }
 
         expect(result.message).toBe("Bad Request");
+      });
+    });
+  });
+
+  describe("When instantated and invoked its method registerUser with a user", () => {
+    describe("And the fetch to register endpoint with a POST method and a user respone with a ok status", () => {
+      test("Then it should resolve parsing the body text as JSON", async () => {
+        const user: UserRegister = {
+          name: "name",
+          email: "email",
+          password: "password",
+        };
+
+        let result: any;
+        try {
+          result = await fetchApi.registerUser(user);
+        } catch (error) {
+          result = error;
+        }
+
+        expect(result).toBe(true);
       });
     });
   });
