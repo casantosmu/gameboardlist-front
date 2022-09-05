@@ -3,7 +3,7 @@ import useUser from "./useUser";
 import { PropsWithChildren } from "react";
 import { Provider } from "react-redux";
 import { setupStore } from "../store";
-import { User, UserLogin } from "../../types/interfaces";
+import { User, UserLogin, UserRegister } from "../../types/interfaces";
 import FetchApi from "../../services/FetchApi";
 import { loginUserAction } from "../slices/userSlice";
 
@@ -115,6 +115,24 @@ describe("Given a useUser function", () => {
         "token",
         response.user.token
       );
+    });
+  });
+
+  describe("When its invoked its registerUser function with a user", () => {
+    const { result } = renderHook(useUser, { wrapper: Wrapper });
+
+    const user: UserRegister = {
+      name: "name",
+      email: "email",
+      password: "password",
+    };
+
+    test("Then it should invoke FetchApi loginUser method with the recived user", async () => {
+      const registerUserMock = jest.spyOn(FetchApi.prototype, "registerUser");
+
+      await result.current.registerUser(user);
+
+      expect(registerUserMock).toHaveBeenCalledWith(user);
     });
   });
 });
