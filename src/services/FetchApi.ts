@@ -1,5 +1,5 @@
 import config from "../config";
-import { UserLogin } from "../types/interfaces";
+import { UserLogin, UserRegister } from "../types/interfaces";
 
 interface LoginResponse {
   user: {
