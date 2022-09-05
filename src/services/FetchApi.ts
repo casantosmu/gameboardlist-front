@@ -42,6 +42,10 @@ class FetchApi {
   loginUser(user: UserLogin) {
     return this.post<LoginResponse>(config.endpoints.loginPath, { user });
   }
+
+  registerUser(user: UserRegister) {
+    return this.post(config.endpoints.registerPath, { user });
+  }
 }
 
 export default FetchApi;
