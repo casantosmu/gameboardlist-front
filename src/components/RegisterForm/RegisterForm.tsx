@@ -1,4 +1,5 @@
 import { useState } from "react";
+import useUser from "../../store/hooks/useUser";
 import { FormField as IFormField } from "../../types/interfaces";
 import Button from "../Button/Button";
 import FormField from "../FormField/FormField";
@@ -10,12 +11,14 @@ const RegisterForm = (): JSX.Element => {
     password: "",
     passwordConfirm: "",
   };
-
+  const { registerUser } = useUser();
   const [formData, setFormData] = useState(initialFormDataState);
   const { name, email, password, passwordConfirm } = formData;
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    registerUser({ name, email, password });
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
