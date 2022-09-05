@@ -27,7 +27,7 @@ class FetchApi {
     });
   }
 
-  private post<T>(pathUrl: string, body: any) {
+  private post<T>(pathUrl: string, body: Object) {
     const postOptions = {
       method: "POST",
       headers: {
