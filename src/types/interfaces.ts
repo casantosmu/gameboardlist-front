@@ -1,5 +1,5 @@
 import { HTMLInputTypeAttribute } from "react";
-import { IconName, IconPrefix } from "@fortawesome/fontawesome-svg-core";
+import { IconName } from "@fortawesome/fontawesome-svg-core";
 
 export interface UserRegister {
   name: string;
@@ -27,5 +27,5 @@ export interface FormField {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   isRequired?: boolean;
-  fontAwesomeIcon?: [IconPrefix, IconName];
+  fontAwesomeIcon?: ["fas", IconName];
 }
