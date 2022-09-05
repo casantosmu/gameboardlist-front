@@ -1,7 +1,7 @@
 import jwtDecode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import FetchApi from "../../services/FetchApi";
-import { UserLogin } from "../../types/interfaces";
+import { UserLogin, UserRegister } from "../../types/interfaces";
 import { loginUserAction } from "../slices/userSlice";
 
 const fetchApi = new FetchApi();
@@ -31,7 +31,17 @@ const useUser = () => {
     }
   };
 
-  return { loginUser };
+  const registerUser = async (user: UserRegister) => {
+    try {
+      await fetchApi.registerUser(user);
+    } catch (error) {
+      if (error instanceof Error && error.message === "Bad Request") {
+        alert("Invalid data");
+      }
+    }
+  };
+
+  return { loginUser, registerUser };
 };
 
 export default useUser;

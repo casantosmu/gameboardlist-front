@@ -10,7 +10,6 @@ library.add(fas);
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<h1>Hola mundo</h1>} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="*" element={<NotFoundPage />} />

@@ -1,5 +1,5 @@
 import config from "../config";
-import { UserLogin } from "../types/interfaces";
+import { UserLogin, UserRegister } from "../types/interfaces";
 
 interface LoginResponse {
   user: {
@@ -41,6 +41,10 @@ class FetchApi {
 
   loginUser(user: UserLogin) {
     return this.post<LoginResponse>(config.endpoints.loginPath, { user });
+  }
+
+  registerUser(user: UserRegister) {
+    return this.post(config.endpoints.registerPath, { user });
   }
 }
 
