@@ -1,17 +1,16 @@
-import { User } from "../../types/interfaces";
 import uiSlice, {
   closeDialogAction,
   closeLoadingAction,
   openDialogAction,
+  OpenDialogActionPayload,
   showLoadingAction,
 } from "./uiSlice";
-import userSlice, { loginUserAction } from "./userSlice";
 
 describe("Given a openDialogAction function", () => {
   describe("When its invoked with a type 'error' and 'Hola' text", () => {
     test("Then it should return an action type 'ui/openDialog' with the recived type and text", () => {
-      const payload = {
-        type: "error" as "error",
+      const payload: OpenDialogActionPayload = {
+        type: "error",
         text: "Hola",
       };
       const expectedActionType = "ui/openDialog";
@@ -98,8 +97,8 @@ describe("Given a uiSlice function", () => {
 
   describe("When it is called with action type openDialog with a type 'error' and 'Hola' text", () => {
     test("Then it should return the intial state with dialog as open and the recived text and type", () => {
-      const payload = {
-        type: "error" as "error",
+      const payload: OpenDialogActionPayload = {
+        type: "error",
         text: "Hola",
       };
       const expectedResult = {

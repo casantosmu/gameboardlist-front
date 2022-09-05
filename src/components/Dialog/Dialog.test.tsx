@@ -1,16 +1,18 @@
 import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import renderWithProviders from "../../utils/test-utils";
-import Modal from "./Dialog";
+import Dialog from "./Dialog";
 
-const keyCodes: any = {
+const keyCodes: { [key: string]: number } = {
   Escape: 27,
 };
+
 function patchKeyEvent(e: KeyboardEvent) {
   Object.defineProperty(e, "keyCode", {
     get: () => keyCodes[e.code] ?? 0,
   });
 }
+
 beforeAll(() => {
   document.addEventListener("keydown", patchKeyEvent, { capture: true });
 });
@@ -29,7 +31,7 @@ describe("Given a Dialog component", () => {
         isLoading: false,
       };
 
-      renderWithProviders(<Modal />, {
+      renderWithProviders(<Dialog />, {
         preloadedState: { ui: initialUi },
       });
 
@@ -52,7 +54,7 @@ describe("Given a Dialog component", () => {
         isLoading: false,
       };
 
-      renderWithProviders(<Modal />, {
+      renderWithProviders(<Dialog />, {
         preloadedState: { ui: initialUi },
       });
 
@@ -79,7 +81,7 @@ describe("Given a Dialog component", () => {
         isLoading: false,
       };
 
-      renderWithProviders(<Modal />, {
+      renderWithProviders(<Dialog />, {
         preloadedState: { ui: initialUi },
       });
 

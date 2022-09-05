@@ -1,18 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ReactModal from "react-modal";
+import Modal from "react-modal";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { closeDialogAction } from "../../store/slices/uiSlice";
 import DialogModalStyles from "./DialogModalStyles";
 import StyledDialog from "./StyledDialog";
 
-// ReactModal.setAppElement("#root");
+if (process.env.NODE_ENV !== "test") Modal.setAppElement("#root");
 
-const Modal = () => {
+const Dialog = () => {
   const { dialog } = useAppSelector((state) => state.ui);
   const dispatch = useAppDispatch();
 
   return (
-    <ReactModal
+    <Modal
       isOpen={dialog.isOpen}
       shouldCloseOnEsc={true}
       onRequestClose={() => dispatch(closeDialogAction())}
@@ -27,8 +27,8 @@ const Modal = () => {
         <span className="dialog__description">{dialog.text}</span>
       </div>
       <button onClick={() => dispatch(closeDialogAction())}>Accept</button>
-    </ReactModal>
+    </Modal>
   );
 };
 
-export default Modal;
+export default Dialog;

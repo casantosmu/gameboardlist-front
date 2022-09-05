@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface OpenDialogActionPayload {
-  type: "error" | "success";
+export interface OpenDialogActionPayload {
+  type: "error";
   text: string;
 }
 

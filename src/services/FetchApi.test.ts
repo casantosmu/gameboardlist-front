@@ -17,12 +17,10 @@ describe("Given a FetchApi class", () => {
           },
         };
 
-        let result: any;
+        let result: unknown;
         try {
           result = await fetchApi.loginUser(user);
-        } catch (error) {
-          result = error;
-        }
+        } catch {}
 
         expect(result).toStrictEqual(expectedResponse);
       });
@@ -35,14 +33,14 @@ describe("Given a FetchApi class", () => {
           password: "password",
         };
 
-        let result: any;
+        let result: unknown;
         try {
           result = await fetchApi.loginUser(user);
         } catch (error) {
           result = error;
         }
 
-        expect(result.message).toBe("Bad Request");
+        expect((result as Error).message).toBe("Bad Request");
       });
     });
   });
@@ -56,7 +54,7 @@ describe("Given a FetchApi class", () => {
           password: "password",
         };
 
-        let result: any;
+        let result: unknown;
         try {
           result = await fetchApi.registerUser(user);
         } catch (error) {
