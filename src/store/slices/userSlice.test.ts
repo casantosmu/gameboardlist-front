@@ -3,7 +3,7 @@ import userSlice, { loginUserAction } from "./userSlice";
 
 describe("Given a loginUserAction function", () => {
   describe("When its invoked with a user", () => {
-    test("Then it should return a action type 'user/loginUser' with the recived user", () => {
+    test("Then it should return an action type 'user/loginUser' with the recived user", () => {
       const user: User = {
         id: "",
         email: "",
