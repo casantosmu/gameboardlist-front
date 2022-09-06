@@ -30,7 +30,7 @@ const useUser = () => {
     } catch (error: unknown) {
       const payload: OpenDialogActionPayload = {
         type: "error",
-        text: "Something whent wrong",
+        text: "Something went wrong",
       };
 
       if (error instanceof Error && error.message === "Unauthorized") {
