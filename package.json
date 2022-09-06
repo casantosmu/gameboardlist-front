@@ -64,7 +64,8 @@
     "collectCoverageFrom": [
       "src/**/*.tsx",
       "src/**/*.ts",
-      "!src/index.tsx"
+      "!src/index.tsx",
+      "!src/setupTests.ts"
     ]
   }
 }
