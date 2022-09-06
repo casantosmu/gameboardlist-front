@@ -4,16 +4,22 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import Dialog from "./components/Dialog/Dialog";
+import Loading from "./components/Loading/Loading";
 
 library.add(fas);
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+    <>
+      <Dialog />
+      <Loading />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </>
   );
 };
 
