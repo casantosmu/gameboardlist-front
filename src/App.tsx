@@ -6,6 +6,7 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Dialog from "./components/Dialog/Dialog";
 import Loading from "./components/Loading/Loading";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 library.add(fas);
 
@@ -15,9 +16,19 @@ const App = () => {
       <Dialog />
       <Loading />
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/">
+          <Route
+            index
+            element={
+              <ProtectedRoute>
+                <h1>Home</h1>
+              </ProtectedRoute>
+            }
+          />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
       </Routes>
     </>
   );
