@@ -22,17 +22,17 @@ describe("Given a Dialog component", () => {
     test("Then it should render a modal with text 'Hola' inside", () => {
       const text = "Hola";
 
-      const initialUi = {
-        dialog: {
-          isOpen: true,
-          type: "error",
-          text,
-        },
-        isLoading: false,
-      };
-
       renderWithProviders(<Dialog />, {
-        preloadedState: { ui: initialUi },
+        preloadedState: {
+          ui: {
+            dialog: {
+              isOpen: true,
+              type: "success",
+              text,
+            },
+            isLoading: false,
+          },
+        },
       });
 
       const modal = screen.getByLabelText(text);
@@ -45,17 +45,18 @@ describe("Given a Dialog component", () => {
       const user = userEvent.setup();
 
       const label = "label";
-      const initialUi = {
-        dialog: {
-          isOpen: true,
-          type: "error",
-          text: label,
-        },
-        isLoading: false,
-      };
 
       renderWithProviders(<Dialog />, {
-        preloadedState: { ui: initialUi },
+        preloadedState: {
+          ui: {
+            dialog: {
+              isOpen: true,
+              type: "error",
+              text: label,
+            },
+            isLoading: false,
+          },
+        },
       });
 
       const modal = screen.getByLabelText(label);
@@ -72,17 +73,18 @@ describe("Given a Dialog component", () => {
       const user = userEvent.setup();
 
       const label = "label";
-      const initialUi = {
-        dialog: {
-          isOpen: true,
-          type: "error",
-          text: label,
-        },
-        isLoading: false,
-      };
 
       renderWithProviders(<Dialog />, {
-        preloadedState: { ui: initialUi },
+        preloadedState: {
+          ui: {
+            dialog: {
+              isOpen: true,
+              type: "error",
+              text: label,
+            },
+            isLoading: false,
+          },
+        },
       });
 
       const modal = screen.getByLabelText(label);

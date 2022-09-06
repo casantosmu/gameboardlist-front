@@ -14,16 +14,21 @@ const Dialog = () => {
   return (
     <Modal
       isOpen={dialog.isOpen}
-      shouldCloseOnEsc={true}
+      onAfterClose={dialog.onClose}
       onRequestClose={() => dispatch(closeDialogAction())}
       style={DialogModalStyles}
       contentLabel={dialog.text}
       contentElement={(props, children) => (
-        <StyledDialog {...props}>{children}</StyledDialog>
+        <StyledDialog {...props} type={dialog.type}>
+          {children}
+        </StyledDialog>
       )}
     >
       <div className="dialog__content">
-        <FontAwesomeIcon icon={"close"} className="dialog__icon" />
+        <FontAwesomeIcon
+          icon={dialog.type === "success" ? "check" : "close"}
+          className="dialog__icon"
+        />
         <span className="dialog__description">{dialog.text}</span>
       </div>
       <button onClick={() => dispatch(closeDialogAction())}>Accept</button>

@@ -7,17 +7,17 @@ describe("Given a Loading component", () => {
     test("Then it should render a modal with text 'Loading' inside", () => {
       const expectedText = "Loading";
 
-      const initialUi = {
-        dialog: {
-          isOpen: false,
-          type: "",
-          text: "",
-        },
-        isLoading: true,
-      };
-
       renderWithProviders(<Loading />, {
-        preloadedState: { ui: initialUi },
+        preloadedState: {
+          ui: {
+            dialog: {
+              isOpen: false,
+              type: "error",
+              text: "",
+            },
+            isLoading: true,
+          },
+        },
       });
 
       const loadingModal = screen.getByLabelText(expectedText);
