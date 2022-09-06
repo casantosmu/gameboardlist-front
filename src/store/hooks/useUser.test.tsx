@@ -277,5 +277,37 @@ describe("Given a useUser function", () => {
         expect(mockUseDispatch).toHaveBeenCalledWith(action);
       });
     });
+
+    describe("When FetchApi registerUser method rejects", () => {
+      test("Then it should call openDialogAction with type error and 'Something went wrong'", async () => {
+        jest.spyOn(FetchApi.prototype, "registerUser").mockRejectedValue({});
+        mockOpenDialogAction = jest.fn();
+
+        const expectedPayload: OpenDialogActionPayload = {
+          type: "error",
+          text: "Something went wrong",
+        };
+
+        await result.current.registerUser(user);
+
+        expect(mockOpenDialogAction).toHaveBeenCalledWith(expectedPayload);
+      });
+
+      test("Then it should call the function returned by useDispatch with the action returned by openDialogAction", async () => {
+        jest.spyOn(FetchApi.prototype, "registerUser").mockRejectedValue({});
+        mockOpenDialogAction = jest.fn();
+
+        const actionPayload: OpenDialogActionPayload = {
+          type: "error",
+          text: "Something went wrong",
+        };
+
+        const action = openDialogAction(actionPayload);
+
+        await result.current.loginUser(user);
+
+        expect(mockUseDispatch).toHaveBeenCalledWith(action);
+      });
+    });
   });
 });
