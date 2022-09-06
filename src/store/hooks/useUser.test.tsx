@@ -32,6 +32,12 @@ jest.mock("../slices/userSlice", () => ({
 let mockJwtDecode: () => string;
 jest.mock("jwt-decode", () => () => mockJwtDecode());
 
+const mockedUsedNavigate = jest.fn();
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockedUsedNavigate,
+}));
+
 describe("Given a useUser function", () => {
   describe("When its invoked its loginUser function with a user", () => {
     const user: UserLogin = {
