@@ -79,8 +79,8 @@ describe("Given a uiSlice function", () => {
   const initialState = {
     dialog: {
       isOpen: false,
-      type: "",
-      text: "",
+      type: "error" as "error",
+      text: "text",
     },
     isLoading: false,
   };
@@ -105,8 +105,7 @@ describe("Given a uiSlice function", () => {
         ...initialState,
         dialog: {
           isOpen: true,
-          type: payload.type,
-          text: payload.text,
+          ...payload,
         },
       };
 
@@ -118,13 +117,12 @@ describe("Given a uiSlice function", () => {
   });
 
   describe("When it is called with action type closeDialog", () => {
-    test("Then it should return the intial state with dialog as closed and an empty text and type", () => {
+    test("Then it should return the intial state with dialog as closed", () => {
       const expectedResult = {
         ...initialState,
         dialog: {
+          ...initialState.dialog,
           isOpen: false,
-          type: "",
-          text: "",
         },
       };
 

@@ -1,8 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface OpenDialogActionPayload {
-  type: "error";
+  type: "error" | "success";
   text: string;
+  onClose?: () => void;
+}
+
+interface UiState {
+  dialog: {
+    isOpen: boolean;
+    type: "error" | "success";
+    text: string;
+    onClose?: () => void;
+  };
+  isLoading: boolean;
 }
 
 const initialState = {
@@ -16,7 +27,7 @@ const initialState = {
 
 const uiSlice = createSlice({
   name: "ui",
-  initialState,
+  initialState: initialState as UiState,
   reducers: {
     openDialog(state, action: PayloadAction<OpenDialogActionPayload>) {
       return {
@@ -31,9 +42,8 @@ const uiSlice = createSlice({
       return {
         ...state,
         dialog: {
+          ...state.dialog,
           isOpen: false,
-          type: "",
-          text: "",
         },
       };
     },
