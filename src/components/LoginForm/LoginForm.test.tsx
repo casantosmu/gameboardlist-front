@@ -11,25 +11,9 @@ jest.mock("../../store/hooks/useUser", () => () => ({
 
 describe("Given a loginForm", () => {
   const user = userEvent.setup();
-
-  describe("When its rendered and user and the user clicks on remember me", () => {
-    test("Then remember me it should go from unchecked to checked", async () => {
-      renderWithProviders(<LoginForm />);
-
-      const checkboxRemember =
-        screen.getByLabelText<HTMLInputElement>(/Remember me/);
-
-      expect(checkboxRemember.checked).toBe(false);
-
-      await user.click(checkboxRemember);
-
-      expect(checkboxRemember.checked).toBe(true);
-    });
-  });
+  const writtenText = "Carlos";
 
   describe("When its rendered and user writes Carlos on inputs", () => {
-    const writtenText = "Carlos";
-
     test("Then it should display Carlos on inputs", async () => {
       renderWithProviders(<LoginForm />);
 

@@ -6,7 +6,7 @@ const initialUser = getInitialUser();
 
 const userSlice = createSlice({
   name: "user",
-  initialState: initialUser as User,
+  initialState: initialUser,
   reducers: {
     loginUser(_, action: PayloadAction<User>) {
       return action.payload;
