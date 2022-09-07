@@ -68,7 +68,15 @@ const useUser = () => {
     }
   };
 
-  return { loginUser, registerUser };
+  const setUser = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const { name, email, id } = jwtDecode<TokenPayload>(token);
+    dispatch(loginUserAction({ token, email, id, name }));
+  };
+
+  return { loginUser, registerUser, setUser };
 };
 
 export default useUser;
