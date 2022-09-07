@@ -68,7 +68,7 @@ const useUser = () => {
     }
   };
 
-  const setUser = async () => {
+  const setUser = () => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
