@@ -27,6 +27,7 @@ const useUser = () => {
 
       dispatch(loginUserAction({ token, email, id, name }));
       localStorage.setItem("token", token);
+      navigate("/");
     } catch (error: unknown) {
       const payload: OpenDialogActionPayload = {
         type: "error",

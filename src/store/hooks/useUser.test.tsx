@@ -131,6 +131,19 @@ describe("Given a useUser function", () => {
       );
     });
 
+    test("Then it should call the function returned by useNavigate with root path", async () => {
+      const rootPath = "/";
+
+      jest.spyOn(FetchApi.prototype, "loginUser").mockResolvedValue(response);
+      mockLoginUserAction = jest.fn();
+      mockJwtDecode = jest.fn().mockReturnValue(payload);
+      Storage.prototype.setItem = jest.fn();
+
+      await result.current.loginUser(user);
+
+      expect(mockedUsedNavigate).toHaveBeenCalledWith(rootPath);
+    });
+
     describe("When FetchApi loginUser method rejects with an error", () => {
       test("Then it should call openDialogAction with type error and 'User or password does not exist'", async () => {
         const unauthorizedError = new Error("Unauthorized");
