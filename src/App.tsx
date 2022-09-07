@@ -7,20 +7,25 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Dialog from "./components/Dialog/Dialog";
 import Loading from "./components/Loading/Loading";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import { useAppSelector } from "./store/hooks";
 
 library.add(fas);
 
 const App = () => {
+  const { token } = useAppSelector((store) => store.user);
+
   return (
     <>
       <Dialog />
       <Loading />
       <Routes>
-        <Route element={<ProtectedRoute />}>
+        <Route element={<ProtectedRoute condition={!!token} path="/login" />}>
           <Route path="/" element={<h1>Home</h1>} />
         </Route>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route element={<ProtectedRoute condition={!token} path="/" />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
