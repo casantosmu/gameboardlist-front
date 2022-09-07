@@ -16,19 +16,12 @@ const App = () => {
       <Dialog />
       <Loading />
       <Routes>
-        <Route path="/">
-          <Route
-            index
-            element={
-              <ProtectedRoute>
-                <h1>Home</h1>
-              </ProtectedRoute>
-            }
-          />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<h1>Home</h1>} />
         </Route>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );

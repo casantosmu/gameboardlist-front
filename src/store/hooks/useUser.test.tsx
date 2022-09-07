@@ -131,6 +131,19 @@ describe("Given a useUser function", () => {
       );
     });
 
+    test("Then it should call the function returned by useNavigate with root path", async () => {
+      const rootPath = "/";
+
+      jest.spyOn(FetchApi.prototype, "loginUser").mockResolvedValue(response);
+      mockLoginUserAction = jest.fn();
+      mockJwtDecode = jest.fn().mockReturnValue(payload);
+      Storage.prototype.setItem = jest.fn();
+
+      await result.current.loginUser(user);
+
+      expect(mockedUsedNavigate).toHaveBeenCalledWith(rootPath);
+    });
+
     describe("When FetchApi loginUser method rejects with an error", () => {
       test("Then it should call openDialogAction with type error and 'User or password does not exist'", async () => {
         const unauthorizedError = new Error("Unauthorized");
@@ -308,80 +321,6 @@ describe("Given a useUser function", () => {
 
         expect(mockUseDispatch).toHaveBeenCalledWith(action);
       });
-    });
-  });
-
-  describe("When its invoked its setUser function", () => {
-    const { result } = renderHook(useUser, { wrapper: Wrapper });
-    test("Then it should call the getItem localStorage method with 'token'", async () => {
-      Storage.prototype.getItem = jest.fn();
-
-      await result.current.setUser();
-
-      expect(localStorage.getItem).toHaveBeenCalledWith("token");
-    });
-
-    test("Then it should call jwtDecode with the token retured by getItem localStorage method", async () => {
-      const token = "token";
-      const payload = {
-        id: "id",
-        name: "name",
-        email: "email",
-      };
-
-      Storage.prototype.getItem = jest.fn().mockReturnValue(token);
-      mockJwtDecode = jest.fn().mockReturnValue(payload);
-
-      await result.current.setUser();
-
-      expect(mockJwtDecode).toHaveBeenCalled();
-    });
-
-    test("Then it should call loginUserAction with the decoded token and the token", async () => {
-      const token = "token";
-      const payload = {
-        id: "id",
-        name: "name",
-        email: "email",
-      };
-
-      Storage.prototype.getItem = jest.fn().mockReturnValue(token);
-      mockJwtDecode = jest.fn().mockReturnValue(payload);
-
-      const expectedPayload = {
-        id: "id",
-        name: "name",
-        email: "email",
-        token,
-      };
-
-      await result.current.setUser();
-
-      expect(mockLoginUserAction).toHaveBeenCalledWith(expectedPayload);
-    });
-
-    test("Then it should call the function returned by useDispatch with the action returned by loginUserAction", async () => {
-      const token = "token";
-      const payload = {
-        id: "id",
-        name: "name",
-        email: "email",
-      };
-
-      Storage.prototype.getItem = jest.fn().mockReturnValue(token);
-      mockJwtDecode = jest.fn().mockReturnValue(payload);
-
-      const actionPayload = {
-        id: "id",
-        name: "name",
-        email: "email",
-        token,
-      };
-      const action = loginUserAction(actionPayload);
-
-      await result.current.setUser();
-
-      expect(mockUseDispatch).toHaveBeenCalledWith(action);
     });
   });
 });

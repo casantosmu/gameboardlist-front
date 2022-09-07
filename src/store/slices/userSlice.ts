@@ -1,16 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../../types/interfaces";
+import getInitialUser from "../../utils/getInitialUser";
 
-const initialState: User = {
-  id: "",
-  name: "",
-  email: "",
-  token: "",
-};
+const initialUser = getInitialUser();
 
 const userSlice = createSlice({
   name: "user",
-  initialState,
+  initialState: initialUser as User,
   reducers: {
     loginUser(_, action: PayloadAction<User>) {
       return action.payload;

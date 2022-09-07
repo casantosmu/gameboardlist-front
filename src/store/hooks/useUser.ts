@@ -27,6 +27,7 @@ const useUser = () => {
 
       dispatch(loginUserAction({ token, email, id, name }));
       localStorage.setItem("token", token);
+      navigate("/");
     } catch (error: unknown) {
       const payload: OpenDialogActionPayload = {
         type: "error",
@@ -68,15 +69,7 @@ const useUser = () => {
     }
   };
 
-  const setUser = () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
-    const { name, email, id } = jwtDecode<TokenPayload>(token);
-    dispatch(loginUserAction({ token, email, id, name }));
-  };
-
-  return { loginUser, registerUser, setUser };
+  return { loginUser, registerUser };
 };
 
 export default useUser;
