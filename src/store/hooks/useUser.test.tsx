@@ -28,14 +28,14 @@ jest.mock("react-redux", () => ({
 }));
 
 let mockLoginUserAction: (payload: User) => string;
-jest.mock("../slices/userSlice", () => ({
-  ...jest.requireActual("../slices/userSlice"),
+jest.mock("../slices/userSlice/userSlice", () => ({
+  ...jest.requireActual("../slices/userSlice/userSlice"),
   loginUserAction: (payload: User) => mockLoginUserAction(payload),
 }));
 
 let mockOpenDialogAction = jest.fn();
-jest.mock("../slices/uiSlice", () => ({
-  ...jest.requireActual("../slices/userSlice"),
+jest.mock("../slices/uiSlice/uiSlice", () => ({
+  ...jest.requireActual("../slices/userSlice/userSlice"),
   openDialogAction: (payload: OpenDialogActionPayload) =>
     mockOpenDialogAction(payload),
 }));
