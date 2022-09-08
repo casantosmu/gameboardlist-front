@@ -33,7 +33,7 @@ export const handlers = [
   rest.get(
     `${baseUrl}${config.endpoints.gameboardsPath}`,
     async (req, res, ctx) => {
-      const authentication = req.headers.get("Authorization") || "";
+      const authentication = req.headers.get("Authorization")!;
       const token = authentication.split(" ")[1];
 
       return token !== "valid"
