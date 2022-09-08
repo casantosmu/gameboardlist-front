@@ -1,4 +1,5 @@
 import { UserLogin, UserRegister } from "../types/interfaces";
+import fakeGameboardsList from "../utils/fakeGameboardsList";
 import FetchApi from "./FetchApi";
 
 describe("Given a FetchApi class", () => {
@@ -71,7 +72,7 @@ describe("Given a FetchApi class", () => {
     describe("And GET fetch to gameboards endpoint, with a valid authorization, respone with a ok status", () => {
       test("Then it should resolve with a list of gameboards", async () => {
         const token = "valid";
-        const expectedGameboards = ["game1", "game2"];
+        const expectedGameboards = fakeGameboardsList;
 
         let result: unknown;
         try {
