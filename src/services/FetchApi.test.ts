@@ -32,6 +32,7 @@ describe("Given a FetchApi class", () => {
           email: "exists",
           password: "password",
         };
+        const expectedMessage = "Bad Request";
 
         let result: unknown;
         try {
@@ -40,7 +41,7 @@ describe("Given a FetchApi class", () => {
           result = error;
         }
 
-        expect((result as Error).message).toBe("Bad Request");
+        expect((result as Error).message).toBe(expectedMessage);
       });
     });
   });
@@ -62,6 +63,42 @@ describe("Given a FetchApi class", () => {
         }
 
         expect(result).toBe(true);
+      });
+    });
+  });
+
+  describe("When instantated and invoked its method getGameboards with token 'valid'", () => {
+    describe("And the fetch to gameboards endpoint with a GET method and a valid authorization respone with a ok status", () => {
+      test("Then it should resolve with a list of gameboards", async () => {
+        const token = "valid";
+        const expectedGameboards = ["game1", "game2"];
+
+        let result: unknown;
+        try {
+          result = await fetchApi.getGameboards(token);
+        } catch (error) {
+          result = error;
+        }
+
+        expect(result).toStrictEqual(expectedGameboards);
+      });
+    });
+
+    describe("When instantated and invoked its method getGameboards with token 'asdfa'", () => {
+      describe("And the GET fetch to gameboards endpoint, with a invalid authorization, respone with an unauthorized status", () => {
+        test("Then it should reject with an error with 'Unauthorized", async () => {
+          const token = "asdfa";
+          const expectedMessage = "Unauthorized";
+
+          let result: unknown;
+          try {
+            result = await fetchApi.getGameboards(token);
+          } catch (error) {
+            result = error;
+          }
+
+          expect((result as Error).message).toBe(expectedMessage);
+        });
       });
     });
   });
