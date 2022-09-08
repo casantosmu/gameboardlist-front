@@ -9,12 +9,16 @@ interface LoginResponse {
 
 class FetchApi {
   private baseUrl = config.endpoints.base;
+  private headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
 
   private fetchJson<T>(pathUrl: string, options: RequestInit) {
     return new Promise<T>(async (resolve, reject) => {
       try {
         const response = await fetch(this.baseUrl + pathUrl, {
           ...options,
+          headers: this.headers,
         });
         const data = await response.json();
 
@@ -30,13 +34,23 @@ class FetchApi {
   private post<T>(pathUrl: string, body: Object) {
     const postOptions = {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(body),
     };
 
     return this.fetchJson<T>(pathUrl, postOptions);
+  }
+
+  private get<T>(pathUrl: string) {
+    const getOptions = {
+      method: "GET",
+    };
+
+    return this.fetchJson<T>(pathUrl, getOptions);
+  }
+
+  private setBearerAuth(token: string) {
+    this.headers.Authorization = `Bearer ${token}`;
+    return this;
   }
 
   loginUser(user: UserLogin) {
@@ -45,6 +59,11 @@ class FetchApi {
 
   registerUser(user: UserRegister) {
     return this.post(config.endpoints.registerPath, { user });
+  }
+
+  getGameboards<T>(token: string) {
+    this.setBearerAuth(token);
+    return this.get<T>(config.endpoints.gameboardsPath);
   }
 }
 
