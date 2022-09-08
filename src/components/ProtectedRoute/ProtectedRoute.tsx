@@ -2,13 +2,13 @@ import { Navigate, Outlet } from "react-router-dom";
 
 interface ProtectedRouteProps {
   condition: boolean;
-  path: string;
+  rejectPath: string;
 }
 
 const ProtectedRoute = ({
   condition,
-  path,
+  rejectPath,
 }: ProtectedRouteProps): JSX.Element =>
-  condition ? <Outlet /> : <Navigate to={path} />;
+  condition ? <Outlet /> : <Navigate to={rejectPath} />;
 
 export default ProtectedRoute;

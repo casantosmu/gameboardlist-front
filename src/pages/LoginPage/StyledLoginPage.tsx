@@ -24,7 +24,6 @@ const StyledLoginPage = styled.div`
 
   .login-page__link {
     color: ${({ theme }) => theme.colors.brand.normal};
-    text-decoration: none;
   }
 `;
 
