@@ -5,7 +5,7 @@ describe("Given a FetchApi class", () => {
   const fetchApi = new FetchApi();
 
   describe("When instantated and invoked its method loginUser with a user", () => {
-    describe("And the fetch to login endpoint with a POST method and a user respone with a ok status", () => {
+    describe("And the POST fetch to login endpoint, with a user, respone with a ok status", () => {
       test("Then it should resolve with the user token", async () => {
         const user: UserLogin = {
           email: "email",
@@ -26,12 +26,13 @@ describe("Given a FetchApi class", () => {
       });
     });
 
-    describe("And the fetch to login endpoint with a POST method and a user respone with 'Bad Request'", () => {
+    describe("And the POST fetch to login endpoint, with a user, respone with 'Bad Request'", () => {
       test("Then it should reject with an error with 'Bad Request'", async () => {
         const user = {
           email: "exists",
           password: "password",
         };
+        const expectedMessage = "Bad Request";
 
         let result: unknown;
         try {
@@ -40,13 +41,13 @@ describe("Given a FetchApi class", () => {
           result = error;
         }
 
-        expect((result as Error).message).toBe("Bad Request");
+        expect((result as Error).message).toBe(expectedMessage);
       });
     });
   });
 
   describe("When instantated and invoked its method registerUser with a user", () => {
-    describe("And the fetch to register endpoint with a POST method and a user respone with a ok status", () => {
+    describe("And the POST fetch to register endpoint, with a user, respone with a ok status", () => {
       test("Then it should resolve parsing the body text as JSON", async () => {
         const user: UserRegister = {
           name: "name",
@@ -62,6 +63,42 @@ describe("Given a FetchApi class", () => {
         }
 
         expect(result).toBe(true);
+      });
+    });
+  });
+
+  describe("When instantated and invoked its method getGameboards with token 'valid'", () => {
+    describe("And GET fetch to gameboards endpoint, with a valid authorization, respone with a ok status", () => {
+      test("Then it should resolve with a list of gameboards", async () => {
+        const token = "valid";
+        const expectedGameboards = ["game1", "game2"];
+
+        let result: unknown;
+        try {
+          result = await fetchApi.getGameboards(token);
+        } catch (error) {
+          result = error;
+        }
+
+        expect(result).toStrictEqual(expectedGameboards);
+      });
+    });
+
+    describe("When instantated and invoked its method getGameboards with token 'asdfa'", () => {
+      describe("And the GET fetch to gameboards endpoint, with a invalid authorization, respone with an unauthorized status", () => {
+        test("Then it should reject with an error with 'Unauthorized", async () => {
+          const token = "asdfa";
+          const expectedMessage = "Unauthorized";
+
+          let result: unknown;
+          try {
+            result = await fetchApi.getGameboards(token);
+          } catch (error) {
+            result = error;
+          }
+
+          expect((result as Error).message).toBe(expectedMessage);
+        });
       });
     });
   });
