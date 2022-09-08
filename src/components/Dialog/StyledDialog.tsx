@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { OpenDialogActionPayload } from "../../store/slices/uiSlice";
+import { OpenDialogActionPayload } from "../../store/slices/uiSlice/uiSlice";
 
 type StyledDialogProps = Pick<OpenDialogActionPayload, "type">;
 

@@ -5,8 +5,11 @@ import { Provider } from "react-redux";
 import { setupStore } from "../store";
 import { User, UserLogin, UserRegister } from "../../types/interfaces";
 import FetchApi from "../../services/FetchApi";
-import { loginUserAction } from "../slices/userSlice";
-import { openDialogAction, OpenDialogActionPayload } from "../slices/uiSlice";
+import { loginUserAction } from "../slices/userSlice/userSlice";
+import {
+  openDialogAction,
+  OpenDialogActionPayload,
+} from "../slices/uiSlice/uiSlice";
 
 const store = setupStore();
 

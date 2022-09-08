@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { closeDialogAction } from "../../store/slices/uiSlice";
+import { closeDialogAction } from "../../store/slices/uiSlice/uiSlice";
 import DialogModalStyles from "./DialogModalStyles";
 import StyledDialog from "./StyledDialog";
 

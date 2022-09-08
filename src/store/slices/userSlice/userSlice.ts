@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../types/interfaces";
-import getInitialUser from "../../utils/getInitialUser";
+import { User } from "../../../types/interfaces";
+import getInitialUser from "../../../utils/getInitialUser";
 
 const initialUser = getInitialUser();
 
