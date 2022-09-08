@@ -1,10 +1,14 @@
 import config from "../config";
-import { UserLogin, UserRegister } from "../types/interfaces";
+import { Gameboards, UserLogin, UserRegister } from "../types/interfaces";
 
 interface LoginResponse {
   user: {
     token: string;
   };
+}
+
+interface GameboardsResponse {
+  gameboards: Gameboards;
 }
 
 class FetchApi {
@@ -61,9 +65,9 @@ class FetchApi {
     return this.post(config.endpoints.registerPath, { user });
   }
 
-  getGameboards<T>(token: string) {
+  getGameboards(token: string) {
     this.setBearerAuth(token);
-    return this.get<T>(config.endpoints.gameboardsPath);
+    return this.get<GameboardsResponse>(config.endpoints.gameboardsPath);
   }
 }
 
