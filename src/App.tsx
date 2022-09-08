@@ -19,10 +19,12 @@ const App = () => {
       <Dialog />
       <Loading />
       <Routes>
-        <Route element={<ProtectedRoute condition={!!token} path="/login" />}>
+        <Route
+          element={<ProtectedRoute condition={!!token} rejectPath="/login" />}
+        >
           <Route path="/" element={<h1>Home</h1>} />
         </Route>
-        <Route element={<ProtectedRoute condition={!token} path="/" />}>
+        <Route element={<ProtectedRoute condition={!token} rejectPath="/" />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Route>
