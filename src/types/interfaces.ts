@@ -43,11 +43,12 @@ export interface MinMax {
 }
 
 export interface Gameboard {
+  id: string;
   image: string;
   rating: number;
   weight: number;
   name: string;
-  year: Date;
+  year: number;
   category: GameboardsCategories;
   authorship?: string;
   createdBy: string;
@@ -55,4 +56,4 @@ export interface Gameboard {
   time: MinMax;
 }
 
-export type Gameboards = Array<Gameboards>;
+export type Gameboards = Array<Gameboard>;
