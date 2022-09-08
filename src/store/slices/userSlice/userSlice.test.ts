@@ -1,4 +1,4 @@
-import { User } from "../../types/interfaces";
+import { User } from "../../../types/interfaces";
 import userSlice, { loginUserAction } from "./userSlice";
 
 describe("Given a loginUserAction function", () => {
@@ -43,7 +43,7 @@ describe("Given a userSlice function", () => {
   });
 
   describe("When it is called with action type loginUser with a user", () => {
-    test("Then it should return the user", () => {
+    test("Then it should return the initial state with the recived user", () => {
       const user: User = {
         id: "1234",
         email: "emal",

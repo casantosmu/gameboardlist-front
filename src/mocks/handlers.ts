@@ -1,7 +1,7 @@
 import { rest } from "msw";
 import config from "../config";
+import fakeGameboardsList from "../utils/fakeGameboardsList";
 
-const gameboardsList = ["game1", "game2"];
 const baseUrl = config.endpoints.base;
 
 export const handlers = [
@@ -33,12 +33,12 @@ export const handlers = [
   rest.get(
     `${baseUrl}${config.endpoints.gameboardsPath}`,
     async (req, res, ctx) => {
-      const authentication = req.headers.get("Authorization") || "";
+      const authentication = req.headers.get("Authorization")!;
       const token = authentication.split(" ")[1];
 
       return token !== "valid"
         ? res(ctx.status(401), ctx.json(null))
-        : res(ctx.status(200), ctx.json(gameboardsList));
+        : res(ctx.status(200), ctx.json(fakeGameboardsList));
     }
   ),
 ];
