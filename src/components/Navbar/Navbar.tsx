@@ -20,12 +20,14 @@ const Navbar = ({ pages }: NavbarProps) => {
       <Container breakpoint="large">
         <div className="navbar__row">
           <div className="navbar__col">
-            <img
-              src="/favicon.png"
-              alt="GameboardsList logo"
-              height={26}
-              width={26}
-            />
+            <Link to="/">
+              <img
+                src="/favicon.png"
+                alt="GameboardsList logo"
+                height={26}
+                width={26}
+              />
+            </Link>
           </div>
           <div className="navbar__col">
             <nav className="navbar__navigation">
