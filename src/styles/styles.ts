@@ -4,6 +4,7 @@ const styles = {
       normal: "#1890ff",
       hover: "#40a9ff",
       click: "#096dd9",
+      dark: "#001529",
     },
     functional: {
       link: "#1890ff",
