@@ -10,7 +10,7 @@ const LoginPage = (): JSX.Element => {
         <h1 className="login-page__heading">Welcome back</h1>
         <LoginForm />
         <span className="login-page__sign-up">
-          Don't have an account yet?
+          Don't have an account yet?{" "}
           <Link to="/register" className="login-page__link">
             Sign up now!
           </Link>
