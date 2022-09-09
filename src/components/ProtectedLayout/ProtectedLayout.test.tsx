@@ -1,7 +1,6 @@
 import { MemoryRouter, Routes, Route } from "react-router-dom";
-import { queryByText, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import ProtectedLayout from "./ProtectedLayout";
-import Home from "../../pages/Home/Home";
 import Theme from "../../styles/Theme/Theme";
 import { setupStore } from "../../store/store";
 import { Provider } from "react-redux";
@@ -47,9 +46,9 @@ describe("Given a ProtectedLayout component", () => {
             <MemoryRouter initialEntries={["/"]}>
               <Routes>
                 <Route element={<ProtectedLayout token={token} />}>
-                  <Route path="/" element={<h1>{expectedHeadingText}</h1>} />
+                  <Route path="/" element={<h1>"fewfew"</h1>} />
                 </Route>
-                <Route path="/login" element={<h1>Login</h1>} />
+                <Route path="/login" element={<h1>{expectedHeadingText}</h1>} />
               </Routes>
             </MemoryRouter>
           </Theme>
