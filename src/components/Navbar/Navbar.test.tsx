@@ -1,5 +1,4 @@
 import { screen } from "@testing-library/react";
-import Home from "../../pages/Home/Home";
 import renderWithProviders from "../../utils/test-utils";
 import Navbar from "./Navbar";
 
