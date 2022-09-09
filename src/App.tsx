@@ -8,6 +8,7 @@ import Dialog from "./components/Dialog/Dialog";
 import Loading from "./components/Loading/Loading";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { useAppSelector } from "./store/hooks";
+import ProtectedLayout from "./components/ProtectedLayout/ProtectedLayout";
 
 library.add(fas);
 
@@ -19,9 +20,7 @@ const App = () => {
       <Dialog />
       <Loading />
       <Routes>
-        <Route
-          element={<ProtectedRoute condition={!!token} rejectPath="/login" />}
-        >
+        <Route element={<ProtectedLayout token={token} />}>
           <Route path="/" element={<h1>Home</h1>} />
         </Route>
         <Route element={<ProtectedRoute condition={!token} rejectPath="/" />}>
