@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "react-modal";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { closeDialogAction } from "../../store/slices/uiSlice/uiSlice";
+import Button from "../Button/Button";
 import DialogModalStyles from "./DialogModalStyles";
 import StyledDialog from "./StyledDialog";
 
@@ -31,7 +32,7 @@ const Dialog = () => {
         />
         <span className="dialog__description">{dialog.text}</span>
       </div>
-      <button onClick={() => dispatch(closeDialogAction())}>Accept</button>
+      <Button onClick={() => dispatch(closeDialogAction())}>Accept</Button>
     </Modal>
   );
 };
