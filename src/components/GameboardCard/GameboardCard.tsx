@@ -4,6 +4,7 @@ import StyledGameboardCard from "./StyledGameboardCard";
 interface GameboardCardProps {
   id: string;
   image: string;
+  imageBackup: string;
   name: string;
   year: number;
   players: MinMax;
@@ -14,6 +15,7 @@ interface GameboardCardProps {
 
 const GameboardCard = ({
   image,
+  imageBackup,
   name,
   year,
   players,
@@ -30,6 +32,10 @@ const GameboardCard = ({
             alt={`${name} game cover`}
             className="gameboard-card__cover"
             height={160}
+            onError={({ currentTarget: target }) => {
+              target.onerror = null;
+              target.src = imageBackup;
+            }}
           />
         </div>
         <h2 className="gameboard-card__heading">{`${name} (${year})`}</h2>

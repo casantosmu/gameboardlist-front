@@ -13,6 +13,7 @@ describe("Given a GameboardCard", () => {
         <GameboardCard
           id=""
           image=""
+          imageBackup=""
           name={name}
           year={year}
           players={{
@@ -47,6 +48,7 @@ describe("When it recive a 8 as rating", () => {
       <GameboardCard
         id=""
         image=""
+        imageBackup=""
         name=""
         year={0}
         players={{
@@ -77,6 +79,7 @@ describe("When it recive a 8 as rating", () => {
         <GameboardCard
           id=""
           image=""
+          imageBackup=""
           name=""
           year={0}
           players={{
@@ -107,6 +110,7 @@ describe("When it recive 2 as weight", () => {
       <GameboardCard
         id=""
         image=""
+        imageBackup=""
         name=""
         year={0}
         players={{
@@ -125,5 +129,38 @@ describe("When it recive 2 as weight", () => {
     const result = screen.getByText(weight);
 
     expect(result).toBeInTheDocument();
+  });
+
+  describe("When it recive an image and a backup image and there is an error with the image", () => {
+    test("Then it should show the backup image", () => {
+      const errorEvent = new ErrorEvent("error");
+      const backupImage = "backupimage";
+
+      renderWithProviders(
+        <GameboardCard
+          id=""
+          image=""
+          imageBackup={backupImage}
+          name=""
+          year={0}
+          players={{
+            min: 0,
+            max: 0,
+          }}
+          time={{
+            min: 0,
+            max: 0,
+          }}
+          weight={0}
+          rating={0}
+        />
+      );
+
+      const image = screen.getByRole("img");
+
+      image.dispatchEvent(errorEvent);
+
+      expect(image).toHaveAttribute("src", backupImage);
+    });
   });
 });

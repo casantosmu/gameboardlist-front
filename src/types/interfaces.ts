@@ -45,6 +45,7 @@ export interface MinMax {
 export interface Gameboard {
   id: string;
   image: string;
+  imageBackup: string;
   rating: number;
   weight: number;
   name: string;

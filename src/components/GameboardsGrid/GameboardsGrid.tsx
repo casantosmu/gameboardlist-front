@@ -10,11 +10,22 @@ const GameboardsGrid = ({ gameboards }: GameboardsGridProps) => {
   return (
     <StyledGameboardsGrid aria-label="Your collection list">
       {gameboards.map(
-        ({ id, image, name, year, players, time, weight, rating }) => (
+        ({
+          id,
+          image,
+          imageBackup,
+          name,
+          year,
+          players,
+          time,
+          weight,
+          rating,
+        }) => (
           <li className="gameboards-grid__col">
             <GameboardCard
               id={id}
               image={image}
+              imageBackup={imageBackup}
               name={name}
               year={year}
               players={players}
