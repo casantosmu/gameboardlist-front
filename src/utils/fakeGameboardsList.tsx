@@ -4,6 +4,7 @@ const fakeGameboardsList: Gameboards = [
   {
     id: "1",
     image: "gerge",
+    imageBackup: "fwefe",
     rating: 9,
     name: "Ark Nova",
     year: 2021,
@@ -23,6 +24,7 @@ const fakeGameboardsList: Gameboards = [
   {
     id: "2",
     image: "fewfw",
+    imageBackup: "fwef",
     rating: 8,
     name: "The Castles of Burgundy",
     year: 2011,
@@ -42,6 +44,7 @@ const fakeGameboardsList: Gameboards = [
   {
     id: "3",
     image: "hjds",
+    imageBackup: "fw",
     rating: 8,
     name: "Aeon's End",
     year: 2016,
@@ -61,6 +64,7 @@ const fakeGameboardsList: Gameboards = [
   {
     id: "4",
     image: "hthtr",
+    imageBackup: "fwfwwaf",
     rating: 7,
     name: "HeroQuest ",
     year: 1989,
