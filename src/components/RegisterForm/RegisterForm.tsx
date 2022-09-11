@@ -3,6 +3,7 @@ import useUser from "../../store/hooks/useUser";
 import { FormField as IFormField } from "../../types/interfaces";
 import Button from "../Button/Button";
 import FormField from "../FormField/FormField";
+import Input from "../Input/Input";
 
 const RegisterForm = (): JSX.Element => {
   const initialFormDataState = {
@@ -11,6 +12,7 @@ const RegisterForm = (): JSX.Element => {
     password: "",
     passwordConfirm: "",
   };
+
   const { registerUser } = useUser();
   const [formData, setFormData] = useState(initialFormDataState);
   const { name, email, password, passwordConfirm } = formData;
@@ -32,41 +34,65 @@ const RegisterForm = (): JSX.Element => {
     {
       id: "name",
       label: "Name",
-      type: "text",
-      value: name,
-      onChange: onChange,
       isRequired: true,
+      children: (
+        <Input
+          id="name"
+          type="text"
+          value={name}
+          onChange={onChange}
+          required={true}
+        />
+      ),
     },
     {
       id: "email",
       label: "Email",
-      type: "email",
-      value: email,
-      onChange: onChange,
       isRequired: true,
+      children: (
+        <Input
+          id="email"
+          type="email"
+          value={email}
+          onChange={onChange}
+          required={true}
+        />
+      ),
     },
     {
       id: "password",
       label: "Password",
-      type: "password",
-      value: password,
-      onChange: onChange,
       isRequired: true,
+      children: (
+        <Input
+          id="password"
+          type="password"
+          value={password}
+          onChange={onChange}
+          required={true}
+        />
+      ),
     },
     {
       id: "passwordConfirm",
       label: "Confirm password",
-      type: "password",
-      value: passwordConfirm,
-      onChange: onChange,
       isRequired: true,
+      children: (
+        <Input
+          id="passwordConfirm"
+          type="password"
+          value={passwordConfirm}
+          onChange={onChange}
+          required={true}
+        />
+      ),
     },
   ];
 
   return (
     <form onSubmit={onSubmit} aria-label="Register form" noValidate>
       {formFields.map((formField) => (
-        <FormField {...formField} />
+        <FormField {...formField} key={formField.id} />
       ))}
       <Button type="submit">Register</Button>
     </form>
