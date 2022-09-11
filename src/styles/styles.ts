@@ -1,10 +1,10 @@
 const styles = {
   colors: {
     brand: {
-      normal: "#1890ff",
-      hover: "#40a9ff",
-      click: "#096dd9",
-      dark: "#001529",
+      normal: "#2973B0",
+      hover: "#4789BF",
+      click: "#0A5B9F",
+      dark: "#084679",
     },
     functional: {
       link: "#1890ff",
@@ -15,7 +15,7 @@ const styles = {
     neutral: {
       title: "#262626",
       primaryText: "#262626",
-      secondaryText: "#8c8c8c",
+      secondaryText: "#6F6F6F",
       disable: "#bfbfbf",
       border: "#d9d9d9",
       backgroundBody: "#f0f2f5",
