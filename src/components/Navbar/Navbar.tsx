@@ -22,7 +22,7 @@ const Navbar = ({ pages }: NavbarProps) => {
           <div className="navbar__col">
             <Link to="/">
               <img
-                src="/favicon.png"
+                src="/favicon.webp"
                 alt="GameboardsList logo"
                 height={26}
                 width={26}
@@ -33,7 +33,7 @@ const Navbar = ({ pages }: NavbarProps) => {
             <nav className="navbar__navigation">
               <ul className="navbar__list">
                 {pages.map(({ path, label }) => (
-                  <li className="navbar__list-item">
+                  <li className="navbar__list-item" key={path}>
                     <Link to={path} className="navbar__link">
                       {label}
                     </Link>
