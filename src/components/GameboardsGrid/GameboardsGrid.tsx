@@ -21,7 +21,7 @@ const GameboardsGrid = ({ gameboards }: GameboardsGridProps) => {
           weight,
           rating,
         }) => (
-          <li className="gameboards-grid__col">
+          <li className="gameboards-grid__col" key={id}>
             <GameboardCard
               id={id}
               image={image}

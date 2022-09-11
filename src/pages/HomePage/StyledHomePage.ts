@@ -5,7 +5,7 @@ const StyledHomePage = styled.main`
     display: flex;
     text-align: center;
     justify-content: space-between;
-    padding: 1.5rem 24px;
+    padding: 1.5rem 20px;
   }
 
   .home-page__heading {

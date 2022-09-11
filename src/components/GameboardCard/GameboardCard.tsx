@@ -32,6 +32,7 @@ const GameboardCard = ({
             alt={`${name} game cover`}
             className="gameboard-card__cover"
             height={160}
+            width={160}
             onError={({ currentTarget: target }) => {
               target.onerror = null;
               target.src = imageBackup;
@@ -51,7 +52,7 @@ const GameboardCard = ({
             </div>
             <div className="gameboard-card__data-col">
               <h3 className="gameboard-card__data-title">Weight</h3>
-              <span className="gameboard-card__data-content">{weight}</span>
+              <span className="gameboard-card__data-content">{weight} / 5</span>
             </div>
           </div>
           <div>

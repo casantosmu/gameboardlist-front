@@ -103,8 +103,9 @@ describe("When it recive a 8 as rating", () => {
 });
 
 describe("When it recive 2 as weight", () => {
-  test("Then it should show '2' as weight", () => {
+  test("Then it should show '2 / 5' as weight", () => {
     const weight = 2;
+    const expectedText = `${weight} / 5`;
 
     renderWithProviders(
       <GameboardCard
@@ -126,7 +127,7 @@ describe("When it recive 2 as weight", () => {
       />
     );
 
-    const result = screen.getByText(weight);
+    const result = screen.getByText(expectedText);
 
     expect(result).toBeInTheDocument();
   });

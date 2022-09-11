@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledButton = styled.button`
   display: inline-block;
-  padding: 0.75rem 1rem;
+  padding: 0.75em 1em;
   background-color: ${({ theme }) => theme.colors.brand.normal};
   color: ${({ theme }) => theme.colors.neutral.light};
   text-align: center;
