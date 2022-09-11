@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute } from "react";
+import { HTMLInputTypeAttribute, ReactNode } from "react";
 import { IconName } from "@fortawesome/fontawesome-svg-core";
 
 export interface UserRegister {
@@ -21,13 +21,9 @@ export interface User {
 
 export interface FormField {
   id: string;
+  isRequired: boolean;
   label: string;
-  value: string;
-  type: HTMLInputTypeAttribute;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
-  isRequired?: boolean;
-  fontAwesomeIcon?: ["fas", IconName];
+  children: ReactNode;
 }
 
 export type GameboardsCategories =

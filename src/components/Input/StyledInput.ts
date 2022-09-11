@@ -1,23 +1,47 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const StyledInput = styled.input`
-  display: block;
-  width: 100%;
-  padding: 0.7rem 16px;
-  border-radius: 2px;
-  border: ${({ theme }) => `1px solid ${theme.colors.neutral.border}}`};
-  font-size: inherit;
-  font-family: inherit;
+interface StyledInputProps {
+  icon: boolean;
+}
 
-  &::placeholder {
+const withIconStyles = css`
+  position: relative;
+
+  .input__icon {
+    position: absolute;
+    left: 1em;
+    top: 50%;
+    transform: translateY(-50%);
+    color: ${({ theme }) => theme.colors.brand.normal};
+  }
+
+  .input {
+    padding-left: 2.5em;
+  }
+`;
+
+const StyledInput = styled.div<StyledInputProps>`
+  .input {
+    display: block;
+    width: 100%;
+    padding: 0.7rem 16px;
+    border-radius: 2px;
+    border: ${({ theme }) => `1px solid ${theme.colors.neutral.border}}`};
+    font-size: inherit;
+    font-family: inherit;
+  }
+
+  .input::placeholder {
     color: ${({ theme }) => theme.colors.neutral.secondaryText};
   }
 
-  &:focus {
+  .input:focus {
     outline: 1px solid ${({ theme }) => theme.colors.brand.hover};
     box-shadow: inset 0px 0px 0px 1px ${({ theme }) => theme.colors.brand.click};
     border: ${({ theme }) => `1px solid ${theme.colors.brand.normal}}`};
   }
+
+  ${({ icon }) => icon && withIconStyles};
 `;
 
 export default StyledInput;

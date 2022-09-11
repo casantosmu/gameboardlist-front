@@ -1,19 +1,13 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormField as IFormField } from "../../types/interfaces";
-import Input from "../Input/Input";
 import StyledFormField from "./StyledFormField";
 
 const FormField = ({
   id,
   isRequired,
-  onChange,
-  type,
-  value,
   label,
-  placeholder,
-  fontAwesomeIcon,
+  children,
 }: IFormField): JSX.Element => (
-  <StyledFormField icon={!!fontAwesomeIcon}>
+  <StyledFormField>
     <label htmlFor={id} className="form-field__label">
       {isRequired ? (
         <span
@@ -26,19 +20,7 @@ const FormField = ({
       ) : null}
       {label}
     </label>
-    <div className="form-field__input-wrapper">
-      <Input
-        id={id}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        required={isRequired}
-      />
-      {fontAwesomeIcon ? (
-        <FontAwesomeIcon icon={fontAwesomeIcon} className="form-field__icon" />
-      ) : null}
-    </div>
+    {children}
   </StyledFormField>
 );
 
