@@ -43,10 +43,10 @@ jest.mock("../slices/uiSlice/uiSlice", () => ({
 let mockJwtDecode: () => string;
 jest.mock("jwt-decode", () => () => mockJwtDecode());
 
-const mockedUsedNavigate = jest.fn();
+const mockedUseNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
-  useNavigate: () => mockedUsedNavigate,
+  useNavigate: () => mockedUseNavigate,
 }));
 
 describe("Given a useUser function", () => {
@@ -144,7 +144,7 @@ describe("Given a useUser function", () => {
 
       await result.current.loginUser(user);
 
-      expect(mockedUsedNavigate).toHaveBeenCalledWith(rootPath);
+      expect(mockedUseNavigate).toHaveBeenCalledWith(rootPath);
     });
 
     describe("When FetchApi loginUser method rejects with an error", () => {
@@ -209,7 +209,7 @@ describe("Given a useUser function", () => {
       jest.spyOn(FetchApi.prototype, "registerUser").mockResolvedValue({});
       mockOpenDialogAction = jest.fn();
 
-      const expectedOnClose = mockedUsedNavigate("/");
+      const expectedOnClose = mockedUseNavigate("/");
       const expectedType = "success";
       const expectedText = "Successfully registred!";
 

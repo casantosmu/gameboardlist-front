@@ -55,13 +55,11 @@ const CreateForm = (): JSX.Element => {
   };
 
   const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event && event.target.files) {
-      const fileUploaded = event.target.files[0];
-      setFormData((prevState) => ({
-        ...prevState,
-        [event.target.id]: fileUploaded,
-      }));
-    }
+    const fileUploaded = event.target.files![0];
+    setFormData((prevState) => ({
+      ...prevState,
+      [event.target.id]: fileUploaded,
+    }));
   };
 
   const formFields: Array<IFormField> = [

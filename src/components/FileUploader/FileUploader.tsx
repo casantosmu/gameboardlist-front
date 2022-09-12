@@ -17,12 +17,8 @@ const FileUploader = ({
 }: FileUploaderProps): JSX.Element => {
   const hiddenFileInput = React.useRef<HTMLInputElement>(null);
 
-  const handleClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    if (hiddenFileInput && hiddenFileInput.current) {
-      hiddenFileInput.current.click();
-    }
+  const handleClick = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    hiddenFileInput.current!.click();
   };
 
   return (
