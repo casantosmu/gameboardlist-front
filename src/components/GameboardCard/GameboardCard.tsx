@@ -1,3 +1,4 @@
+import useGameboards from "../../store/hooks/useGameboards";
 import { MinMax } from "../../types/interfaces";
 import StyledGameboardCard from "./StyledGameboardCard";
 
@@ -14,6 +15,7 @@ interface GameboardCardProps {
 }
 
 const GameboardCard = ({
+  id,
   image,
   imageBackup,
   name,
@@ -23,6 +25,8 @@ const GameboardCard = ({
   time,
   rating,
 }: GameboardCardProps): JSX.Element => {
+  const { deleteGameboard } = useGameboards();
+
   return (
     <StyledGameboardCard>
       <header>
@@ -66,6 +70,18 @@ const GameboardCard = ({
           </span>
         </div>
       </div>
+      <footer className="gameboard-card__footer">
+        <ul className="gameboard-card__footer-list">
+          <li className="gameboard-card__footer-item">
+            <button
+              className="gameboard-card__footer-button"
+              onClick={() => deleteGameboard(id)}
+            >
+              Delete
+            </button>
+          </li>
+        </ul>
+      </footer>
     </StyledGameboardCard>
   );
 };

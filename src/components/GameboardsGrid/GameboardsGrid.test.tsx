@@ -11,7 +11,7 @@ describe("Given a GameboardsGrid component", () => {
       renderWithProviders(<GameboardsGrid gameboards={fakeGameboardsList} />);
 
       const list = screen.getByLabelText("Your collection list");
-      const cards = within(list).getAllByRole("listitem");
+      const cards = within(list).getAllByRole("article");
 
       expect(cards).toHaveLength(expectedLenght);
     });
