@@ -66,6 +66,28 @@ const StyledGameboardCard = styled.article`
     color: ${({ theme }) => theme.colors.neutral.light};
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   }
+
+  .gameboard-card__footer {
+    padding-top: 1rem;
+  }
+
+  .gameboard-card__footer-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .gameboard-card__footer-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .gameboard-card__footer-button {
+    padding: 0 16px 0 0;
+    background: none;
+    color: ${({ theme }) => theme.colors.brand.normal};
+    border: none;
+    cursor: pointer;
+  }
 `;
 
 export default StyledGameboardCard;
