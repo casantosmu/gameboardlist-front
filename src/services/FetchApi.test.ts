@@ -103,4 +103,22 @@ describe("Given a FetchApi class", () => {
       });
     });
   });
+
+  describe("When instantated and invoked its method postGameboard with a token and a FormData", () => {
+    describe("And the POST fetch to gameboards endpoint, with token and FormData, respone with a ok status", () => {
+      test("Then it should resolve parsing the body text as JSON", async () => {
+        const data = new FormData();
+        const token = "token";
+
+        let result: unknown;
+        try {
+          result = await fetchApi.postGameboard(token, data);
+        } catch (error) {
+          result = error;
+        }
+
+        expect(result).toBe(true);
+      });
+    });
+  });
 });
