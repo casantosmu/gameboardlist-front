@@ -48,4 +48,18 @@ export const handlers = [
       return res(ctx.status(201), ctx.json(true));
     }
   ),
+
+  rest.delete(
+    `${baseUrl}${config.endpoints.gameboardsPath}/id1`,
+    async (req, res, ctx) => {
+      return res(ctx.status(204));
+    }
+  ),
+
+  rest.delete(
+    `${baseUrl}${config.endpoints.gameboardsPath}/id2`,
+    async (req, res, ctx) => {
+      return res(ctx.status(204));
+    }
+  ),
 ];

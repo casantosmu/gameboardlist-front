@@ -121,4 +121,40 @@ describe("Given a FetchApi class", () => {
       });
     });
   });
+
+  describe("When instantated and invoked its method deleteGameboard with a token and an id", () => {
+    describe("And the DELETE fetch to gameboards endpoint with param as id, with authentication token, respone with a 204 status", () => {
+      test("Then it should resolve as undefined", async () => {
+        const id = "id1";
+        const token = "token";
+        const expectedResult = undefined;
+
+        let result: unknown;
+        try {
+          result = await fetchApi.deleteGameboard(token, id);
+        } catch (error) {
+          result = error;
+        }
+
+        expect(result).toBe(expectedResult);
+      });
+    });
+
+    describe("And the DELETE fetch to gameboards endpoint with param as id, with authentication token, respone with a 200 status", () => {
+      test("Then it should resolve as undefined", async () => {
+        const id = "id2";
+        const token = "token";
+        const expectedResult = undefined;
+
+        let result: unknown;
+        try {
+          result = await fetchApi.deleteGameboard(token, id);
+        } catch (error) {
+          result = error;
+        }
+
+        expect(result).toBe(expectedResult);
+      });
+    });
+  });
 });
