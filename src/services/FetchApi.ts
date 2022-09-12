@@ -115,6 +115,12 @@ class FetchApi {
       data
     );
   }
+
+  deleteGameboard(token: string, id: string) {
+    return this.setBearerAuth(token).delete(
+      `${config.endpoints.gameboardsPath}/${id}`
+    );
+  }
 }
 
 export default FetchApi;
