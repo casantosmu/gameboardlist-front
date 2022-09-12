@@ -13,9 +13,7 @@ interface GameboardsResponse {
 
 class FetchApi {
   private baseUrl = config.endpoints.base;
-  private headers: Record<string, string> = {
-    "Content-Type": "application/json",
-  };
+  private headers: Record<string, string> = {};
 
   private fetchJson<T>(pathUrl: string, options: RequestInit) {
     return new Promise<T>(async (resolve, reject) => {
@@ -44,6 +42,15 @@ class FetchApi {
     return this.fetchJson<T>(pathUrl, postOptions);
   }
 
+  private postData<T>(pathUrl: string, data: FormData) {
+    const postOptions = {
+      method: "POST",
+      body: data,
+    };
+
+    return this.fetchJson<T>(pathUrl, postOptions);
+  }
+
   private get<T>(pathUrl: string) {
     const getOptions = {
       method: "GET",
@@ -66,8 +73,16 @@ class FetchApi {
   }
 
   getGameboards(token: string) {
-    this.setBearerAuth(token);
-    return this.get<GameboardsResponse>(config.endpoints.gameboardsPath);
+    return this.setBearerAuth(token).get<GameboardsResponse>(
+      config.endpoints.gameboardsPath
+    );
+  }
+
+  postGameboard(token: string, data: FormData) {
+    return this.setBearerAuth(token).postData(
+      config.endpoints.gameboardsPath,
+      data
+    );
   }
 }
 

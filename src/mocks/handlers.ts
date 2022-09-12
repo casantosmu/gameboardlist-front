@@ -41,4 +41,11 @@ export const handlers = [
         : res(ctx.status(200), ctx.json(fakeGameboardsList));
     }
   ),
+
+  rest.post(
+    `${baseUrl}${config.endpoints.gameboardsPath}`,
+    async (_, res, ctx) => {
+      return res(ctx.status(201), ctx.json(true));
+    }
+  ),
 ];
