@@ -59,17 +59,30 @@ class FetchApi {
     return this.fetchJson<T>(pathUrl, getOptions);
   }
 
+  private setHeader(key: string, value: string) {
+    this.headers[key] = value;
+    return this;
+  }
+
   private setBearerAuth(token: string) {
     this.headers.Authorization = `Bearer ${token}`;
     return this;
   }
 
   loginUser(user: UserLogin) {
-    return this.post<LoginResponse>(config.endpoints.loginPath, { user });
+    return this.setHeader(
+      "Content-Type",
+      "application/json"
+    ).post<LoginResponse>(config.endpoints.loginPath, {
+      user,
+    });
   }
 
   registerUser(user: UserRegister) {
-    return this.post(config.endpoints.registerPath, { user });
+    return this.setHeader("Content-Type", "application/json").post(
+      config.endpoints.registerPath,
+      { user }
+    );
   }
 
   getGameboards(token: string) {
