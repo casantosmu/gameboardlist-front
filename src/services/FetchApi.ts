@@ -11,20 +11,29 @@ interface GameboardsResponse {
   gameboards: Gameboards;
 }
 
+interface RequestOptions extends RequestInit {
+  parseResponse?: boolean;
+}
+
 class FetchApi {
   private baseUrl = config.endpoints.base;
   private headers: Record<string, string> = {};
 
-  private fetchJson<T>(pathUrl: string, options: RequestInit) {
-    return new Promise<T>(async (resolve, reject) => {
+  private fetchJson<T>(pathUrl: string, options: RequestOptions) {
+    return new Promise<T | void>(async (resolve, reject) => {
       try {
         const response = await fetch(this.baseUrl + pathUrl, {
           ...options,
           headers: this.headers,
         });
-        const data = await response.json();
 
         if (!response.ok) throw new Error(response.statusText);
+
+        if (options.parseResponse === false || response.status === 204) {
+          resolve(undefined);
+        }
+
+        const data = await response.json();
 
         resolve(data);
       } catch (error) {
@@ -57,6 +66,15 @@ class FetchApi {
     };
 
     return this.fetchJson<T>(pathUrl, getOptions);
+  }
+
+  private delete(pathUrl: string) {
+    const getOptions = {
+      parseResponse: false,
+      method: "DELETE",
+    };
+
+    return this.fetchJson(pathUrl, getOptions);
   }
 
   private setHeader(key: string, value: string) {
@@ -95,6 +113,12 @@ class FetchApi {
     return this.setBearerAuth(token).postData(
       config.endpoints.gameboardsPath,
       data
+    );
+  }
+
+  deleteGameboard(token: string, id: string) {
+    return this.setBearerAuth(token).delete(
+      `${config.endpoints.gameboardsPath}/${id}`
     );
   }
 }
