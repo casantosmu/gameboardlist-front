@@ -1,5 +1,5 @@
-import { HTMLInputTypeAttribute, ReactNode } from "react";
-import { IconName } from "@fortawesome/fontawesome-svg-core";
+import { ReactNode } from "react";
+import config from "../config";
 
 export interface UserRegister {
   name: string;
@@ -20,18 +20,13 @@ export interface User {
 }
 
 export interface FormField {
-  id: string;
-  isRequired: boolean;
+  id?: string;
+  isRequired?: boolean;
   label: string;
   children: ReactNode;
 }
 
-export type GameboardsCategories =
-  | "party"
-  | "family"
-  | "thematic"
-  | "wargame"
-  | "strategy";
+export type GameboardsCategories = typeof config.gameboards.categories[number];
 
 export interface MinMax {
   min: number;

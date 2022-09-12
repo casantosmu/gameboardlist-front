@@ -5,6 +5,9 @@ const config = {
     registerPath: "/users/register",
     gameboardsPath: "/gameboards",
   } as const,
+  gameboards: {
+    categories: ["party", "family", "thematic", "wargame", "strategy"],
+  } as const,
 } as const;
 
 export default config;
