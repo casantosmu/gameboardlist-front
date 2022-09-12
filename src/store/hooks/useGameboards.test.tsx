@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { PropsWithChildren } from "react";
-import { RootState, setupStore } from "../store";
+import { setupStore } from "../store";
 import { Provider } from "react-redux";
 import useGameboards from "./useGameboards";
 import {
@@ -9,14 +9,13 @@ import {
   showLoadingAction,
 } from "../slices/uiSlice/uiSlice";
 import FetchApi from "../../services/FetchApi";
-import renderWithProviders from "../../utils/test-utils";
 import fakeGameboardsList from "../../utils/fakeGameboardsList";
 import { Gameboards } from "../../types/interfaces";
 import { loadGameboardsAction } from "../slices/gameboardsSlice/gameboardsSlice";
 
 const preloadedState = {
   user: {
-    id: "",
+    id: "id",
     name: "",
     email: "",
     token: "token",
@@ -40,6 +39,12 @@ const mockUseDispatch = jest.fn();
 jest.mock("react-redux", () => ({
   ...jest.requireActual("react-redux"),
   useDispatch: () => mockUseDispatch,
+}));
+
+const mockedUseNavigate = jest.fn();
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockedUseNavigate,
 }));
 
 let mockLoadGameboardsAction: (payload: Gameboards) => string;
@@ -141,6 +146,114 @@ describe("Given a useGameboards function", () => {
         const action = openDialogAction(actionPayload);
 
         await result.current.getGameboards();
+
+        expect(mockUseDispatch).toHaveBeenCalledWith(action);
+      });
+    });
+  });
+
+  describe("When its invoked its postGameboard function", () => {
+    const { result } = renderHook(useGameboards, { wrapper: Wrapper });
+
+    const gameboard = {
+      image: "",
+      rating: "",
+      name: "",
+      year: "",
+      category: "",
+      weight: "",
+      playersMin: "",
+      playersMax: "",
+      timeMin: "",
+      timeMax: "",
+      authorship: "",
+    };
+
+    test("Then it should call the function returned by useDispatch with showLoadingAction function", async () => {
+      await result.current.postGameboard(gameboard);
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(showLoadingAction());
+    });
+
+    test("Then it should invoke FetchApi getGameboards method with the user token from store and data on FormData and with user id from store", async () => {
+      const expectedData = new FormData();
+      expectedData.append("image", gameboard.image);
+      expectedData.append("rating", gameboard.rating);
+      expectedData.append("name", gameboard.name);
+      expectedData.append("year", gameboard.year);
+      expectedData.append("category", gameboard.category);
+      expectedData.append("weight", gameboard.weight);
+      expectedData.append("players[min]", gameboard.playersMin);
+      expectedData.append("players[max]", gameboard.playersMax);
+      expectedData.append("time[min]", gameboard.timeMin);
+      expectedData.append("time[max]", gameboard.timeMax);
+      expectedData.append("authorship", gameboard.authorship || "-");
+      expectedData.append("createdBy", preloadedState.user.id);
+
+      const expectedToken = preloadedState.user.token;
+
+      const getGameboardsMock = jest.spyOn(FetchApi.prototype, "postGameboard");
+
+      await result.current.postGameboard(gameboard);
+
+      expect(getGameboardsMock).toHaveBeenCalledWith(
+        expectedToken,
+        expectedData
+      );
+    });
+
+    test("Then it should call openDialogAction with type success, 'Successfully added!' and the function returned by useNavigate with root path", async () => {
+      jest.spyOn(FetchApi.prototype, "postGameboard").mockResolvedValue({});
+      mockOpenDialogAction = jest.fn();
+
+      const expectedOnClose = mockedUseNavigate("/");
+      const expectedType = "success";
+      const expectedText = "Successfully added!";
+
+      await result.current.postGameboard(gameboard);
+
+      const mockParameter = mockOpenDialogAction.mock.calls[0][0];
+
+      expect(mockParameter.type).toBe(expectedType);
+      expect(mockParameter.text).toBe(expectedText);
+      expect(mockParameter.onClose()).toBe(expectedOnClose);
+    });
+
+    describe("When FetchApi postGameboards method rejects with an error", () => {
+      test("Then it should call openDialogAction with type error and 'Ups! Shomething went wrong'", async () => {
+        const error = new Error();
+
+        jest
+          .spyOn(FetchApi.prototype, "postGameboard")
+          .mockRejectedValue(error);
+        mockOpenDialogAction = jest.fn();
+
+        const expectedPayload: OpenDialogActionPayload = {
+          type: "error",
+          text: "Ups! Shomething went wrong",
+        };
+
+        await result.current.postGameboard(gameboard);
+
+        expect(mockOpenDialogAction).toHaveBeenCalledWith(expectedPayload);
+      });
+
+      test("Then it should call the function returned by useDispatch with the action returned by openDialogAction", async () => {
+        const error = new Error();
+
+        jest
+          .spyOn(FetchApi.prototype, "postGameboard")
+          .mockRejectedValue(error);
+        mockOpenDialogAction = jest.fn();
+
+        const actionPayload: OpenDialogActionPayload = {
+          type: "error",
+          text: "Ups! Shomething went wrong",
+        };
+
+        const action = openDialogAction(actionPayload);
+
+        await result.current.postGameboard(gameboard);
 
         expect(mockUseDispatch).toHaveBeenCalledWith(action);
       });
