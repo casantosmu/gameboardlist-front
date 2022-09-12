@@ -6,7 +6,6 @@ import { loadGameboardsAction } from "../slices/gameboardsSlice/gameboardsSlice"
 import {
   closeLoadingAction,
   openDialogAction,
-  OpenDialogActionPayload,
   showLoadingAction,
 } from "../slices/uiSlice/uiSlice";
 
@@ -72,13 +71,33 @@ const useGameboards = () => {
     try {
       await fetchApi.postGameboard(token, formData);
 
-      const payload: OpenDialogActionPayload = {
-        type: "success",
-        text: "Successfully added!",
-        onClose: () => navigate("/"),
-      };
+      dispatch(
+        openDialogAction({
+          type: "success",
+          text: "Successfully added!",
+          onClose: () => navigate("/"),
+        })
+      );
+    } catch {
+      dispatch(
+        openDialogAction({
+          text: "Ups! Shomething went wrong",
+          type: "error",
+        })
+      );
+    }
 
-      dispatch(openDialogAction(payload));
+    dispatch(closeLoadingAction());
+  };
+
+  const deleteGameboard = async (id: string) => {
+    const fetchApi = new FetchApi();
+
+    dispatch(showLoadingAction());
+
+    try {
+      await fetchApi.deleteGameboard(token, id);
+      await getGameboards();
     } catch {
       dispatch(
         openDialogAction({
@@ -94,6 +113,7 @@ const useGameboards = () => {
   return {
     getGameboards,
     postGameboard,
+    deleteGameboard,
   };
 };
 
