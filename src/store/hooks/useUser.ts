@@ -25,7 +25,7 @@ const useUser = () => {
     try {
       const response = await fetchApi.loginUser(user);
 
-      const token = response.user.token;
+      const token = response!.user.token;
       const { name, email, id } = jwtDecode<TokenPayload>(token);
 
       dispatch(loginUserAction({ token, email, id, name }));

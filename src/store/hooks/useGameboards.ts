@@ -35,9 +35,9 @@ const useGameboards = () => {
     dispatch(showLoadingAction());
 
     try {
-      const { gameboards } = await fetchApi.getGameboards(token);
+      const gameboards = await fetchApi.getGameboards(token);
 
-      dispatch(loadGameboardsAction(gameboards));
+      dispatch(loadGameboardsAction(gameboards!.gameboards));
     } catch {
       dispatch(
         openDialogAction({
@@ -50,49 +50,46 @@ const useGameboards = () => {
     dispatch(closeLoadingAction());
   }, [dispatch, token]);
 
-  const postGameboard = useCallback(
-    async (gameboard: PostGameboard) => {
-      const fetchApi = new FetchApi();
+  const postGameboard = async (gameboard: PostGameboard) => {
+    const fetchApi = new FetchApi();
 
-      dispatch(showLoadingAction());
+    dispatch(showLoadingAction());
 
-      const formData = new FormData();
-      formData.append("image", gameboard.image);
-      formData.append("rating", gameboard.rating);
-      formData.append("name", gameboard.name);
-      formData.append("year", gameboard.year);
-      formData.append("category", gameboard.category);
-      formData.append("weight", gameboard.weight);
-      formData.append("players[min]", gameboard.playersMin);
-      formData.append("players[max]", gameboard.playersMax);
-      formData.append("time[min]", gameboard.timeMin);
-      formData.append("time[max]", gameboard.timeMax);
-      formData.append("authorship", gameboard.authorship || "-");
-      formData.append("createdBy", id);
+    const formData = new FormData();
+    formData.append("image", gameboard.image);
+    formData.append("rating", gameboard.rating);
+    formData.append("name", gameboard.name);
+    formData.append("year", gameboard.year);
+    formData.append("category", gameboard.category);
+    formData.append("weight", gameboard.weight);
+    formData.append("players[min]", gameboard.playersMin);
+    formData.append("players[max]", gameboard.playersMax);
+    formData.append("time[min]", gameboard.timeMin);
+    formData.append("time[max]", gameboard.timeMax);
+    formData.append("authorship", gameboard.authorship || "-");
+    formData.append("createdBy", id);
 
-      try {
-        await fetchApi.postGameboard(token, formData);
+    try {
+      await fetchApi.postGameboard(token, formData);
 
-        const payload: OpenDialogActionPayload = {
-          type: "success",
-          text: "Successfully added!",
-          onClose: () => navigate("/"),
-        };
+      const payload: OpenDialogActionPayload = {
+        type: "success",
+        text: "Successfully added!",
+        onClose: () => navigate("/"),
+      };
 
-        dispatch(openDialogAction(payload));
-      } catch {
-        dispatch(
-          openDialogAction({
-            text: "Ups! Shomething went wrong",
-            type: "error",
-          })
-        );
-      }
+      dispatch(openDialogAction(payload));
+    } catch {
+      dispatch(
+        openDialogAction({
+          text: "Ups! Shomething went wrong",
+          type: "error",
+        })
+      );
+    }
 
-      dispatch(closeLoadingAction());
-    },
-    [dispatch, id, navigate, token]
-  );
+    dispatch(closeLoadingAction());
+  };
 
   return {
     getGameboards,
