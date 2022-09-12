@@ -5,7 +5,7 @@ import LoadingModalStyles from "./LoadingModalStyles";
 
 if (process.env.NODE_ENV !== "test") Modal.setAppElement("#root");
 
-const Loading = () => {
+const Loading = (): JSX.Element => {
   const { isLoading } = useAppSelector((state) => state.ui);
 
   return (

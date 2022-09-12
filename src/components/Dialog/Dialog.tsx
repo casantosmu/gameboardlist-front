@@ -8,7 +8,7 @@ import StyledDialog from "./StyledDialog";
 
 if (process.env.NODE_ENV !== "test") Modal.setAppElement("#root");
 
-const Dialog = () => {
+const Dialog = (): JSX.Element => {
   const { dialog } = useAppSelector((state) => state.ui);
   const dispatch = useAppDispatch();
 

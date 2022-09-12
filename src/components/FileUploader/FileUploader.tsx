@@ -14,7 +14,7 @@ const FileUploader = ({
   isRequired,
   children,
   onChange,
-}: FileUploaderProps) => {
+}: FileUploaderProps): JSX.Element => {
   const hiddenFileInput = React.useRef<HTMLInputElement>(null);
 
   const handleClick = (

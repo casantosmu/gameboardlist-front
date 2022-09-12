@@ -6,7 +6,7 @@ interface GameboardsGridProps {
   gameboards: Gameboards;
 }
 
-const GameboardsGrid = ({ gameboards }: GameboardsGridProps) => {
+const GameboardsGrid = ({ gameboards }: GameboardsGridProps): JSX.Element => {
   return (
     <StyledGameboardsGrid aria-label="Your collection list">
       {gameboards.map(

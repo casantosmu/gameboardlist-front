@@ -14,7 +14,7 @@ interface NavbarProps {
   pages: Array<Page>;
 }
 
-const Navbar = ({ pages }: NavbarProps) => {
+const Navbar = ({ pages }: NavbarProps): JSX.Element => {
   return (
     <StyledNavbar>
       <Container breakpoint="large">
