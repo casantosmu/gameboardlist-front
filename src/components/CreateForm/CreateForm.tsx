@@ -10,7 +10,7 @@ import FormField from "../FormField/FormField";
 import Input from "../Input/Input";
 import StyledCreateForm from "./StyledCreateForm";
 
-const CreateForm = () => {
+const CreateForm = (): JSX.Element => {
   const [formData, setFormData] = useState({
     image: "",
     rating: "",

@@ -215,11 +215,11 @@ describe("Given a useUser function", () => {
 
       await result.current.registerUser(user);
 
-      const nextParameter = mockOpenDialogAction.mock.calls[0][0];
+      const mockParameter = mockOpenDialogAction.mock.calls[0][0];
 
-      expect(nextParameter.type).toBe(expectedType);
-      expect(nextParameter.text).toBe(expectedText);
-      expect(nextParameter.onClose()).toBe(expectedOnClose);
+      expect(mockParameter.type).toBe(expectedType);
+      expect(mockParameter.text).toBe(expectedText);
+      expect(mockParameter.onClose()).toBe(expectedOnClose);
     });
 
     describe("When FetchApi registerUser method rejects with an 'Bad Request' error", () => {
