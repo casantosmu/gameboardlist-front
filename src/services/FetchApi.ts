@@ -68,6 +68,15 @@ class FetchApi {
     return this.fetchJson<T>(pathUrl, getOptions);
   }
 
+  private delete(pathUrl: string) {
+    const getOptions = {
+      parseResponse: false,
+      method: "DELETE",
+    };
+
+    return this.fetchJson(pathUrl, getOptions);
+  }
+
   private setHeader(key: string, value: string) {
     this.headers[key] = value;
     return this;
