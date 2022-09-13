@@ -1,5 +1,6 @@
 import useGameboards from "../../store/hooks/useGameboards";
 import { MinMax } from "../../types/interfaces";
+import RatingTile from "../RatingTile/RatingTile";
 import StyledGameboardCard from "./StyledGameboardCard";
 
 interface GameboardCardProps {
@@ -65,9 +66,7 @@ const GameboardCard = ({
           </div>
         </div>
         <div className="gameboard-card__content gameboard-card__content--small">
-          <span className="gameboard-card__rating" aria-label="Rating">
-            {rating}
-          </span>
+          <RatingTile rating={rating} />
         </div>
       </div>
       <footer className="gameboard-card__footer">
