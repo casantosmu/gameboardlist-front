@@ -259,4 +259,79 @@ describe("Given a useGameboards function", () => {
       });
     });
   });
+
+  describe("When its invoked its deleteGameboard function with an id", () => {
+    const { result } = renderHook(useGameboards, { wrapper: Wrapper });
+
+    test("Then it should call the function returned by useDispatch with showLoadingAction function", async () => {
+      await result.current.deleteGameboard("");
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(showLoadingAction());
+    });
+
+    test("Then it should invoke FetchApi deleteGameboards method with the user token from store and data on FormData and with user id from store", async () => {
+      const expectedId = "id";
+      const expectedToken = preloadedState.user.token;
+
+      const deleteGameboardMock = jest.spyOn(
+        FetchApi.prototype,
+        "deleteGameboard"
+      );
+
+      await result.current.deleteGameboard(expectedId);
+
+      expect(deleteGameboardMock).toHaveBeenCalledWith(
+        expectedToken,
+        expectedId
+      );
+    });
+
+    test("Then it should invoke FetchApi getGameboards method by calling its getGameboard function", async () => {
+      jest.spyOn(FetchApi.prototype, "deleteGameboard").mockResolvedValue({});
+      const getGameboardsMock = jest.spyOn(FetchApi.prototype, "getGameboards");
+
+      await result.current.deleteGameboard("id");
+
+      expect(getGameboardsMock).toHaveBeenCalled();
+    });
+
+    describe("When FetchApi deleteGameboard method rejects with an error", () => {
+      test("Then it should call openDialogAction with type error and 'Ups! Shomething went wrong'", async () => {
+        const error = new Error();
+        const expectedPayload: OpenDialogActionPayload = {
+          type: "error",
+          text: "Ups! Shomething went wrong",
+        };
+
+        jest
+          .spyOn(FetchApi.prototype, "deleteGameboard")
+          .mockRejectedValue(error);
+        mockOpenDialogAction = jest.fn();
+
+        await result.current.deleteGameboard("id");
+
+        expect(mockOpenDialogAction).toHaveBeenCalledWith(expectedPayload);
+      });
+
+      test("Then it should call the function returned by useDispatch with the action returned by openDialogAction", async () => {
+        const error = new Error();
+
+        jest
+          .spyOn(FetchApi.prototype, "deleteGameboard")
+          .mockRejectedValue(error);
+        mockOpenDialogAction = jest.fn();
+
+        const actionPayload: OpenDialogActionPayload = {
+          type: "error",
+          text: "Ups! Shomething went wrong",
+        };
+
+        const action = openDialogAction(actionPayload);
+
+        await result.current.deleteGameboard("id");
+
+        expect(mockUseDispatch).toHaveBeenCalledWith(action);
+      });
+    });
+  });
 });

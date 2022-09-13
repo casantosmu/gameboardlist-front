@@ -4,7 +4,6 @@ import userEvent from "@testing-library/user-event";
 import CreateForm from "./CreateForm";
 
 const mockPostGameboard = jest.fn();
-
 jest.mock("../../store/hooks/useGameboards", () => () => ({
   postGameboard: mockPostGameboard,
 }));
@@ -19,7 +18,7 @@ describe("Given a loginForm", () => {
   const user = userEvent.setup();
 
   describe("When its rendered and user types on all form fields and user press submit button", () => {
-    test("Then it should call the function postGameboard returned by useUser with an object with all input values", async () => {
+    test("Then it should call the function postGameboard returned by useGameboard with an object with all input values", async () => {
       const expectedObject = {
         image: new File(["hello"], "hello.png", { type: "image/png" }),
         rating: "8",
