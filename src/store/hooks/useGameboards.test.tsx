@@ -82,6 +82,13 @@ describe("Given a useGameboards function", () => {
     });
 
     test("Then it should invoke loadGameboardsAction with the gameboards returned by FetchApi getGameboards method", async () => {
+      const expectedResult = fakeGameboardsList.map(
+        ({ image, ...gameboard }) => ({
+          ...gameboard,
+          image: `${process.env.REACT_APP_API_URL}/${image}`,
+        })
+      );
+
       const fetchResponse = {
         gameboards: fakeGameboardsList,
       };
@@ -93,7 +100,7 @@ describe("Given a useGameboards function", () => {
 
       await result.current.getGameboards();
 
-      expect(mockLoadGameboardsAction).toHaveBeenCalledWith(fakeGameboardsList);
+      expect(mockLoadGameboardsAction).toHaveBeenCalledWith(expectedResult);
     });
 
     test("Then it should call the function returned by useDispatch with the action returned by loadGameboardsAction", async () => {

@@ -36,7 +36,14 @@ const useGameboards = () => {
     try {
       const gameboards = await fetchApi.getGameboards(token);
 
-      dispatch(loadGameboardsAction(gameboards!.gameboards));
+      dispatch(
+        loadGameboardsAction(
+          gameboards!.gameboards.map(({ image, ...gameboard }) => ({
+            ...gameboard,
+            image: `${process.env.REACT_APP_API_URL}/${image}`,
+          }))
+        )
+      );
     } catch {
       dispatch(
         openDialogAction({
