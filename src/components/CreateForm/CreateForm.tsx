@@ -66,7 +66,7 @@ const CreateForm = (): JSX.Element => {
     {
       id: "image",
       label: "Image",
-      isRequired: true,
+      status: "required",
       children: (
         <FileUploader
           id="image"
@@ -84,7 +84,7 @@ const CreateForm = (): JSX.Element => {
     {
       id: "rating",
       label: "Rating",
-      isRequired: true,
+      status: "required",
       children: (
         <Input
           id="rating"
@@ -99,7 +99,7 @@ const CreateForm = (): JSX.Element => {
     {
       id: "name",
       label: "Name",
-      isRequired: true,
+      status: "required",
       children: (
         <Input
           id="name"
@@ -114,7 +114,7 @@ const CreateForm = (): JSX.Element => {
     {
       id: "year",
       label: "Year",
-      isRequired: true,
+      status: "required",
       children: (
         <Input
           id="year"
@@ -129,7 +129,7 @@ const CreateForm = (): JSX.Element => {
     {
       id: "category",
       label: "Category",
-      isRequired: true,
+      status: "required",
       children: (
         <select value={category} onChange={onChange} id="category">
           {config.gameboards.categories.map((category) => (
@@ -143,7 +143,7 @@ const CreateForm = (): JSX.Element => {
     {
       id: "weight",
       label: "Weight",
-      isRequired: true,
+      status: "required",
       children: (
         <Input
           id="weight"
@@ -157,7 +157,7 @@ const CreateForm = (): JSX.Element => {
     },
     {
       label: "Players",
-      isRequired: true,
+      status: "required",
       children: (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}>
           <Input
@@ -183,7 +183,7 @@ const CreateForm = (): JSX.Element => {
     },
     {
       label: "Time",
-      isRequired: true,
+      status: "required",
       children: (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}>
           <Input
@@ -210,6 +210,7 @@ const CreateForm = (): JSX.Element => {
     {
       id: "authorship",
       label: "Author/s",
+      status: "optional",
       children: (
         <Input
           id="authorship"

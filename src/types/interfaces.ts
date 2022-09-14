@@ -21,7 +21,7 @@ export interface User {
 
 export interface FormField {
   id?: string;
-  isRequired?: boolean;
+  status?: "required" | "optional";
   label: string;
   children: ReactNode;
 }
@@ -42,7 +42,7 @@ export interface Gameboard {
   name: string;
   year: number;
   category: GameboardsCategories;
-  authorship?: string;
+  authorship: string;
   createdBy: string;
   players: MinMax;
   time: MinMax;
