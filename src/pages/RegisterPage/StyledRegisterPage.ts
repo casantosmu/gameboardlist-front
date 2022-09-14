@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-const StyledRegisterPage = styled.div`
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-
+const StyledRegisterPage = styled.main`
   .register-page__top {
     display: flex;
     justify-content: space-between;
