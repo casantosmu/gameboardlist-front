@@ -10,7 +10,10 @@ const StyledFormField = styled.div`
 
   .form-field__required {
     color: ${({ theme }) => theme.colors.functional.error};
-    margin-right: 5px;
+  }
+
+  .form-field__optional {
+    color: ${({ theme }) => theme.colors.neutral.secondaryText};
   }
 `;
 
