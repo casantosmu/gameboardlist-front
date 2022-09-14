@@ -1,4 +1,3 @@
-import Container from "../../components/Container/Container";
 import RegisterForm from "../../components/RegisterForm/RegisterForm";
 import StyledRegisterPage from "./StyledRegisterPage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
