@@ -32,7 +32,12 @@ const Dialog = (): JSX.Element => {
         />
         <span className="dialog__description">{dialog.text}</span>
       </div>
-      <Button onClick={() => dispatch(closeDialogAction())}>Accept</Button>
+      <Button
+        onClick={() => dispatch(closeDialogAction())}
+        semantic="secondary"
+      >
+        Accept
+      </Button>
     </Modal>
   );
 };

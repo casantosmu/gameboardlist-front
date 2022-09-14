@@ -41,7 +41,7 @@ const Navbar = ({ pages }: NavbarProps): JSX.Element => {
                 ))}
               </ul>
             </nav>
-            <Button onChange={() => {}}>
+            <Button onChange={() => {}} semantic="secondary">
               <FontAwesomeIcon icon="power-off" aria-hidden="true" />
               <VisuallyHidden>Logout</VisuallyHidden>
             </Button>

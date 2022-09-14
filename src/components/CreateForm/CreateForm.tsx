@@ -234,8 +234,10 @@ const CreateForm = (): JSX.Element => {
         ))}
       </div>
       <div className="create-form__buttons-wrapper">
-        <Button type="submit">Submit</Button>
-        <Button onClick={() => navigation("/")}>Cancel</Button>
+        <Button type="submit">Add new</Button>
+        <Button onClick={() => navigation("/")} semantic="secondary">
+          Cancel
+        </Button>
       </div>
     </StyledCreateForm>
   );

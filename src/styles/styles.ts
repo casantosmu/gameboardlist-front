@@ -19,12 +19,14 @@ const styles = {
       disable: "#bfbfbf",
       border: "#d9d9d9",
       backgroundBody: "#f0f2f5",
-      light: "#fff",
+      light: "#ffffff",
+      lightHover: "#f2f2f2",
+      lightClick: "#e5e5e5",
     },
   },
   breakpoints: {
     small: "33.75rem",
-    medium: "45rem",
+    medium: "50rem",
     large: "60rem",
   },
 };
