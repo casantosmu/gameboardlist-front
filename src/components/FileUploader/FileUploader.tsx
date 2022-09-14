@@ -23,7 +23,12 @@ const FileUploader = ({
 
   return (
     <>
-      <Button onClick={handleClick} arial-hidden={true} type="button">
+      <Button
+        onClick={handleClick}
+        arial-hidden={true}
+        type="button"
+        semantic="secondary"
+      >
         {children}
       </Button>
       <VisuallyHidden>
