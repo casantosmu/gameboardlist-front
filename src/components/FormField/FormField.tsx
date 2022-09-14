@@ -3,23 +3,33 @@ import StyledFormField from "./StyledFormField";
 
 const FormField = ({
   id,
-  isRequired,
   label,
+  description,
+  status,
   children,
 }: IFormField): JSX.Element => (
   <StyledFormField>
     <label htmlFor={id} className="form-field__label">
-      {isRequired ? (
+      {status === "required" && (
         <span
           className="form-field__required"
           aria-hidden="true"
           data-testid="required-span"
         >
-          *
+          *{" "}
         </span>
-      ) : null}
+      )}
       {label}
+      {status === "optional" && (
+        <span className="form-field__optional" data-testid="optional-span">
+          {" "}
+          (optional)
+        </span>
+      )}
     </label>
+    {description && (
+      <span className="form-field__description">{description}</span>
+    )}
     {children}
   </StyledFormField>
 );

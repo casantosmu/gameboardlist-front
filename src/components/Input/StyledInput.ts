@@ -27,8 +27,6 @@ const StyledInput = styled.div<StyledInputProps>`
     padding: 0.7rem 16px;
     border-radius: 2px;
     border: ${({ theme }) => `1px solid ${theme.colors.neutral.border}}`};
-    font-size: inherit;
-    font-family: inherit;
   }
 
   .input::placeholder {

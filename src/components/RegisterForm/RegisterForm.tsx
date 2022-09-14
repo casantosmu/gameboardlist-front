@@ -34,7 +34,7 @@ const RegisterForm = (): JSX.Element => {
     {
       id: "name",
       label: "Name",
-      isRequired: true,
+      status: "required",
       children: (
         <Input
           id="name"
@@ -48,7 +48,7 @@ const RegisterForm = (): JSX.Element => {
     {
       id: "email",
       label: "Email",
-      isRequired: true,
+      status: "required",
       children: (
         <Input
           id="email"
@@ -62,7 +62,7 @@ const RegisterForm = (): JSX.Element => {
     {
       id: "password",
       label: "Password",
-      isRequired: true,
+      status: "required",
       children: (
         <Input
           id="password"
@@ -76,7 +76,7 @@ const RegisterForm = (): JSX.Element => {
     {
       id: "passwordConfirm",
       label: "Confirm password",
-      isRequired: true,
+      status: "required",
       children: (
         <Input
           id="passwordConfirm"

@@ -55,7 +55,7 @@ describe("Given a loginForm", () => {
         /Maximum game duration/
       );
       const inputAuthorship =
-        screen.getByLabelText<HTMLInputElement>("Author/s");
+        screen.getByLabelText<HTMLInputElement>(/^Author\/s/);
       const submitButton = screen.getByRole("button", {
         name: /Add new/,
       });

@@ -66,7 +66,7 @@ const CreateForm = (): JSX.Element => {
     {
       id: "image",
       label: "Image",
-      isRequired: true,
+      status: "required",
       children: (
         <FileUploader
           id="image"
@@ -83,8 +83,9 @@ const CreateForm = (): JSX.Element => {
     },
     {
       id: "rating",
+      description: "Select the ranking from 1 to 10",
       label: "Rating",
-      isRequired: true,
+      status: "required",
       children: (
         <Input
           id="rating"
@@ -98,8 +99,9 @@ const CreateForm = (): JSX.Element => {
     },
     {
       id: "name",
+      description: "Enter game name",
       label: "Name",
-      isRequired: true,
+      status: "required",
       children: (
         <Input
           id="name"
@@ -114,7 +116,8 @@ const CreateForm = (): JSX.Element => {
     {
       id: "year",
       label: "Year",
-      isRequired: true,
+      description: "Enter release year",
+      status: "required",
       children: (
         <Input
           id="year"
@@ -129,7 +132,8 @@ const CreateForm = (): JSX.Element => {
     {
       id: "category",
       label: "Category",
-      isRequired: true,
+      description: "Please select one of the categories",
+      status: "required",
       children: (
         <select value={category} onChange={onChange} id="category">
           {config.gameboards.categories.map((category) => (
@@ -143,7 +147,8 @@ const CreateForm = (): JSX.Element => {
     {
       id: "weight",
       label: "Weight",
-      isRequired: true,
+      description: "Enter weight from 1 to 5",
+      status: "required",
       children: (
         <Input
           id="weight"
@@ -157,7 +162,8 @@ const CreateForm = (): JSX.Element => {
     },
     {
       label: "Players",
-      isRequired: true,
+      description: "Enter the min and max number of players",
+      status: "required",
       children: (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}>
           <Input
@@ -183,7 +189,8 @@ const CreateForm = (): JSX.Element => {
     },
     {
       label: "Time",
-      isRequired: true,
+      description: "Enter the min and max minutes of game time",
+      status: "required",
       children: (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}>
           <Input
@@ -210,6 +217,8 @@ const CreateForm = (): JSX.Element => {
     {
       id: "authorship",
       label: "Author/s",
+      description: "You can introduce game designers",
+      status: "optional",
       children: (
         <Input
           id="authorship"

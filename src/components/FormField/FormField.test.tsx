@@ -14,13 +14,15 @@ describe("Given a FormField component", () => {
       const formProps: IFormField = {
         id: id,
         label: label,
-        isRequired: false,
+        status: "required",
         children: input,
       };
 
       renderWithProviders(<FormField {...formProps} />);
 
-      const inputResult = screen.getByLabelText(label, { selector: "input" });
+      const inputResult = screen.getByLabelText(/Carlos/, {
+        selector: "input",
+      });
 
       expect(inputResult).toBeInTheDocument();
     });
@@ -31,7 +33,7 @@ describe("Given a FormField component", () => {
       const formProps: IFormField = {
         id: "",
         label: "",
-        isRequired: true,
+        status: "required",
         children: <span></span>,
       };
 

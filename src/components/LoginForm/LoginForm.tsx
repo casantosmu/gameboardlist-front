@@ -33,7 +33,7 @@ const LoginForm = (): JSX.Element => {
     {
       id: "email",
       label: "Email",
-      isRequired: true,
+      status: "required",
       children: (
         <Input
           id="email"
@@ -49,7 +49,7 @@ const LoginForm = (): JSX.Element => {
     {
       id: "password",
       label: "Password",
-      isRequired: true,
+      status: "required",
       children: (
         <Input
           id="password"

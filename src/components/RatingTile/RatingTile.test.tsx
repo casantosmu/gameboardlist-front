@@ -7,6 +7,7 @@ describe("Given a RatingTile component", () => {
     test("Then it should render a 4 rating", () => {
       const rating = "4";
       const label = "Rating";
+
       renderWithProviders(<RatingTile rating={+rating} />);
 
       const result = screen.getByLabelText(label);
