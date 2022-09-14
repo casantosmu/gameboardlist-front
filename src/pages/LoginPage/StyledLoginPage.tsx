@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-const StyledLoginPage = styled.div`
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-
+const StyledLoginPage = styled.main`
   .login-page__heading {
     padding-bottom: 0.75rem;
     margin-bottom: 1rem;

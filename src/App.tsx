@@ -6,11 +6,12 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Dialog from "./components/Dialog/Dialog";
 import Loading from "./components/Loading/Loading";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import { useAppSelector } from "./store/hooks";
 import ProtectedLayout from "./components/ProtectedLayout/ProtectedLayout";
 import HomePage from "./pages/HomePage/HomePage";
 import CreatePage from "./pages/CreatePage/CreatePage";
+import "@fontsource/sunflower/500.css";
+import AuthProtectedLayout from "./components/AuthProtectedLayout/AuthProtectedLayout";
 
 library.add(fas);
 
@@ -26,7 +27,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/create" element={<CreatePage />} />
         </Route>
-        <Route element={<ProtectedRoute condition={!token} rejectPath="/" />}>
+        <Route element={<AuthProtectedLayout token={token} />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Route>

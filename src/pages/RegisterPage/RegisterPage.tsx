@@ -9,22 +9,20 @@ import VisuallyHidden from "../../components/VisuallyHidden/VisuallyHidden";
 const RegisterPage = (): JSX.Element => {
   return (
     <StyledRegisterPage>
-      <Container breakpoint="small">
-        <div className="register-page__top">
-          <h1 className="register-page__heading">Register</h1>
-          <Link to={"/login"}>
-            <FontAwesomeIcon
-              icon={faXmark}
-              size="xl"
-              className="register-page__close"
-              title="Back to login page"
-              aria-hidden="true"
-            />
-            <VisuallyHidden>Back to login</VisuallyHidden>
-          </Link>
-        </div>
-        <RegisterForm />
-      </Container>
+      <div className="register-page__top">
+        <h2 className="register-page__heading">Register</h2>
+        <Link to={"/login"}>
+          <FontAwesomeIcon
+            icon={faXmark}
+            size="xl"
+            className="register-page__close"
+            title="Back to login page"
+            aria-hidden="true"
+          />
+          <VisuallyHidden>Back to login</VisuallyHidden>
+        </Link>
+      </div>
+      <RegisterForm />
     </StyledRegisterPage>
   );
 };
