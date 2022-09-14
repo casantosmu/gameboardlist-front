@@ -57,7 +57,7 @@ describe("Given a loginForm", () => {
       const inputAuthorship =
         screen.getByLabelText<HTMLInputElement>("Author/s");
       const submitButton = screen.getByRole("button", {
-        name: /Submit/,
+        name: /Add new/,
       });
 
       await user.upload(inputImage, expectedObject.image);
