@@ -5,7 +5,13 @@ const StyledFormField = styled.div`
 
   .form-field__label {
     display: block;
+    padding-bottom: 0.2em;
+  }
+
+  .form-field__description {
+    display: block;
     padding-bottom: 0.5em;
+    color: ${({ theme }) => theme.colors.neutral.secondaryText};
   }
 
   .form-field__required {

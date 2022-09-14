@@ -21,8 +21,9 @@ export interface User {
 
 export interface FormField {
   id?: string;
-  status?: "required" | "optional";
   label: string;
+  description?: string;
+  status?: "required" | "optional";
   children: ReactNode;
 }
 

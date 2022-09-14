@@ -3,8 +3,9 @@ import StyledFormField from "./StyledFormField";
 
 const FormField = ({
   id,
-  status,
   label,
+  description,
+  status,
   children,
 }: IFormField): JSX.Element => (
   <StyledFormField>
@@ -26,6 +27,9 @@ const FormField = ({
         </span>
       )}
     </label>
+    {description && (
+      <span className="form-field__description">{description}</span>
+    )}
     {children}
   </StyledFormField>
 );
