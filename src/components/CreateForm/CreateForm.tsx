@@ -8,6 +8,7 @@ import Button from "../Button/Button";
 import FileUploader from "../FileUploader/FileUploader";
 import FormField from "../FormField/FormField";
 import Input from "../Input/Input";
+import Select from "../Select/Select";
 import StyledCreateForm from "./StyledCreateForm";
 
 const CreateForm = (): JSX.Element => {
@@ -16,7 +17,7 @@ const CreateForm = (): JSX.Element => {
     rating: "",
     name: "",
     year: "",
-    category: "",
+    category: "Select one",
     weight: "",
     playersMin: "",
     playersMax: "",
@@ -135,13 +136,12 @@ const CreateForm = (): JSX.Element => {
       description: "Please select one of the categories",
       status: "required",
       children: (
-        <select value={category} onChange={onChange} id="category">
-          {config.gameboards.categories.map((category) => (
-            <option value={category} key={category}>
-              {category}
-            </option>
-          ))}
-        </select>
+        <Select
+          onChange={onChange}
+          id="category"
+          items={["Select one", ...config.gameboards.categories]}
+          value={category}
+        />
       ),
     },
     {
