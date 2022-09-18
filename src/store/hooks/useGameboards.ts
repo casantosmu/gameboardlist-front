@@ -26,7 +26,7 @@ interface PostGameboard {
 const useGameboards = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { token, id } = useAppSelector((state) => state.user);
+  const { token } = useAppSelector((state) => state.user);
 
   const getGameboards = useCallback(async () => {
     const fetchApi = new FetchApi();
@@ -73,7 +73,6 @@ const useGameboards = () => {
     formData.append("time[min]", gameboard.timeMin);
     formData.append("time[max]", gameboard.timeMax);
     formData.append("authorship", gameboard.authorship || "-");
-    formData.append("createdBy", id);
 
     try {
       await fetchApi.postGameboard(token, formData);

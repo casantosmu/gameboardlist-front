@@ -195,7 +195,6 @@ describe("Given a useGameboards function", () => {
       expectedData.append("time[min]", gameboard.timeMin);
       expectedData.append("time[max]", gameboard.timeMax);
       expectedData.append("authorship", gameboard.authorship || "-");
-      expectedData.append("createdBy", preloadedState.user.id);
 
       const expectedToken = preloadedState.user.token;
 
