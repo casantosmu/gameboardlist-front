@@ -25,7 +25,7 @@ const App = () => {
       <Routes>
         <Route element={<ProtectedLayout token={token} />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/create" element={<CreatePage />} />
+          <Route path="/gameboard/create" element={<CreatePage />} />
         </Route>
         <Route element={<AuthProtectedLayout token={token} />}>
           <Route path="/login" element={<LoginPage />} />

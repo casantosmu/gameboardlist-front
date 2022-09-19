@@ -7,6 +7,12 @@ export interface UserRegister {
   password: string;
 }
 
+export interface TokenPayload {
+  id: string;
+  name: string;
+  email: string;
+}
+
 export interface UserLogin {
   email: string;
   password: string;

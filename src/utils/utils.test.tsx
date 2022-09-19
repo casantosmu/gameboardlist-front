@@ -1,5 +1,5 @@
 import { User } from "../types/interfaces";
-import getInitialUser from "./getInitialUser";
+import { capitalizeFirstLetter, getInitialUser } from "./utils";
 
 let mockJwtDecode: () => string;
 jest.mock("jwt-decode", () => () => mockJwtDecode());
@@ -55,6 +55,17 @@ describe("Given a getInitialUser function", () => {
       const result = getInitialUser();
 
       expect(result).toStrictEqual(expectedResult);
+    });
+  });
+});
+
+describe("Given a capitalizeFirstLetter function", () => {
+  describe("When its called and it receives test", () => {
+    test("Then it should return Test", () => {
+      const expectedResult = "Test";
+      const result = capitalizeFirstLetter("test");
+
+      expect(result).toBe(expectedResult);
     });
   });
 });

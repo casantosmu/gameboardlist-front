@@ -22,7 +22,7 @@ const HomePage = (): JSX.Element => {
       <StyledHomePage>
         <header className="home-page__header">
           <h1 className="home-page__heading">Your collection</h1>
-          <Button onClick={() => navigate("/create")}>
+          <Button onClick={() => navigate("/gameboard/create")}>
             <FontAwesomeIcon
               icon="plus"
               aria-hidden="true"

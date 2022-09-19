@@ -29,7 +29,7 @@ describe("Given a HomePage component", () => {
     test("Then it should call the function returned by useNavigate with root path", async () => {
       const user = userEvent.setup();
 
-      const createPath = "/create";
+      const createPath = "/gameboard/create";
       const buttonText = "Add New";
 
       renderWithProviders(<HomePage />);
