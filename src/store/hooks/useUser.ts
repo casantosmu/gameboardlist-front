@@ -2,7 +2,7 @@ import jwtDecode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FetchApi from "../../services/FetchApi";
-import { UserLogin, UserRegister } from "../../types/interfaces";
+import { TokenPayload, UserLogin, UserRegister } from "../../types/interfaces";
 import {
   openDialogAction,
   OpenDialogActionPayload,
@@ -10,12 +10,6 @@ import {
 import { loginUserAction } from "../slices/userSlice/userSlice";
 
 const fetchApi = new FetchApi();
-
-interface TokenPayload {
-  id: string;
-  name: string;
-  email: string;
-}
 
 const useUser = () => {
   const dispatch = useDispatch();

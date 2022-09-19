@@ -1,13 +1,7 @@
 import jwtDecode from "jwt-decode";
-import { User } from "../types/interfaces";
+import { TokenPayload, User } from "../types/interfaces";
 
-interface TokenPayload {
-  id: string;
-  name: string;
-  email: string;
-}
-
-const getInitialUser = (): User => {
+export const getInitialUser = (): User => {
   const token = localStorage.getItem("token");
 
   if (!token) {
@@ -27,4 +21,6 @@ const getInitialUser = (): User => {
   };
 };
 
-export default getInitialUser;
+export function capitalizeFirstLetter(letter: string) {
+  return letter.charAt(0).toUpperCase() + letter.slice(1);
+}
