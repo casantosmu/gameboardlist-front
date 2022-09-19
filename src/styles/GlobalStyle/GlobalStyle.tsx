@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
-    background-color:  ${styles.colors.neutral.backgroundBody};
+    background-color:  ${styles.colors.neutral.bodyBackground};
     color: ${styles.colors.neutral.primaryText};
     font-family: "Roboto", sans-serif;
     font-size: 0.875rem;

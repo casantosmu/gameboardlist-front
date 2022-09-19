@@ -51,9 +51,9 @@ const useGameboards = () => {
           type: "error",
         })
       );
+    } finally {
+      dispatch(closeLoadingAction());
     }
-
-    dispatch(closeLoadingAction());
   }, [dispatch, token]);
 
   const postGameboard = async (gameboard: PostGameboard) => {
@@ -91,9 +91,9 @@ const useGameboards = () => {
           type: "error",
         })
       );
+    } finally {
+      dispatch(closeLoadingAction());
     }
-
-    dispatch(closeLoadingAction());
   };
 
   const deleteGameboard = async (id: string) => {
@@ -111,9 +111,9 @@ const useGameboards = () => {
           type: "error",
         })
       );
+    } finally {
+      dispatch(closeLoadingAction());
     }
-
-    dispatch(closeLoadingAction());
   };
 
   return {
