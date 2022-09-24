@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 
 const mockRegisterUser = jest.fn();
 
-jest.mock("../../store/hooks/useUser", () => () => ({
+jest.mock("../../store/user/useUser", () => () => ({
   registerUser: mockRegisterUser,
 }));
 

@@ -1,4 +1,4 @@
-import { fakeGameboards } from "../../../utils/mocks/fakeData";
+import { fakeGameboards } from "../../utils/mocks/fakeData";
 import gameboardsSlice, { loadGameboardsAction } from "./gameboardsSlice";
 
 describe("Given a loadGameboardsAction function", () => {

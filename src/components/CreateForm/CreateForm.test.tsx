@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import CreateForm from "./CreateForm";
 
 const mockPostGameboard = jest.fn();
-jest.mock("../../store/hooks/useGameboards", () => () => ({
+jest.mock("../../store/gameboards/useGameboards", () => () => ({
   postGameboard: mockPostGameboard,
 }));
 

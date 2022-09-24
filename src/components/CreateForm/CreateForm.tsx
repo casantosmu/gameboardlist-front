@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import config from "../../config";
-import useGameboards from "../../store/hooks/useGameboards";
+import useGameboards from "../../store/gameboards/useGameboards";
 import { FormField as IFormField } from "../../types/interfaces";
 import Button from "../Button/Button";
 import FileUploader from "../FileUploader/FileUploader";

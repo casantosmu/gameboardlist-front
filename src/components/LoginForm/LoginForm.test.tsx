@@ -5,7 +5,7 @@ import LoginForm from "./LoginForm";
 
 const mockLoginUser = jest.fn();
 
-jest.mock("../../store/hooks/useUser", () => () => ({
+jest.mock("../../store/user/useUser", () => () => ({
   loginUser: mockLoginUser,
 }));
 
