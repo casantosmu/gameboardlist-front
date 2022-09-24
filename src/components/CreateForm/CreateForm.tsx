@@ -25,7 +25,9 @@ const CreateForm = (): JSX.Element => {
     timeMax: "",
     authorship: "",
   });
+
   const {
+    image,
     authorship,
     category,
     weight,
@@ -37,13 +39,26 @@ const CreateForm = (): JSX.Element => {
     timeMax,
     year,
   } = formData;
-  const { postGameboard } = useGameboards();
+  const { postGameboards } = useGameboards();
   const navigation = useNavigate();
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    postGameboard(formData);
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("rating", rating);
+    formData.append("name", name);
+    formData.append("year", year);
+    formData.append("category", category);
+    formData.append("weight", weight);
+    formData.append("players[min]", playersMin);
+    formData.append("players[max]", playersMax);
+    formData.append("time[min]", timeMin);
+    formData.append("time[max]", timeMax);
+    formData.append("authorship", authorship || "-");
+
+    postGameboards(formData);
   };
 
   const onChange = (

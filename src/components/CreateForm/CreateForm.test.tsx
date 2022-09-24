@@ -3,9 +3,10 @@ import renderWithProviders from "../../utils/test-utils";
 import userEvent from "@testing-library/user-event";
 import CreateForm from "./CreateForm";
 
-const mockPostGameboard = jest.fn();
+const mockPostGameboards = jest.fn();
 jest.mock("../../store/gameboards/useGameboards", () => () => ({
-  postGameboard: mockPostGameboard,
+  ...jest.requireActual("../../store/gameboards/useGameboards"),
+  postGameboards: mockPostGameboards,
 }));
 
 const mockedUseNavigate = jest.fn();
@@ -18,8 +19,8 @@ describe("Given a loginForm", () => {
   const user = userEvent.setup();
 
   describe("When its rendered and user types on all form fields and user press submit button", () => {
-    test("Then it should call the function postGameboard returned by useGameboard with an object with all input values", async () => {
-      const expectedObject = {
+    test("Then it should call the function postGameboards returned by useGameboards with a FormData", async () => {
+      const expected = {
         image: new File(["hello"], "hello.png", { type: "image/png" }),
         rating: "8",
         name: "Car",
@@ -32,6 +33,19 @@ describe("Given a loginForm", () => {
         timeMax: "45",
         authorship: "Arthur",
       };
+
+      const expectedFormData = new FormData();
+      expectedFormData.append("image", expected.image);
+      expectedFormData.append("rating", expected.rating);
+      expectedFormData.append("name", expected.name);
+      expectedFormData.append("year", expected.year);
+      expectedFormData.append("category", expected.category);
+      expectedFormData.append("weight", expected.weight);
+      expectedFormData.append("players[min]", expected.playersMin);
+      expectedFormData.append("players[max]", expected.playersMax);
+      expectedFormData.append("time[min]", expected.timeMin);
+      expectedFormData.append("time[max]", expected.timeMax);
+      expectedFormData.append("authorship", expected.authorship || "-");
 
       renderWithProviders(<CreateForm />);
 
@@ -60,30 +74,30 @@ describe("Given a loginForm", () => {
         name: /Add new/,
       });
 
-      await user.upload(inputImage, expectedObject.image);
+      await user.upload(inputImage, expected.image);
       await user.click(inputReating);
-      await user.keyboard(expectedObject.rating);
+      await user.keyboard(expected.rating);
       await user.click(inputName);
-      await user.keyboard(expectedObject.name);
+      await user.keyboard(expected.name);
       await user.click(inputYear);
-      await user.keyboard(expectedObject.year);
-      await user.selectOptions(inputCategory, expectedObject.category);
+      await user.keyboard(expected.year);
+      await user.selectOptions(inputCategory, expected.category);
       await user.click(inputWeight);
-      await user.keyboard(expectedObject.weight);
+      await user.keyboard(expected.weight);
       await user.click(inputMinPlayers);
-      await user.keyboard(expectedObject.playersMin);
+      await user.keyboard(expected.playersMin);
       await user.click(inputMaxPlayers);
-      await user.keyboard(expectedObject.playersMax);
+      await user.keyboard(expected.playersMax);
       await user.click(inputMinTime);
-      await user.keyboard(expectedObject.timeMin);
+      await user.keyboard(expected.timeMin);
       await user.click(inputMaxTime);
-      await user.keyboard(expectedObject.timeMax);
+      await user.keyboard(expected.timeMax);
       await user.click(inputAuthorship);
-      await user.keyboard(expectedObject.authorship);
+      await user.keyboard(expected.authorship);
 
       await user.click(submitButton);
 
-      expect(mockPostGameboard).toHaveBeenCalledWith(expectedObject);
+      expect(mockPostGameboards).toHaveBeenCalledWith(expectedFormData);
     });
   });
 
