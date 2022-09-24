@@ -1,20 +1,28 @@
-import { screen } from "@testing-library/react";
 import renderWithProviders from "../../utils/test-utils";
 import HomePage from "./HomePage";
 import userEvent from "@testing-library/user-event";
+import { screen } from "@testing-library/react";
 
-const mockedUseNavigate = jest.fn();
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useNavigate: () => mockedUseNavigate,
+const mockGetGameboards = jest.fn();
+jest.mock("../../store/gameboards/useGameboards", () => () => ({
+  ...jest.requireActual("../../store/gameboards/useGameboards"),
+  getGameboards: mockGetGameboards,
 }));
 
 describe("Given a HomePage component", () => {
-  describe("When its rendered", () => {
+  describe("When its rendered and status is not loading and error", () => {
     test("Then it should render a heading with 'Your collection'", () => {
       const expectedHeadingText = "Your collection";
 
-      renderWithProviders(<HomePage />);
+      renderWithProviders(<HomePage />, {
+        preloadedState: {
+          gameboards: {
+            error: false,
+            gameboards: [],
+            status: "succeeded",
+          },
+        },
+      });
 
       const heading = screen.getByRole("heading", {
         level: 1,
@@ -25,22 +33,45 @@ describe("Given a HomePage component", () => {
     });
   });
 
-  describe("When its rendered and user clicks on 'Add New' button", () => {
-    test("Then it should call the function returned by useNavigate with root path", async () => {
-      const user = userEvent.setup();
+  test("Then it should render a link to create path witg Add New", async () => {
+    const user = userEvent.setup();
 
-      const createPath = "/gameboard/create";
-      const buttonText = "Add New";
+    const createPath = "/gameboard/create";
+    const linkText = "Add New";
 
-      renderWithProviders(<HomePage />);
+    renderWithProviders(<HomePage />, {
+      preloadedState: {
+        gameboards: {
+          error: false,
+          gameboards: [],
+          status: "succeeded",
+        },
+      },
+    });
 
-      const button = screen.getByRole("button", {
-        name: buttonText,
+    const link = screen.getByRole("link", {
+      name: linkText,
+    });
+
+    await user.click(link);
+    expect(link).toHaveAttribute("href", createPath);
+  });
+
+  describe("When its rendered and there is an error on gameboards store", () => {
+    test("Then it should render an error", () => {
+      renderWithProviders(<HomePage />, {
+        preloadedState: {
+          gameboards: {
+            error: "Bad",
+            gameboards: [],
+            status: "failed",
+          },
+        },
       });
 
-      await user.click(button);
+      const element = screen.getByText(/Error/);
 
-      expect(mockedUseNavigate).toHaveBeenCalledWith(createPath);
+      expect(element).toBeInTheDocument();
     });
   });
 });
