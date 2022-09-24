@@ -1,4 +1,4 @@
-import fakeGameboardsList from "../../../utils/fakeGameboardsList";
+import { fakeGameboards } from "../../../utils/mocks/fakeData";
 import gameboardsSlice, { loadGameboardsAction } from "./gameboardsSlice";
 
 describe("Given a loadGameboardsAction function", () => {
@@ -7,10 +7,10 @@ describe("Given a loadGameboardsAction function", () => {
       const expectedActionType = "gameboards/loadGameboards";
       const expectedAction = {
         type: expectedActionType,
-        payload: fakeGameboardsList,
+        payload: fakeGameboards,
       };
 
-      const result = loadGameboardsAction(fakeGameboardsList);
+      const result = loadGameboardsAction(fakeGameboards);
 
       expect(result).toStrictEqual(expectedAction);
     });
@@ -19,7 +19,7 @@ describe("Given a loadGameboardsAction function", () => {
 
 describe("Given a gameboardsSlice function", () => {
   const initialState = {
-    gameboards: fakeGameboardsList,
+    gameboards: fakeGameboards,
   };
 
   describe("When it is called with an unknow action", () => {
@@ -34,10 +34,10 @@ describe("Given a gameboardsSlice function", () => {
 
   describe("When it is called with action type loadGameboards with a list of gameboards", () => {
     test("Then it should return the initial state with gameboards with the recived list", () => {
-      const action = loadGameboardsAction(fakeGameboardsList);
+      const action = loadGameboardsAction(fakeGameboards);
       const result = gameboardsSlice(initialState, action);
       const expectedResult = {
-        gameboards: fakeGameboardsList,
+        gameboards: fakeGameboards,
       };
 
       expect(result).toStrictEqual(expectedResult);

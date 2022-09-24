@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import fakeGameboardsList from "../../utils/fakeGameboardsList";
+import { fakeGameboard1 } from "../../utils/mocks/fakeData";
 import renderWithProviders from "../../utils/test-utils";
 import GameboardTable from "./GameboardTable";
 
@@ -7,7 +7,7 @@ describe("Given a GamboardTable component", () => {
   describe("When its rendered", () => {
     test("Then it should render a heading for authorship, category, players, rating, time, weight and year", () => {
       const { authorship, category, players, rating, time, weight, year } =
-        fakeGameboardsList[0];
+        fakeGameboard1;
 
       const expectedAuthorshipHeading = "Author/s";
       const expectedCategoryHeading = "Category";
@@ -71,7 +71,7 @@ describe("Given a GamboardTable component", () => {
   describe("When its rendered with a gameboard data", () => {
     test("Then it should render then it should render all the received data", () => {
       const { authorship, category, players, rating, time, weight, year } =
-        fakeGameboardsList[0];
+        fakeGameboard1;
       const expectedPayers = `${players.min}/${players.max}`;
       const expectedTime = `${time.min}/${time.min} Min`;
       const expectedWeight = `${weight}/5`;
@@ -109,8 +109,7 @@ describe("Given a GamboardTable component", () => {
 
   describe("When its rendered without a authorship", () => {
     test("Then it should render '-'", () => {
-      const { category, players, rating, time, weight, year } =
-        fakeGameboardsList[0];
+      const { category, players, rating, time, weight, year } = fakeGameboard1;
       const expectedAuthorship = "-";
 
       renderWithProviders(
