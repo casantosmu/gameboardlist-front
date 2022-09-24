@@ -1,8 +1,7 @@
 import { useState } from "react";
 import useUser from "../../store/user/useUser";
-import { FormField as IFormField } from "../../types/interfaces";
 import Button from "../Button/Button";
-import FormField from "../FormField/FormField";
+import FormField, { IFormField } from "../FormField/FormField";
 import Input from "../Input/Input";
 import StyledLoginForm from "./StyledLoginForm";
 

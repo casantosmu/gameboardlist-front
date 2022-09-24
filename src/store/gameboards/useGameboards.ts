@@ -1,7 +1,9 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import FetchApi from "../../services/FetchApi";
-import { GameboardResponse, GameboardsResponse } from "../../types/interfaces";
+import FetchApi, {
+  GameboardResponse,
+  GameboardsResponse,
+} from "../../services/FetchApi";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
   closeLoadingAction,

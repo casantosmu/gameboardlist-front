@@ -1,8 +1,7 @@
 import { screen } from "@testing-library/react";
-import { FormField as IFormField } from "../../types/interfaces";
 import renderWithProviders from "../../utils/test-utils";
 import Input from "../Input/Input";
-import FormField from "./FormField";
+import FormField, { IFormField } from "./FormField";
 
 describe("Given a FormField component", () => {
   describe("When it recives 'name' as id, 'Carlos' as label and an input as child", () => {

@@ -3,10 +3,10 @@ import useUser from "./useUser";
 import { PropsWithChildren } from "react";
 import { Provider } from "react-redux";
 import { setupStore } from "../store";
-import { User, UserLogin, UserRegister } from "../../types/interfaces";
 import FetchApi from "../../services/FetchApi";
 import { openDialogAction, OpenDialogActionPayload } from "../ui/uiSlice";
 import { loginUserAction } from "./userSlice";
+import { User, UserLogin, UserRegister } from "../../types/user";
 
 const store = setupStore();
 

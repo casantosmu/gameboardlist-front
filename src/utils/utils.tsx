@@ -1,5 +1,5 @@
 import jwtDecode from "jwt-decode";
-import { TokenPayload, User } from "../types/interfaces";
+import { TokenPayload, User } from "../types/user";
 
 export const getInitialUser = (): User => {
   const token = localStorage.getItem("token");

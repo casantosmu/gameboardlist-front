@@ -1,4 +1,4 @@
-import { UserLogin, UserRegister } from "../types/interfaces";
+import { UserLogin, UserRegister } from "../types/user";
 import { fakeGameboard1, fakeGameboards } from "../utils/mocks/fakeData";
 import FetchApi from "./FetchApi";
 
