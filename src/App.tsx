@@ -12,6 +12,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import CreatePage from "./pages/CreatePage/CreatePage";
 import "@fontsource/sunflower/500.css";
 import AuthProtectedLayout from "./components/AuthProtectedLayout/AuthProtectedLayout";
+import DetailsPage from "./pages/DetailsPage/DetailsPage";
 
 library.add(fas);
 
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/" element={<ProtectedLayout token={token} />}>
           <Route index element={<HomePage />} />
           <Route path="/gameboard/create" element={<CreatePage />} />
+          <Route path="/gameboard/:id" element={<DetailsPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route element={<AuthProtectedLayout token={token} />}>

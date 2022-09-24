@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useGameboards from "../../store/gameboards/useGameboards";
 import { Gameboard } from "../../types/interfaces";
 import RatingTile from "../RatingTile/RatingTile";
@@ -69,6 +70,14 @@ const GameboardCard = ({
             >
               Delete
             </button>
+          </li>
+          <li className="gameboard-card__footer-item">
+            <Link
+              to={`gameboard/${id}`}
+              className="gameboard-card__footer-action"
+            >
+              View
+            </Link>
           </li>
         </ul>
       </footer>
