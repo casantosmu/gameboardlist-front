@@ -1,12 +1,16 @@
 import config from "../config";
-import {
-  GameboardResponse,
-  GameboardsResponse,
-  UserLogin,
-  UserRegister,
-} from "../types/interfaces";
+import { Gameboard, Gameboards } from "../types/interfaces";
+import { UserLogin, UserRegister } from "../types/user";
 
-interface LoginResponse {
+export interface GameboardResponse {
+  gameboard: Gameboard;
+}
+
+export interface GameboardsResponse {
+  gameboards: Gameboards;
+}
+
+export interface LoginResponse {
   user: {
     token: string;
   };

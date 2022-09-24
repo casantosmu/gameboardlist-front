@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import FetchApi from "../../services/FetchApi";
-import { GameboardResponse } from "../../types/interfaces";
+import FetchApi, { GameboardResponse } from "../../services/FetchApi";
 import { useAppSelector } from "../hooks";
 import { closeLoadingAction, showLoadingAction } from "../ui/uiSlice";
 import {
