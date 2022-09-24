@@ -96,7 +96,7 @@ const useGameboards = () => {
     }
   };
 
-  const deleteGameboard = async (id: string) => {
+  const deleteGameboards = async (id: string) => {
     const fetchApi = new FetchApi();
 
     dispatch(showLoadingAction());
@@ -119,7 +119,7 @@ const useGameboards = () => {
   return {
     getGameboards,
     postGameboard,
-    deleteGameboard,
+    deleteGameboards,
   };
 };
 

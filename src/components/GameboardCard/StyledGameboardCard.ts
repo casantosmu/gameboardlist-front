@@ -59,20 +59,17 @@ const StyledGameboardCard = styled.article`
   }
 
   .gameboard-card__footer-list {
+    display: flex;
+    gap: 16px;
     list-style: none;
     padding: 0;
   }
 
-  .gameboard-card__footer-list {
-    list-style: none;
-    padding: 0;
-  }
-
-  .gameboard-card__footer-button {
-    padding: 0 16px 0 0;
+  .gameboard-card__footer-action {
     background: none;
     color: ${({ theme }) => theme.colors.brand.normal};
     border: none;
+    padding: 0;
     cursor: pointer;
   }
 `;

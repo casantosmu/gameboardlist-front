@@ -217,7 +217,7 @@ describe("Given a useGameboards function", () => {
     const { result } = renderHook(useGameboards, { wrapper: Wrapper });
 
     test("Then it should call the function returned by useDispatch with showLoadingAction function", async () => {
-      await result.current.deleteGameboard("");
+      await result.current.deleteGameboards("");
 
       expect(mockUseDispatch).toHaveBeenCalledWith(showLoadingAction());
     });
@@ -231,7 +231,7 @@ describe("Given a useGameboards function", () => {
         "deleteGameboard"
       );
 
-      await result.current.deleteGameboard(expectedId);
+      await result.current.deleteGameboards(expectedId);
 
       expect(deleteGameboardMock).toHaveBeenCalledWith(
         expectedToken,
@@ -243,7 +243,7 @@ describe("Given a useGameboards function", () => {
       jest.spyOn(FetchApi.prototype, "deleteGameboard").mockResolvedValue({});
       const getGameboardsMock = jest.spyOn(FetchApi.prototype, "getGameboards");
 
-      await result.current.deleteGameboard("id");
+      await result.current.deleteGameboards("id");
 
       expect(getGameboardsMock).toHaveBeenCalled();
     });
@@ -264,7 +264,7 @@ describe("Given a useGameboards function", () => {
 
         const action = openDialogAction(actionPayload);
 
-        await result.current.deleteGameboard("id");
+        await result.current.deleteGameboards("id");
 
         expect(mockUseDispatch).toHaveBeenCalledWith(action);
       });
