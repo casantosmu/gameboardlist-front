@@ -1,32 +1,20 @@
 import useGameboards from "../../store/gameboards/useGameboards";
-import { MinMax } from "../../types/interfaces";
+import { Gameboard } from "../../types/interfaces";
 import RatingTile from "../RatingTile/RatingTile";
 import StyledGameboardCard from "./StyledGameboardCard";
-
-interface GameboardCardProps {
-  id: string;
-  image: string;
-  imageBackup: string;
-  name: string;
-  year: number;
-  players: MinMax;
-  weight: number;
-  time: MinMax;
-  rating: number;
-}
 
 const GameboardCard = ({
   id,
   image,
   imageBackup,
   name,
+  rating,
   year,
+  time,
   players,
   weight,
-  time,
-  rating,
-}: GameboardCardProps): JSX.Element => {
-  const { deleteGameboard } = useGameboards();
+}: Gameboard): JSX.Element => {
+  const { deleteGameboards, getGameboards } = useGameboards();
 
   return (
     <StyledGameboardCard>
@@ -73,8 +61,11 @@ const GameboardCard = ({
         <ul className="gameboard-card__footer-list">
           <li className="gameboard-card__footer-item">
             <button
-              className="gameboard-card__footer-button"
-              onClick={() => deleteGameboard(id)}
+              className="gameboard-card__footer-action"
+              onClick={async () => {
+                await deleteGameboards(id);
+                await getGameboards();
+              }}
             >
               Delete
             </button>
