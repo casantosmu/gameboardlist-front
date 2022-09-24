@@ -1,6 +1,6 @@
 import { rest } from "msw";
-import config from "../config";
-import fakeGameboardsList from "../utils/fakeGameboardsList";
+import config from "../../config";
+import { fakeGameboards } from "./fakeData";
 
 const baseUrl = config.endpoints.base;
 
@@ -38,7 +38,7 @@ export const handlers = [
 
       return token !== "valid"
         ? res(ctx.status(401), ctx.json(null))
-        : res(ctx.status(200), ctx.json(fakeGameboardsList));
+        : res(ctx.status(200), ctx.json(fakeGameboards));
     }
   ),
 

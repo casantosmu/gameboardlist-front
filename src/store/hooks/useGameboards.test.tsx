@@ -9,9 +9,9 @@ import {
   showLoadingAction,
 } from "../slices/uiSlice/uiSlice";
 import FetchApi from "../../services/FetchApi";
-import fakeGameboardsList from "../../utils/fakeGameboardsList";
 import { Gameboards } from "../../types/interfaces";
 import { loadGameboardsAction } from "../slices/gameboardsSlice/gameboardsSlice";
+import { fakeGameboards } from "../../utils/mocks/fakeData";
 
 const preloadedState = {
   user: {
@@ -82,15 +82,13 @@ describe("Given a useGameboards function", () => {
     });
 
     test("Then it should invoke loadGameboardsAction with the gameboards returned by FetchApi getGameboards method", async () => {
-      const expectedResult = fakeGameboardsList.map(
-        ({ image, ...gameboard }) => ({
-          ...gameboard,
-          image: `${process.env.REACT_APP_API_URL}/${image}`,
-        })
-      );
+      const expectedResult = fakeGameboards.map(({ image, ...gameboard }) => ({
+        ...gameboard,
+        image: `${process.env.REACT_APP_API_URL}/${image}`,
+      }));
 
       const fetchResponse = {
-        gameboards: fakeGameboardsList,
+        gameboards: fakeGameboards,
       };
 
       jest
@@ -105,9 +103,9 @@ describe("Given a useGameboards function", () => {
 
     test("Then it should call the function returned by useDispatch with the action returned by loadGameboardsAction", async () => {
       const fetchResponse = {
-        gameboards: fakeGameboardsList,
+        gameboards: fakeGameboards,
       };
-      const action = loadGameboardsAction(fakeGameboardsList);
+      const action = loadGameboardsAction(fakeGameboards);
 
       jest
         .spyOn(FetchApi.prototype, "getGameboards")
