@@ -133,7 +133,7 @@ const CreateForm = (): JSX.Element => {
     {
       id: "category",
       label: "Category",
-      description: "Please select one of the categories",
+      description: "Select one of the categories",
       status: "required",
       children: (
         <Select
@@ -217,7 +217,7 @@ const CreateForm = (): JSX.Element => {
     {
       id: "authorship",
       label: "Author/s",
-      description: "You can introduce game designers",
+      description: "Introduce game designers",
       status: "optional",
       children: (
         <Input
