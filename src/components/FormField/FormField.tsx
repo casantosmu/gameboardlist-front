@@ -1,5 +1,13 @@
-import { FormField as IFormField } from "../../types/interfaces";
+import { ReactNode } from "react";
 import StyledFormField from "./StyledFormField";
+
+export interface IFormField {
+  id?: string;
+  label: string;
+  description?: string;
+  status?: "required" | "optional";
+  children: ReactNode;
+}
 
 const FormField = ({
   id,
