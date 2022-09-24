@@ -8,11 +8,11 @@ interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
 
 const Input = ({ fontAwesomeIcon, ...props }: InputProps): JSX.Element => {
   return (
-    <StyledInput icon={!!fontAwesomeIcon} className="input__wrapper">
+    <StyledInput icon={!!fontAwesomeIcon}>
       <input className="input" {...props} />
-      {fontAwesomeIcon ? (
+      {fontAwesomeIcon && (
         <FontAwesomeIcon icon={fontAwesomeIcon} className="input__icon" />
-      ) : null}
+      )}
     </StyledInput>
   );
 };

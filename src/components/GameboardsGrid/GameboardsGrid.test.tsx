@@ -1,5 +1,5 @@
 import { screen, within } from "@testing-library/react";
-import fakeGameboardsList from "../../utils/fakeGameboardsList";
+import { fakeGameboardsList } from "../../utils/mocks/fakeData";
 import renderWithProviders from "../../utils/test-utils";
 import GameboardsGrid from "./GameboardsGrid";
 

@@ -1,6 +1,6 @@
-import { Gameboards } from "../types/interfaces";
+import { Gameboards } from "../../types/interfaces";
 
-const fakeGameboardsList: Gameboards = [
+export const fakeGameboardsList: Gameboards = [
   {
     id: "1",
     image: "gerge",
@@ -82,5 +82,3 @@ const fakeGameboardsList: Gameboards = [
     weight: 2,
   },
 ];
-
-export default fakeGameboardsList;

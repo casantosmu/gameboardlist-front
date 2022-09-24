@@ -1,4 +1,4 @@
-import { User } from "../../../types/interfaces";
+import { User } from "../../types/interfaces";
 import userSlice, { loginUserAction } from "./userSlice";
 
 describe("Given a loginUserAction function", () => {

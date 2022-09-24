@@ -2,12 +2,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
-import StyledNotFoundPage from "./StyledNotFoundPage";
+import StyledNotFound from "./StyledNotFound";
 
-const NotFoundPage = (): JSX.Element => {
+const NotFound = (): JSX.Element => {
   return (
     <Container breakpoint="small">
-      <StyledNotFoundPage>
+      <StyledNotFound>
         <FontAwesomeIcon icon={"question"} className="not-found-page__icon" />
         <h1 className="not-found-page__heading">404: Oops!</h1>
         <span className="not-found-page__description">
@@ -16,9 +16,9 @@ const NotFoundPage = (): JSX.Element => {
         <Button renderAs={Link} to={"/"}>
           Home
         </Button>
-      </StyledNotFoundPage>
+      </StyledNotFound>
     </Container>
   );
 };
 
-export default NotFoundPage;
+export default NotFound;

@@ -1,5 +1,5 @@
 import { UserLogin, UserRegister } from "../types/interfaces";
-import fakeGameboardsList from "../utils/fakeGameboardsList";
+import { fakeGameboardsList } from "../utils/mocks/fakeData";
 import FetchApi from "./FetchApi";
 
 describe("Given a FetchApi class", () => {
@@ -154,6 +154,25 @@ describe("Given a FetchApi class", () => {
         }
 
         expect(result).toBe(expectedResult);
+      });
+    });
+  });
+
+  describe("When instantated and invoked its method getGameboard with a token and an id", () => {
+    describe("And the GET fetch to gameboards endpoint with an id, with an auth token, respone with a ok status", () => {
+      test("Then it should resolve with gameboard data", async () => {
+        const id = "id";
+        const token = "token";
+        const expectedGameboard = fakeGameboardsList[0];
+
+        let result: unknown;
+        try {
+          result = await fetchApi.getGameboard(token, id);
+        } catch (error) {
+          result = error;
+        }
+
+        expect(result).toStrictEqual(expectedGameboard);
       });
     });
   });

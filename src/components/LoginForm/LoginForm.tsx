@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useUser from "../../store/hooks/useUser";
+import useUser from "../../store/user/useUser";
 import { FormField as IFormField } from "../../types/interfaces";
 import Button from "../Button/Button";
 import FormField from "../FormField/FormField";

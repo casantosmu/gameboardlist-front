@@ -1,6 +1,6 @@
 import { rest } from "msw";
-import config from "../config";
-import fakeGameboardsList from "../utils/fakeGameboardsList";
+import config from "../../config";
+import { fakeGameboardsList } from "./fakeData";
 
 const baseUrl = config.endpoints.base;
 
@@ -23,11 +23,8 @@ export const handlers = [
     }
   ),
 
-  rest.post(
-    `${baseUrl}${config.endpoints.registerPath}`,
-    async (_, res, ctx) => {
-      return res(ctx.status(201), ctx.json(true));
-    }
+  rest.post(`${baseUrl}${config.endpoints.registerPath}`, async (_, res, ctx) =>
+    res(ctx.status(201), ctx.json(true))
   ),
 
   rest.get(
@@ -44,22 +41,21 @@ export const handlers = [
 
   rest.post(
     `${baseUrl}${config.endpoints.gameboardsPath}`,
-    async (_, res, ctx) => {
-      return res(ctx.status(201), ctx.json(true));
-    }
+    async (_, res, ctx) => res(ctx.status(201), ctx.json(true))
   ),
 
   rest.delete(
     `${baseUrl}${config.endpoints.gameboardsPath}/id1`,
-    async (req, res, ctx) => {
-      return res(ctx.status(204));
-    }
+    async (req, res, ctx) => res(ctx.status(204))
   ),
 
   rest.delete(
     `${baseUrl}${config.endpoints.gameboardsPath}/id2`,
-    async (req, res, ctx) => {
-      return res(ctx.status(204));
-    }
+    async (_, res, ctx) => res(ctx.status(204))
+  ),
+
+  rest.get(
+    `${baseUrl}${config.endpoints.gameboardsPath}/id`,
+    async (_, res, ctx) => res(ctx.status(200), ctx.json(fakeGameboardsList[0]))
   ),
 ];

@@ -7,22 +7,22 @@ export interface OpenDialogActionPayload {
 }
 
 interface UiState {
+  isLoading: boolean;
   dialog: {
     isOpen: boolean;
     type: "error" | "success";
     text: string;
     onClose?: () => void;
   };
-  isLoading: boolean;
 }
 
 const initialState = {
+  isLoading: false,
   dialog: {
     isOpen: false,
     type: "",
     text: "",
   },
-  isLoading: false,
 };
 
 const uiSlice = createSlice({
@@ -49,14 +49,14 @@ const uiSlice = createSlice({
     },
     showLoading(state) {
       return {
-        ...state,
         isLoading: true,
+        dialog: state.dialog,
       };
     },
     closeLoading(state) {
       return {
-        ...state,
         isLoading: false,
+        dialog: state.dialog,
       };
     },
   },

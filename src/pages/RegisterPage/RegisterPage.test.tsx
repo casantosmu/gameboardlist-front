@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import renderWithProviders from "../../utils/test-utils";
 import RegisterPage from "./RegisterPage";
 
-describe("Given a registerForm", () => {
+describe("Given a RegisterPage", () => {
   describe("When its rendered", () => {
     test("Then it should render a heading with 'Register'", () => {
       const expectedText = "Register";

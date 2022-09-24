@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import config from "../../config";
-import useGameboards from "../../store/hooks/useGameboards";
+import useGameboards from "../../store/gameboards/useGameboards";
 import { FormField as IFormField } from "../../types/interfaces";
 import Button from "../Button/Button";
 import FileUploader from "../FileUploader/FileUploader";
@@ -25,7 +25,9 @@ const CreateForm = (): JSX.Element => {
     timeMax: "",
     authorship: "",
   });
+
   const {
+    image,
     authorship,
     category,
     weight,
@@ -37,13 +39,26 @@ const CreateForm = (): JSX.Element => {
     timeMax,
     year,
   } = formData;
-  const { postGameboard } = useGameboards();
+  const { postGameboards } = useGameboards();
   const navigation = useNavigate();
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    postGameboard(formData);
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("rating", rating);
+    formData.append("name", name);
+    formData.append("year", year);
+    formData.append("category", category);
+    formData.append("weight", weight);
+    formData.append("players[min]", playersMin);
+    formData.append("players[max]", playersMax);
+    formData.append("time[min]", timeMin);
+    formData.append("time[max]", timeMax);
+    formData.append("authorship", authorship || "-");
+
+    postGameboards(formData);
   };
 
   const onChange = (
@@ -133,7 +148,7 @@ const CreateForm = (): JSX.Element => {
     {
       id: "category",
       label: "Category",
-      description: "Please select one of the categories",
+      description: "Select one of the categories",
       status: "required",
       children: (
         <Select
@@ -217,7 +232,7 @@ const CreateForm = (): JSX.Element => {
     {
       id: "authorship",
       label: "Author/s",
-      description: "You can introduce game designers",
+      description: "Introduce game designers",
       status: "optional",
       children: (
         <Input

@@ -2,6 +2,7 @@ import { screen } from "@testing-library/react";
 import renderWithProviders from "../../utils/test-utils";
 import GameboardCard from "./GameboardCard";
 import userEvent from "@testing-library/user-event";
+import { Gameboard } from "../../types/interfaces";
 
 const mockDeleteGameboard = jest.fn();
 jest.mock("../../store/hooks/useGameboards", () => () => ({
@@ -15,25 +16,28 @@ describe("Given a GameboardCard", () => {
       const year = 2020;
       const expectedHeading = `${name} (${year})`;
 
-      renderWithProviders(
-        <GameboardCard
-          id=""
-          image=""
-          imageBackup=""
-          name={name}
-          year={year}
-          players={{
-            min: 0,
-            max: 0,
-          }}
-          time={{
-            min: 0,
-            max: 0,
-          }}
-          weight={0}
-          rating={0}
-        />
-      );
+      const gameboard: Gameboard = {
+        id: "",
+        image: "",
+        imageBackup: "",
+        name,
+        year,
+        players: {
+          min: 0,
+          max: 0,
+        },
+        time: {
+          min: 0,
+          max: 0,
+        },
+        weight: 0,
+        rating: 0,
+        authorship: "",
+        category: "family",
+        createdBy: "",
+      };
+
+      renderWithProviders(<GameboardCard {...gameboard} />);
 
       const heading = screen.getByRole("heading", {
         level: 2,
@@ -49,25 +53,28 @@ describe("Given a GameboardCard", () => {
       const rating = 8;
       const label = "Rating";
 
-      renderWithProviders(
-        <GameboardCard
-          id=""
-          image=""
-          imageBackup=""
-          name=""
-          year={0}
-          players={{
-            min: 0,
-            max: 0,
-          }}
-          time={{
-            min: 0,
-            max: 0,
-          }}
-          weight={0}
-          rating={rating}
-        />
-      );
+      const gameboard: Gameboard = {
+        id: "",
+        image: "",
+        imageBackup: "",
+        name: "",
+        year: 0,
+        players: {
+          min: 0,
+          max: 0,
+        },
+        time: {
+          min: 0,
+          max: 0,
+        },
+        weight: 0,
+        rating,
+        authorship: "",
+        category: "family",
+        createdBy: "",
+      };
+
+      renderWithProviders(<GameboardCard {...gameboard} />);
 
       const ratingElement = screen.getByLabelText(label);
 
@@ -80,25 +87,28 @@ describe("Given a GameboardCard", () => {
         const maxPlayers = 4;
         const expectedText = `${minPlayers}-${maxPlayers}`;
 
-        renderWithProviders(
-          <GameboardCard
-            id=""
-            image=""
-            imageBackup=""
-            name=""
-            year={0}
-            players={{
-              min: minPlayers,
-              max: maxPlayers,
-            }}
-            time={{
-              min: 0,
-              max: 0,
-            }}
-            weight={0}
-            rating={0}
-          />
-        );
+        const gameboard: Gameboard = {
+          id: "",
+          image: "",
+          imageBackup: "",
+          name: "",
+          year: 0,
+          players: {
+            min: minPlayers,
+            max: maxPlayers,
+          },
+          time: {
+            min: 0,
+            max: 0,
+          },
+          weight: 0,
+          rating: 0,
+          authorship: "",
+          category: "family",
+          createdBy: "",
+        };
+
+        renderWithProviders(<GameboardCard {...gameboard} />);
 
         const result = screen.getByText(expectedText);
 
@@ -112,25 +122,28 @@ describe("Given a GameboardCard", () => {
       const weight = 2;
       const expectedText = `${weight} / 5`;
 
-      renderWithProviders(
-        <GameboardCard
-          id=""
-          image=""
-          imageBackup=""
-          name=""
-          year={0}
-          players={{
-            min: 0,
-            max: 0,
-          }}
-          time={{
-            min: 0,
-            max: 0,
-          }}
-          weight={weight}
-          rating={0}
-        />
-      );
+      const gameboard: Gameboard = {
+        id: "",
+        image: "",
+        imageBackup: "",
+        name: "",
+        year: 0,
+        players: {
+          min: 0,
+          max: 0,
+        },
+        time: {
+          min: 0,
+          max: 0,
+        },
+        weight,
+        rating: 0,
+        authorship: "",
+        category: "family",
+        createdBy: "",
+      };
+
+      renderWithProviders(<GameboardCard {...gameboard} />);
 
       const result = screen.getByText(expectedText);
 
@@ -140,33 +153,36 @@ describe("Given a GameboardCard", () => {
     describe("When it recive an image and a backup image and there is an error with the image", () => {
       test("Then it should show the backup image", () => {
         const errorEvent = new ErrorEvent("error");
-        const backupImage = "backupimage";
+        const imageBackup = "backupimage";
 
-        renderWithProviders(
-          <GameboardCard
-            id=""
-            image=""
-            imageBackup={backupImage}
-            name=""
-            year={0}
-            players={{
-              min: 0,
-              max: 0,
-            }}
-            time={{
-              min: 0,
-              max: 0,
-            }}
-            weight={0}
-            rating={0}
-          />
-        );
+        const gameboard: Gameboard = {
+          id: "",
+          image: "",
+          imageBackup,
+          name: "",
+          year: 0,
+          players: {
+            min: 0,
+            max: 0,
+          },
+          time: {
+            min: 0,
+            max: 0,
+          },
+          weight: 0,
+          rating: 0,
+          authorship: "",
+          category: "family",
+          createdBy: "",
+        };
+
+        renderWithProviders(<GameboardCard {...gameboard} />);
 
         const image = screen.getByRole("img");
 
         image.dispatchEvent(errorEvent);
 
-        expect(image).toHaveAttribute("src", backupImage);
+        expect(image).toHaveAttribute("src", imageBackup);
       });
     });
   });
@@ -175,28 +191,31 @@ describe("Given a GameboardCard", () => {
     test("Then it should call the function deleteGameboard returned by useGameboard with the recived id", async () => {
       const user = userEvent.setup();
 
-      const expectedId = "id";
+      const id = "id";
       const buttonText = "Delete";
 
-      renderWithProviders(
-        <GameboardCard
-          id={expectedId}
-          image=""
-          imageBackup=""
-          name=""
-          year={0}
-          players={{
-            min: 0,
-            max: 0,
-          }}
-          time={{
-            min: 0,
-            max: 0,
-          }}
-          weight={0}
-          rating={0}
-        />
-      );
+      const gameboard: Gameboard = {
+        id,
+        image: "",
+        imageBackup: "",
+        name: "",
+        year: 0,
+        players: {
+          min: 0,
+          max: 0,
+        },
+        time: {
+          min: 0,
+          max: 0,
+        },
+        weight: 0,
+        rating: 0,
+        authorship: "",
+        category: "family",
+        createdBy: "",
+      };
+
+      renderWithProviders(<GameboardCard {...gameboard} />);
 
       const image = screen.getByRole("button", {
         name: buttonText,
@@ -204,7 +223,7 @@ describe("Given a GameboardCard", () => {
 
       await user.click(image);
 
-      expect(mockDeleteGameboard).toHaveBeenCalledWith(expectedId);
+      expect(mockDeleteGameboard).toHaveBeenCalledWith(id);
     });
   });
 });
