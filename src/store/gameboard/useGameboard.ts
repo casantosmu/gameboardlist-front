@@ -33,9 +33,7 @@ const useGameboard = () => {
 
         dispatch(gameboardLoadSuccessAction(gameboard));
       } catch (error) {
-        if (error instanceof Error) {
-          dispatch(gameboardLoadFailureAction(error.message));
-        }
+        dispatch(gameboardLoadFailureAction((error as Error).message));
       } finally {
         dispatch(closeLoadingAction());
       }
