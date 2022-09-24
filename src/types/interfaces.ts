@@ -56,3 +56,11 @@ export interface Gameboard {
 }
 
 export type Gameboards = Array<Gameboard>;
+
+export interface GameboardResponse {
+  gameboard: Gameboard;
+}
+
+export interface GameboardsResponse {
+  gameboards: Gameboards;
+}

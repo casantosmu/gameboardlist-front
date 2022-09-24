@@ -22,7 +22,7 @@ const useUser = () => {
       dispatch(loginUserAction({ token, email, id, name }));
       localStorage.setItem("token", token);
       navigate("/");
-    } catch (error: unknown) {
+    } catch (error) {
       const payload: OpenDialogActionPayload = {
         type: "error",
         text: "Something went wrong",
