@@ -1,116 +1,100 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import FetchApi from "../../services/FetchApi";
+import { GameboardResponse, GameboardsResponse } from "../../types/interfaces";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
   closeLoadingAction,
   openDialogAction,
+  OpenDialogActionPayload,
   showLoadingAction,
 } from "../ui/uiSlice";
-import { gameboardsLoadSuccessAction } from "./gameboardsSlice";
-
-interface PostGameboard {
-  image: string;
-  rating: string;
-  name: string;
-  year: string;
-  category: string;
-  weight: string;
-  playersMin: string;
-  playersMax: string;
-  timeMin: string;
-  timeMax: string;
-  authorship: string;
-}
+import {
+  gameboardsAddAction,
+  gameboardsDeleteAction,
+  gameboardsLoadAction,
+  gameboardsLoadFailureAction,
+  gameboardsLoadSuccessAction,
+} from "./gameboardsSlice";
 
 const useGameboards = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const { token } = useAppSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const getGameboards = useCallback(async () => {
     const fetchApi = new FetchApi();
 
     dispatch(showLoadingAction());
+    dispatch(gameboardsLoadAction());
 
     try {
-      const gameboards = await fetchApi.getGameboards(token);
-
-      dispatch(
-        gameboardsLoadSuccessAction(
-          gameboards!.gameboards.map(({ image, ...gameboard }) => ({
-            ...gameboard,
-            image: `${process.env.REACT_APP_API_URL}/${image}`,
-          }))
-        )
-      );
-    } catch {
-      dispatch(
-        openDialogAction({
-          text: "Ups! Shomething went wrong",
-          type: "error",
+      const gameboardsResponse = (await fetchApi.getGameboards(
+        token
+      )) as GameboardsResponse;
+      const gameboards = gameboardsResponse.gameboards.map(
+        ({ image, ...gameboard }) => ({
+          ...gameboard,
+          image: `${process.env.REACT_APP_API_URL}/${image}`,
         })
       );
+
+      dispatch(gameboardsLoadSuccessAction(gameboards));
+    } catch (error) {
+      dispatch(gameboardsLoadFailureAction((error as Error).message));
     } finally {
       dispatch(closeLoadingAction());
     }
   }, [dispatch, token]);
 
-  const postGameboard = async (gameboard: PostGameboard) => {
+  const deleteGameboards = async (id: string) => {
     const fetchApi = new FetchApi();
 
     dispatch(showLoadingAction());
-
-    const formData = new FormData();
-    formData.append("image", gameboard.image);
-    formData.append("rating", gameboard.rating);
-    formData.append("name", gameboard.name);
-    formData.append("year", gameboard.year);
-    formData.append("category", gameboard.category);
-    formData.append("weight", gameboard.weight);
-    formData.append("players[min]", gameboard.playersMin);
-    formData.append("players[max]", gameboard.playersMax);
-    formData.append("time[min]", gameboard.timeMin);
-    formData.append("time[max]", gameboard.timeMax);
-    formData.append("authorship", gameboard.authorship || "-");
+    dispatch(gameboardsLoadAction());
 
     try {
-      await fetchApi.postGameboard(token, formData);
+      await fetchApi.deleteGameboard(token, id);
 
-      dispatch(
-        openDialogAction({
-          type: "success",
-          text: "Successfully added!",
-          onClose: () => navigate("/"),
-        })
-      );
+      dispatch(gameboardsDeleteAction(id));
     } catch {
-      dispatch(
-        openDialogAction({
-          text: "Ups! Shomething went wrong",
-          type: "error",
-        })
-      );
+      const openDialogPayload: OpenDialogActionPayload = {
+        text: "Ups! Shomething went wrong",
+        type: "error",
+      };
+      dispatch(openDialogAction(openDialogPayload));
     } finally {
       dispatch(closeLoadingAction());
     }
   };
 
-  const deleteGameboards = async (id: string) => {
+  const postGameboards = async (gameboard: FormData) => {
     const fetchApi = new FetchApi();
 
     dispatch(showLoadingAction());
+    dispatch(gameboardsLoadAction());
 
     try {
-      await fetchApi.deleteGameboard(token, id);
-      await getGameboards();
+      const { gameboard: gameboardResponse } = (await fetchApi.postGameboard(
+        token,
+        gameboard
+      )) as GameboardResponse;
+
+      const openDialogPayload: OpenDialogActionPayload = {
+        type: "success",
+        text: "Successfully added!",
+        onClose: () => navigate("/"),
+      };
+      dispatch(openDialogAction(openDialogPayload));
+
+      dispatch(gameboardsAddAction(gameboardResponse));
     } catch {
-      dispatch(
-        openDialogAction({
-          text: "Ups! Shomething went wrong",
-          type: "error",
-        })
-      );
+      const openDialogPayload: OpenDialogActionPayload = {
+        text: "Ups! Shomething went wrong",
+        type: "error",
+      };
+
+      dispatch(openDialogAction(openDialogPayload));
     } finally {
       dispatch(closeLoadingAction());
     }
@@ -118,8 +102,8 @@ const useGameboards = () => {
 
   return {
     getGameboards,
-    postGameboard,
     deleteGameboards,
+    postGameboards,
   };
 };
 
