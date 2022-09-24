@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import renderWithProviders from "../../utils/test-utils";
 import LoginPage from "./LoginPage";
 
-describe("Given a registerForm", () => {
+describe("Given a LoginPage component", () => {
   describe("When its rendered", () => {
     test("Then it should render a heading with 'Welcome back'", () => {
       const expectedText = "Welcome back";
