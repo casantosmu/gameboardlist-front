@@ -2,12 +2,12 @@ import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import FetchApi from "../../services/FetchApi";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { loadGameboardsAction } from "../gameboards/gameboardsSlice";
 import {
   closeLoadingAction,
   openDialogAction,
   showLoadingAction,
 } from "../ui/uiSlice";
+import { gameboardsLoadSuccessAction } from "./gameboardsSlice";
 
 interface PostGameboard {
   image: string;
@@ -37,7 +37,7 @@ const useGameboards = () => {
       const gameboards = await fetchApi.getGameboards(token);
 
       dispatch(
-        loadGameboardsAction(
+        gameboardsLoadSuccessAction(
           gameboards!.gameboards.map(({ image, ...gameboard }) => ({
             ...gameboard,
             image: `${process.env.REACT_APP_API_URL}/${image}`,

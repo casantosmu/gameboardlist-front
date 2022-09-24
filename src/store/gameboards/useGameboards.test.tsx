@@ -5,13 +5,13 @@ import { Provider } from "react-redux";
 import useGameboards from "./useGameboards";
 import FetchApi from "../../services/FetchApi";
 import { Gameboards } from "../../types/interfaces";
-import { loadGameboardsAction } from "./gameboardsSlice";
-import { fakeGameboards } from "../../utils/mocks/fakeData";
 import {
   openDialogAction,
   OpenDialogActionPayload,
   showLoadingAction,
 } from "../ui/uiSlice";
+import { fakeGameboards } from "../../utils/mocks/fakeData";
+import { gameboardsLoadSuccessAction } from "./gameboardsSlice";
 
 const preloadedState = {
   user: {
@@ -48,8 +48,8 @@ jest.mock("react-router-dom", () => ({
 }));
 
 let mockLoadGameboardsAction: (payload: Gameboards) => string;
-jest.mock("../gameboards/gameboardsSlice", () => ({
-  ...jest.requireActual("../gameboards/gameboardsSlice"),
+jest.mock("./gameboardsSlice", () => ({
+  ...jest.requireActual("./gameboardsSlice"),
   loadGameboardsAction: (payload: Gameboards) =>
     mockLoadGameboardsAction(payload),
 }));
@@ -81,31 +81,16 @@ describe("Given a useGameboards function", () => {
       expect(getGameboardsMock).toHaveBeenCalledWith(expectedToken);
     });
 
-    test("Then it should invoke loadGameboardsAction with the gameboards returned by FetchApi getGameboards method", async () => {
-      const expectedResult = fakeGameboards.map(({ image, ...gameboard }) => ({
+    test("Then it should call the function returned by useDispatch with the action returned by gameboardsLoadSuccessAction", async () => {
+      const fetchResponse = {
+        gameboards: fakeGameboards,
+      };
+      const actionPayload = fakeGameboards.map(({ image, ...gameboard }) => ({
         ...gameboard,
         image: `${process.env.REACT_APP_API_URL}/${image}`,
       }));
 
-      const fetchResponse = {
-        gameboards: fakeGameboards,
-      };
-
-      jest
-        .spyOn(FetchApi.prototype, "getGameboards")
-        .mockResolvedValue(fetchResponse);
-      mockLoadGameboardsAction = jest.fn();
-
-      await result.current.getGameboards();
-
-      expect(mockLoadGameboardsAction).toHaveBeenCalledWith(expectedResult);
-    });
-
-    test("Then it should call the function returned by useDispatch with the action returned by loadGameboardsAction", async () => {
-      const fetchResponse = {
-        gameboards: fakeGameboards,
-      };
-      const action = loadGameboardsAction(fakeGameboards);
+      const action = gameboardsLoadSuccessAction(actionPayload);
 
       jest
         .spyOn(FetchApi.prototype, "getGameboards")
@@ -117,24 +102,6 @@ describe("Given a useGameboards function", () => {
     });
 
     describe("When FetchApi getGameboards method rejects with an error", () => {
-      test("Then it should call openDialogAction with type error and 'Ups! Shomething went wrong'", async () => {
-        const error = new Error();
-
-        jest
-          .spyOn(FetchApi.prototype, "getGameboards")
-          .mockRejectedValue(error);
-        mockOpenDialogAction = jest.fn();
-
-        const expectedPayload: OpenDialogActionPayload = {
-          type: "error",
-          text: "Ups! Shomething went wrong",
-        };
-
-        await result.current.getGameboards();
-
-        expect(mockOpenDialogAction).toHaveBeenCalledWith(expectedPayload);
-      });
-
       test("Then it should call the function returned by useDispatch with the action returned by openDialogAction", async () => {
         const error = new Error();
 
@@ -224,24 +191,6 @@ describe("Given a useGameboards function", () => {
     });
 
     describe("When FetchApi postGameboards method rejects with an error", () => {
-      test("Then it should call openDialogAction with type error and 'Ups! Shomething went wrong'", async () => {
-        const error = new Error();
-
-        jest
-          .spyOn(FetchApi.prototype, "postGameboard")
-          .mockRejectedValue(error);
-        mockOpenDialogAction = jest.fn();
-
-        const expectedPayload: OpenDialogActionPayload = {
-          type: "error",
-          text: "Ups! Shomething went wrong",
-        };
-
-        await result.current.postGameboard(gameboard);
-
-        expect(mockOpenDialogAction).toHaveBeenCalledWith(expectedPayload);
-      });
-
       test("Then it should call the function returned by useDispatch with the action returned by openDialogAction", async () => {
         const error = new Error();
 
@@ -300,23 +249,6 @@ describe("Given a useGameboards function", () => {
     });
 
     describe("When FetchApi deleteGameboard method rejects with an error", () => {
-      test("Then it should call openDialogAction with type error and 'Ups! Shomething went wrong'", async () => {
-        const error = new Error();
-        const expectedPayload: OpenDialogActionPayload = {
-          type: "error",
-          text: "Ups! Shomething went wrong",
-        };
-
-        jest
-          .spyOn(FetchApi.prototype, "deleteGameboard")
-          .mockRejectedValue(error);
-        mockOpenDialogAction = jest.fn();
-
-        await result.current.deleteGameboard("id");
-
-        expect(mockOpenDialogAction).toHaveBeenCalledWith(expectedPayload);
-      });
-
       test("Then it should call the function returned by useDispatch with the action returned by openDialogAction", async () => {
         const error = new Error();
 
