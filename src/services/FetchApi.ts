@@ -1,5 +1,10 @@
 import config from "../config";
-import { Gameboards, UserLogin, UserRegister } from "../types/interfaces";
+import {
+  GameboardResponse,
+  GameboardsResponse,
+  UserLogin,
+  UserRegister,
+} from "../types/interfaces";
 
 interface LoginResponse {
   user: {
@@ -7,19 +12,11 @@ interface LoginResponse {
   };
 }
 
-interface GameboardsResponse {
-  gameboards: Gameboards;
-}
-
-interface RequestOptions extends RequestInit {
-  parseResponse?: boolean;
-}
-
 class FetchApi {
   private baseUrl = config.endpoints.base;
   private headers: Record<string, string> = {};
 
-  private fetchJson<T>(pathUrl: string, options: RequestOptions) {
+  private fetchJson<T>(pathUrl: string, options: RequestInit) {
     return new Promise<T | void>(async (resolve, reject) => {
       try {
         const response = await fetch(this.baseUrl + pathUrl, {
@@ -27,14 +24,14 @@ class FetchApi {
           headers: this.headers,
         });
 
-        if (!response.ok) throw new Error(response.statusText);
-
-        if (options.parseResponse === false || response.status === 204) {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        if (response.status === 204) {
           resolve(undefined);
         }
 
         const data = await response.json();
-
         resolve(data);
       } catch (error) {
         reject(error);
@@ -48,7 +45,10 @@ class FetchApi {
       body: JSON.stringify(body),
     };
 
-    return this.fetchJson<T>(pathUrl, postOptions);
+    return this.setHeader("Content-Type", "application/json").fetchJson<T>(
+      pathUrl,
+      postOptions
+    );
   }
 
   private postData<T>(pathUrl: string, data: FormData) {
@@ -88,19 +88,13 @@ class FetchApi {
   }
 
   loginUser(user: UserLogin) {
-    return this.setHeader(
-      "Content-Type",
-      "application/json"
-    ).post<LoginResponse>(config.endpoints.loginPath, {
+    return this.post<LoginResponse>(config.endpoints.loginPath, {
       user,
     });
   }
 
   registerUser(user: UserRegister) {
-    return this.setHeader("Content-Type", "application/json").post(
-      config.endpoints.registerPath,
-      { user }
-    );
+    return this.post(config.endpoints.registerPath, { user });
   }
 
   getGameboards(token: string) {
@@ -110,7 +104,7 @@ class FetchApi {
   }
 
   postGameboard(token: string, data: FormData) {
-    return this.setBearerAuth(token).postData(
+    return this.setBearerAuth(token).postData<GameboardResponse>(
       config.endpoints.gameboardsPath,
       data
     );
@@ -118,6 +112,12 @@ class FetchApi {
 
   deleteGameboard(token: string, id: string) {
     return this.setBearerAuth(token).delete(
+      `${config.endpoints.gameboardsPath}/${id}`
+    );
+  }
+
+  getGameboard(token: string, id: string) {
+    return this.setBearerAuth(token).get<GameboardResponse>(
       `${config.endpoints.gameboardsPath}/${id}`
     );
   }
