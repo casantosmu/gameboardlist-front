@@ -3,7 +3,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import NotFound from "./components/NotFound/NotFound";
 import Dialog from "./components/Dialog/Dialog";
 import Loading from "./components/Loading/Loading";
 import { useAppSelector } from "./store/hooks";
@@ -23,15 +23,16 @@ const App = () => {
       <Dialog />
       <Loading />
       <Routes>
-        <Route element={<ProtectedLayout token={token} />}>
-          <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<ProtectedLayout token={token} />}>
+          <Route index element={<HomePage />} />
           <Route path="/gameboard/create" element={<CreatePage />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
         <Route element={<AuthProtectedLayout token={token} />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Route>
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

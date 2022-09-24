@@ -1,13 +1,13 @@
 import { screen } from "@testing-library/react";
 import renderWithProviders from "../../utils/test-utils";
-import NotFoundPage from "./NotFoundPage";
+import NotFound from "./NotFound";
 
-describe("Given a registerForm", () => {
+describe("Given a NotFound component", () => {
   describe("When its rendered", () => {
     test("Then it should render a heading with '404: Oops!'", () => {
       const expectedText = "404: Oops!";
 
-      renderWithProviders(<NotFoundPage />);
+      renderWithProviders(<NotFound />);
 
       const heading = screen.getByRole("heading", {
         name: expectedText,
@@ -19,7 +19,7 @@ describe("Given a registerForm", () => {
     test("Then it should render 'The page you're looking for could not be found'", () => {
       const expectedText = "The page you're looking for could not be found";
 
-      renderWithProviders(<NotFoundPage />);
+      renderWithProviders(<NotFound />);
 
       const result = screen.getByText(expectedText);
 
@@ -29,7 +29,7 @@ describe("Given a registerForm", () => {
     test("Then it should render a link to Home page", () => {
       const expectedText = "Home";
 
-      renderWithProviders(<NotFoundPage />);
+      renderWithProviders(<NotFound />);
 
       const link = screen.getByRole("link", {
         name: expectedText,
