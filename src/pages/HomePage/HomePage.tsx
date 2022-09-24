@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
 import GameboardsGrid from "../../components/GameboardsGrid/GameboardsGrid";
+import useGameboards from "../../store/gameboards/useGameboards";
 import { useAppSelector } from "../../store/hooks";
-import useGameboards from "../../store/hooks/useGameboards";
 import StyledHomePage from "./StyledHomePage";
 
 const HomePage = (): JSX.Element => {

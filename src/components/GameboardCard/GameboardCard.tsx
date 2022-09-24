@@ -1,4 +1,4 @@
-import useGameboards from "../../store/hooks/useGameboards";
+import useGameboards from "../../store/gameboards/useGameboards";
 import { MinMax } from "../../types/interfaces";
 import RatingTile from "../RatingTile/RatingTile";
 import StyledGameboardCard from "./StyledGameboardCard";

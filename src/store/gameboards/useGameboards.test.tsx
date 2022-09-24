@@ -3,15 +3,15 @@ import { PropsWithChildren } from "react";
 import { setupStore } from "../store";
 import { Provider } from "react-redux";
 import useGameboards from "./useGameboards";
+import FetchApi from "../../services/FetchApi";
+import { Gameboards } from "../../types/interfaces";
+import { loadGameboardsAction } from "./gameboardsSlice";
+import { fakeGameboards } from "../../utils/mocks/fakeData";
 import {
   openDialogAction,
   OpenDialogActionPayload,
   showLoadingAction,
-} from "../slices/uiSlice/uiSlice";
-import FetchApi from "../../services/FetchApi";
-import { Gameboards } from "../../types/interfaces";
-import { loadGameboardsAction } from "../slices/gameboardsSlice/gameboardsSlice";
-import { fakeGameboards } from "../../utils/mocks/fakeData";
+} from "../ui/uiSlice";
 
 const preloadedState = {
   user: {
@@ -48,15 +48,15 @@ jest.mock("react-router-dom", () => ({
 }));
 
 let mockLoadGameboardsAction: (payload: Gameboards) => string;
-jest.mock("../slices/gameboardsSlice/gameboardsSlice", () => ({
-  ...jest.requireActual("../slices/gameboardsSlice/gameboardsSlice"),
+jest.mock("../gameboards/gameboardsSlice", () => ({
+  ...jest.requireActual("../gameboards/gameboardsSlice"),
   loadGameboardsAction: (payload: Gameboards) =>
     mockLoadGameboardsAction(payload),
 }));
 
 let mockOpenDialogAction = jest.fn();
-jest.mock("../slices/uiSlice/uiSlice", () => ({
-  ...jest.requireActual("../slices/uiSlice/uiSlice"),
+jest.mock("../ui/uiSlice", () => ({
+  ...jest.requireActual("../ui/uiSlice"),
   openDialogAction: (payload: OpenDialogActionPayload) =>
     mockOpenDialogAction(payload),
 }));

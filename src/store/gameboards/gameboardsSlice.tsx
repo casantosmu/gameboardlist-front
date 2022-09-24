@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Gameboards } from "../../../types/interfaces";
+import { Gameboards } from "../../types/interfaces";
 
 const initialGameboards = {
   gameboards: [] as Gameboards,

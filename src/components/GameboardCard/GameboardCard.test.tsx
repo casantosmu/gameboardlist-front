@@ -4,7 +4,7 @@ import GameboardCard from "./GameboardCard";
 import userEvent from "@testing-library/user-event";
 
 const mockDeleteGameboard = jest.fn();
-jest.mock("../../store/hooks/useGameboards", () => () => ({
+jest.mock("../../store/gameboards/useGameboards", () => () => ({
   deleteGameboard: mockDeleteGameboard,
 }));
 

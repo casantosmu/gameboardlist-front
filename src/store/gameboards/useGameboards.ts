@@ -2,12 +2,12 @@ import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import FetchApi from "../../services/FetchApi";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { loadGameboardsAction } from "../slices/gameboardsSlice/gameboardsSlice";
+import { loadGameboardsAction } from "../gameboards/gameboardsSlice";
 import {
   closeLoadingAction,
   openDialogAction,
   showLoadingAction,
-} from "../slices/uiSlice/uiSlice";
+} from "../ui/uiSlice";
 
 interface PostGameboard {
   image: string;

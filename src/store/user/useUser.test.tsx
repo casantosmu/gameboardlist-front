@@ -5,11 +5,8 @@ import { Provider } from "react-redux";
 import { setupStore } from "../store";
 import { User, UserLogin, UserRegister } from "../../types/interfaces";
 import FetchApi from "../../services/FetchApi";
-import { loginUserAction } from "../slices/userSlice/userSlice";
-import {
-  openDialogAction,
-  OpenDialogActionPayload,
-} from "../slices/uiSlice/uiSlice";
+import { openDialogAction, OpenDialogActionPayload } from "../ui/uiSlice";
+import { loginUserAction } from "./userSlice";
 
 const store = setupStore();
 
@@ -28,14 +25,14 @@ jest.mock("react-redux", () => ({
 }));
 
 let mockLoginUserAction: (payload: User) => string;
-jest.mock("../slices/userSlice/userSlice", () => ({
-  ...jest.requireActual("../slices/userSlice/userSlice"),
+jest.mock("./userSlice", () => ({
+  ...jest.requireActual("./userSlice"),
   loginUserAction: (payload: User) => mockLoginUserAction(payload),
 }));
 
 let mockOpenDialogAction = jest.fn();
-jest.mock("../slices/uiSlice/uiSlice", () => ({
-  ...jest.requireActual("../slices/userSlice/userSlice"),
+jest.mock("../ui/uiSlice", () => ({
+  ...jest.requireActual("../ui/uiSlice"),
   openDialogAction: (payload: OpenDialogActionPayload) =>
     mockOpenDialogAction(payload),
 }));

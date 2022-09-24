@@ -3,11 +3,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FetchApi from "../../services/FetchApi";
 import { TokenPayload, UserLogin, UserRegister } from "../../types/interfaces";
-import {
-  openDialogAction,
-  OpenDialogActionPayload,
-} from "../slices/uiSlice/uiSlice";
-import { loginUserAction } from "../slices/userSlice/userSlice";
+import { openDialogAction, OpenDialogActionPayload } from "../ui/uiSlice";
+import { loginUserAction } from "./userSlice";
 
 const fetchApi = new FetchApi();
 
