@@ -1,8 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
 import NotFound from "./components/NotFound/NotFound";
 import Dialog from "./components/Dialog/Dialog";
 import Loading from "./components/Loading/Loading";
@@ -13,8 +11,6 @@ import CreatePage from "./pages/CreatePage/CreatePage";
 import "@fontsource/sunflower/500.css";
 import AuthProtectedLayout from "./components/AuthProtectedLayout/AuthProtectedLayout";
 import DetailsPage from "./pages/DetailsPage/DetailsPage";
-
-library.add(fas);
 
 const App = () => {
   const { token } = useAppSelector((store) => store.user);

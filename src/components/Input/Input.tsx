@@ -1,18 +1,18 @@
-import { IconName } from "@fortawesome/fontawesome-svg-core";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import StyledInput from "./StyledInput";
 
 interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
-  fontAwesomeIcon?: ["fas", IconName];
+  fontAwesomeIcon?: IconDefinition;
 }
 
 const Input = ({ fontAwesomeIcon, ...props }: InputProps): JSX.Element => {
   return (
     <StyledInput icon={!!fontAwesomeIcon}>
       <input className="input" {...props} />
-      {fontAwesomeIcon ? (
+      {fontAwesomeIcon && (
         <FontAwesomeIcon icon={fontAwesomeIcon} className="input__icon" />
-      ) : null}
+      )}
     </StyledInput>
   );
 };

@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import Container from "../Container/Container";
@@ -42,7 +43,7 @@ const Navbar = ({ pages }: NavbarProps): JSX.Element => {
               </ul>
             </nav>
             <Button onChange={() => {}} semantic="secondary">
-              <FontAwesomeIcon icon="power-off" aria-hidden="true" />
+              <FontAwesomeIcon icon={faPowerOff} aria-hidden="true" />
               <VisuallyHidden>Logout</VisuallyHidden>
             </Button>
           </div>

@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 import Container from "../Container/Container";
@@ -8,7 +9,7 @@ const NotFound = (): JSX.Element => {
   return (
     <Container breakpoint="small">
       <StyledNotFound>
-        <FontAwesomeIcon icon={"question"} className="not-found-page__icon" />
+        <FontAwesomeIcon icon={faQuestion} className="not-found-page__icon" />
         <h1 className="not-found-page__heading">404: Oops!</h1>
         <span className="not-found-page__description">
           The page you're looking for could not be found
