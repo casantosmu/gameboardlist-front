@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import FetchApi, { LoginResponse } from "../../services/FetchApi";
 import { TokenPayload, UserLogin, UserRegister } from "../../types/user";
 import { openDialogAction, OpenDialogActionPayload } from "../ui/uiSlice";
-import { loginUserAction } from "./userSlice";
+import { loginUserAction, logoutUserAction } from "./userSlice";
 
 const fetchApi = new FetchApi();
 
@@ -63,7 +63,12 @@ const useUser = () => {
     }
   };
 
-  return { loginUser, registerUser };
+  const logoutUser = () => {
+    localStorage.removeItem("token");
+    dispatch(logoutUserAction());
+  };
+
+  return { loginUser, registerUser, logoutUser };
 };
 
 export default useUser;

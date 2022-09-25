@@ -1,6 +1,12 @@
 import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import renderWithProviders from "../../utils/test-utils";
 import Navbar from "./Navbar";
+
+const mockLogoutUser = jest.fn();
+jest.mock("../../store/user/useUser", () => () => ({
+  logoutUser: mockLogoutUser,
+}));
 
 describe("Given a Navbar component", () => {
   describe("When its rendered", () => {
@@ -16,7 +22,8 @@ describe("Given a Navbar component", () => {
       expect(image).toBeInTheDocument();
     });
 
-    test("Then it should show a button to logout", () => {
+    test("Then it should render a Logout button that invoke logoutUser when users clicks", async () => {
+      const user = userEvent.setup();
       const expectedLabel = "Logout";
 
       renderWithProviders(<Navbar pages={[]} />);
@@ -25,7 +32,9 @@ describe("Given a Navbar component", () => {
         name: expectedLabel,
       });
 
-      expect(button).toBeInTheDocument();
+      await user.click(button);
+
+      expect(mockLogoutUser).toHaveBeenCalled();
     });
   });
 
