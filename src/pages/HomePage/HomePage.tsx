@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
@@ -32,7 +33,7 @@ const HomePage = (): JSX.Element => {
               <h1 className="home-page__heading">Your collection</h1>
               <Button renderAs={Link} to="/gameboard/create">
                 <FontAwesomeIcon
-                  icon="plus"
+                  icon={faPlus}
                   aria-hidden="true"
                   className="home-page__header-icon"
                 />

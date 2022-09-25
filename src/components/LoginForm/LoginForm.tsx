@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import FormField, { IFormField } from "../FormField/FormField";
 import Input from "../Input/Input";
 import StyledLoginForm from "./StyledLoginForm";
+import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const LoginForm = (): JSX.Element => {
   const initialFormDataState = {
@@ -41,7 +42,7 @@ const LoginForm = (): JSX.Element => {
           onChange={onChange}
           required={true}
           placeholder="email"
-          fontAwesomeIcon={["fas", "user"]}
+          fontAwesomeIcon={faUser}
         />
       ),
     },
@@ -57,7 +58,7 @@ const LoginForm = (): JSX.Element => {
           onChange={onChange}
           required={true}
           placeholder="password"
-          fontAwesomeIcon={["fas", "lock"]}
+          fontAwesomeIcon={faLock}
         />
       ),
     },

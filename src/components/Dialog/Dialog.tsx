@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faClose } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-modal";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { closeDialogAction } from "../../store/ui/uiSlice";
@@ -27,7 +28,7 @@ const Dialog = (): JSX.Element => {
     >
       <div className="dialog__content">
         <FontAwesomeIcon
-          icon={dialog.type === "success" ? "check" : "close"}
+          icon={dialog.type === "success" ? faCheck : faClose}
           className="dialog__icon"
         />
         <span className="dialog__description">{dialog.text}</span>

@@ -23,6 +23,7 @@ const GameboardCard = ({
         <div className="gameboard-card__cover-wrapper">
           <img
             src={image}
+            loading="lazy"
             alt={`${name} game cover`}
             className="gameboard-card__cover"
             height={160}

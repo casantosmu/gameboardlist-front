@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import config from "../../config";
@@ -87,7 +88,7 @@ const CreateForm = (): JSX.Element => {
           id="image"
           children={
             <>
-              <FontAwesomeIcon icon="plus" style={{ paddingRight: "6px" }} />
+              <FontAwesomeIcon icon={faPlus} style={{ paddingRight: "6px" }} />
               Upload
             </>
           }

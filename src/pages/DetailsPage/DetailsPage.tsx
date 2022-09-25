@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Container from "../../components/Container/Container";
@@ -36,7 +37,7 @@ const DetailsPage = (): JSX.Element => {
           <StyledGameboardDetailsPage>
             <header className="gameboard-detail__header">
               <Link to={"/"} className="gameboard-detail__icon">
-                <FontAwesomeIcon icon="arrow-left" size="lg" />
+                <FontAwesomeIcon icon={faArrowLeft} size="lg" />
                 <VisuallyHidden>Back to collection</VisuallyHidden>
               </Link>
               <h1 className="gameboard-detail__heading">{gameboard.name}</h1>
