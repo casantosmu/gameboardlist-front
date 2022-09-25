@@ -5,6 +5,7 @@ import Button from "../Button/Button";
 import Container from "../Container/Container";
 import VisuallyHidden from "../VisuallyHidden/VisuallyHidden";
 import StyledNavbar from "./StyledNavbar";
+import useUser from "../../store/user/useUser";
 
 interface Page {
   label: string;
@@ -16,6 +17,8 @@ interface NavbarProps {
 }
 
 const Navbar = ({ pages }: NavbarProps): JSX.Element => {
+  const { logoutUser } = useUser();
+
   return (
     <StyledNavbar>
       <Container breakpoint="large">
@@ -42,7 +45,7 @@ const Navbar = ({ pages }: NavbarProps): JSX.Element => {
                 ))}
               </ul>
             </nav>
-            <Button onChange={() => {}} semantic="secondary">
+            <Button onClick={() => logoutUser()} semantic="secondary">
               <FontAwesomeIcon icon={faPowerOff} aria-hidden="true" />
               <VisuallyHidden>Logout</VisuallyHidden>
             </Button>

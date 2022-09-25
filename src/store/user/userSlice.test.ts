@@ -1,5 +1,5 @@
 import { User } from "../../types/user";
-import userSlice, { loginUserAction } from "./userSlice";
+import userSlice, { loginUserAction, logoutUserAction } from "./userSlice";
 
 describe("Given a loginUserAction function", () => {
   describe("When its invoked with a user", () => {
@@ -11,13 +11,28 @@ describe("Given a loginUserAction function", () => {
         token: "",
       };
       const expectedActionType = "user/loginUser";
-      const expectedUser = user;
       const expectedAction = {
         type: expectedActionType,
-        payload: expectedUser,
+        payload: user,
       };
 
       const result = loginUserAction(user);
+
+      expect(result).toStrictEqual(expectedAction);
+    });
+  });
+});
+
+describe("Given a logoutUserAction function", () => {
+  describe("When its invoked", () => {
+    test("Then it should return an action type 'user/logoutUser'", () => {
+      const expectedActionType = "user/logoutUser";
+      const expectedAction = {
+        type: expectedActionType,
+        payload: undefined,
+      };
+
+      const result = logoutUserAction();
 
       expect(result).toStrictEqual(expectedAction);
     });
@@ -55,6 +70,28 @@ describe("Given a userSlice function", () => {
       const result = userSlice(initialState, action);
 
       expect(result).toStrictEqual(user);
+    });
+  });
+
+  describe("When it is called with action type logoutUser", () => {
+    test("Then it should return an empty user", () => {
+      const user: User = {
+        id: "1234",
+        email: "emal",
+        name: "name",
+        token: "1234",
+      };
+      const emptyUser: User = {
+        email: "",
+        id: "",
+        name: "",
+        token: "",
+      };
+
+      const action = logoutUserAction();
+      const result = userSlice(user, action);
+
+      expect(result).toStrictEqual(emptyUser);
     });
   });
 });

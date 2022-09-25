@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { setupStore } from "../store";
 import FetchApi from "../../services/FetchApi";
 import { openDialogAction, OpenDialogActionPayload } from "../ui/uiSlice";
-import { loginUserAction } from "./userSlice";
+import { loginUserAction, logoutUserAction } from "./userSlice";
 import { User, UserLogin, UserRegister } from "../../types/user";
 
 const store = setupStore();
@@ -321,6 +321,26 @@ describe("Given a useUser function", () => {
 
         expect(mockUseDispatch).toHaveBeenCalledWith(action);
       });
+    });
+  });
+
+  describe("When its invoked its logoutUser function", () => {
+    const { result } = renderHook(useUser, { wrapper: Wrapper });
+
+    test("Then it should invoke removeItem method from localStorage with 'token'", async () => {
+      Storage.prototype.removeItem = jest.fn();
+
+      await result.current.logoutUser();
+
+      expect(localStorage.removeItem).toHaveBeenCalledWith("token");
+    });
+
+    test("Then it should invoke dispatch with logoutUserAction", async () => {
+      const action = logoutUserAction();
+
+      await result.current.logoutUser();
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(action);
     });
   });
 });
