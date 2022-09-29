@@ -124,10 +124,10 @@ describe("Given a FetchApi class", () => {
 
   describe("When instantated and invoked its method deleteGameboard with a token and an id", () => {
     describe("And the DELETE fetch to gameboards endpoint with param as id, with authentication token, respone with a 204 status", () => {
-      test("Then it should resolve as undefined", async () => {
+      test("Then it should resolve as null", async () => {
         const id = "id1";
         const token = "token";
-        const expectedResult = undefined;
+        const expectedResult = null;
 
         let result: unknown;
         try {
@@ -141,10 +141,10 @@ describe("Given a FetchApi class", () => {
     });
 
     describe("And the DELETE fetch to gameboards endpoint with param as id, with authentication token, respone with a 200 status", () => {
-      test("Then it should resolve as undefined", async () => {
+      test("Then it should resolve as null", async () => {
         const id = "id2";
         const token = "token";
-        const expectedResult = undefined;
+        const expectedResult = null;
 
         let result: unknown;
         try {

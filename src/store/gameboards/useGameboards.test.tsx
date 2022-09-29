@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 import { setupStore } from "../store";
 import { Provider } from "react-redux";
 import useGameboards from "./useGameboards";
-import FetchApi from "../../services/FetchApi";
+import FetchApi, { GameboardResponse } from "../../services/FetchApi";
 import {
   openDialogAction,
   OpenDialogActionPayload,
@@ -140,7 +140,7 @@ describe("Given a useGameboards function", () => {
     test("Then it should call openDialogAction with type success, 'Successfully added!' and the function returned by useNavigate with root path", async () => {
       jest
         .spyOn(FetchApi.prototype, "postGameboard")
-        .mockResolvedValue({} as unknown as void);
+        .mockResolvedValue({} as GameboardResponse);
       mockOpenDialogAction = jest.fn();
 
       const expectedOnClose = mockedUseNavigate("/");
@@ -158,14 +158,9 @@ describe("Given a useGameboards function", () => {
 
     test("Then it should call the function returned by useDispatch with the action returned by gameboardsDeleteAction with id", async () => {
       const id = "id";
-      const fetchResponse = {
-        gameboards: fakeGameboards,
-      };
       const action = gameboardsDeleteAction(id);
 
-      jest
-        .spyOn(FetchApi.prototype, "deleteGameboard")
-        .mockResolvedValue(fetchResponse);
+      jest.spyOn(FetchApi.prototype, "deleteGameboard").mockResolvedValue(null);
 
       await result.current.deleteGameboards(id);
 

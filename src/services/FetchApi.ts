@@ -16,12 +16,16 @@ export interface LoginResponse {
   };
 }
 
+interface FetchApiOptions extends RequestInit {
+  parseResponse?: boolean;
+}
+
 class FetchApi {
   private baseUrl = config.endpoints.base;
   private headers: Record<string, string> = {};
 
-  private fetchJson<T>(pathUrl: string, options: RequestInit) {
-    return new Promise<T | void>(async (resolve, reject) => {
+  private fetchJson<T>(pathUrl: string, options: FetchApiOptions) {
+    return new Promise<T | null>(async (resolve, reject) => {
       try {
         const response = await fetch(this.baseUrl + pathUrl, {
           ...options,
@@ -31,22 +35,28 @@ class FetchApi {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
-        if (response.status === 204) {
-          resolve(undefined);
+
+        if (options.parseResponse === false || response.status === 204) {
+          resolve(null);
+          return;
         }
 
-        const data = await response.json();
-        resolve(data);
+        resolve(response.json());
       } catch (error) {
         reject(error);
       }
     });
   }
 
-  private post<T>(pathUrl: string, body: Object) {
+  private post<T>(
+    pathUrl: string,
+    body: Object,
+    options: FetchApiOptions = {}
+  ) {
     const postOptions = {
-      method: "POST",
+      ...options,
       body: JSON.stringify(body),
+      method: "POST",
     };
 
     return this.setHeader("Content-Type", "application/json").fetchJson<T>(
@@ -55,30 +65,37 @@ class FetchApi {
     );
   }
 
-  private postData<T>(pathUrl: string, data: FormData) {
+  private postData<T>(
+    pathUrl: string,
+    data: FormData,
+    options: FetchApiOptions = {}
+  ) {
     const postOptions = {
-      method: "POST",
+      ...options,
       body: data,
+      method: "POST",
     };
 
     return this.fetchJson<T>(pathUrl, postOptions);
   }
 
-  private get<T>(pathUrl: string) {
+  private get<T>(pathUrl: string, options: FetchApiOptions = {}) {
     const getOptions = {
+      ...options,
       method: "GET",
     };
 
     return this.fetchJson<T>(pathUrl, getOptions);
   }
 
-  private delete(pathUrl: string) {
-    const getOptions = {
+  private delete<T>(pathUrl: string, options: FetchApiOptions = {}) {
+    const deleteOptions = {
       parseResponse: false,
+      ...options,
       method: "DELETE",
     };
 
-    return this.fetchJson(pathUrl, getOptions);
+    return this.fetchJson<T>(pathUrl, deleteOptions);
   }
 
   private setHeader(key: string, value: string) {
@@ -92,9 +109,7 @@ class FetchApi {
   }
 
   loginUser(user: UserLogin) {
-    return this.post<LoginResponse>(config.endpoints.loginPath, {
-      user,
-    });
+    return this.post<LoginResponse>(config.endpoints.loginPath, { user });
   }
 
   registerUser(user: UserRegister) {
@@ -115,7 +130,7 @@ class FetchApi {
   }
 
   deleteGameboard(token: string, id: string) {
-    return this.setBearerAuth(token).delete(
+    return this.setBearerAuth(token).delete<null>(
       `${config.endpoints.gameboardsPath}/${id}`
     );
   }
