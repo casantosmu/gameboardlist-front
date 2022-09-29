@@ -1,7 +1,7 @@
 import jwtDecode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import FetchApi, { LoginResponse } from "../../services/FetchApi";
+import FetchApi from "../../services/FetchApi";
 import { TokenPayload, UserLogin, UserRegister } from "../../types/user";
 import { openDialogAction, OpenDialogActionPayload } from "../ui/uiSlice";
 import { loginUserAction, logoutUserAction } from "./userSlice";
@@ -14,13 +14,15 @@ const useUser = () => {
 
   const loginUser = async (user: UserLogin) => {
     try {
-      const response = (await fetchApi.loginUser(user)) as LoginResponse;
+      const {
+        user: { token },
+      } = await fetchApi.loginUser(user);
 
-      const token = response.user.token;
       const { name, email, id } = jwtDecode<TokenPayload>(token);
 
       dispatch(loginUserAction({ token, email, id, name }));
       localStorage.setItem("token", token);
+
       navigate("/");
     } catch (error) {
       const payload: OpenDialogActionPayload = {

@@ -109,7 +109,9 @@ class FetchApi {
   }
 
   loginUser(user: UserLogin) {
-    return this.post<LoginResponse>(config.endpoints.loginPath, { user });
+    return this.post<LoginResponse>(config.endpoints.loginPath, {
+      user,
+    }) as Promise<LoginResponse>;
   }
 
   registerUser(user: UserRegister) {
@@ -119,14 +121,14 @@ class FetchApi {
   getGameboards(token: string) {
     return this.setBearerAuth(token).get<GameboardsResponse>(
       config.endpoints.gameboardsPath
-    );
+    ) as Promise<GameboardsResponse>;
   }
 
   postGameboard(token: string, data: FormData) {
     return this.setBearerAuth(token).postData<GameboardResponse>(
       config.endpoints.gameboardsPath,
       data
-    );
+    ) as Promise<GameboardResponse>;
   }
 
   deleteGameboard(token: string, id: string) {
@@ -138,7 +140,7 @@ class FetchApi {
   getGameboard(token: string, id: string) {
     return this.setBearerAuth(token).get<GameboardResponse>(
       `${config.endpoints.gameboardsPath}/${id}`
-    );
+    ) as Promise<GameboardResponse>;
   }
 }
 

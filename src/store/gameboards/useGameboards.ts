@@ -1,9 +1,6 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import FetchApi, {
-  GameboardResponse,
-  GameboardsResponse,
-} from "../../services/FetchApi";
+import FetchApi from "../../services/FetchApi";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
   closeLoadingAction,
@@ -31,15 +28,13 @@ const useGameboards = () => {
     dispatch(gameboardsLoadAction());
 
     try {
-      const gameboardsResponse = (await fetchApi.getGameboards(
+      const { gameboards: gameboardsResponse } = await fetchApi.getGameboards(
         token
-      )) as GameboardsResponse;
-      const gameboards = gameboardsResponse.gameboards.map(
-        ({ image, ...gameboard }) => ({
-          ...gameboard,
-          image: `${process.env.REACT_APP_API_URL}/${image}`,
-        })
       );
+      const gameboards = gameboardsResponse.map(({ image, ...gameboard }) => ({
+        ...gameboard,
+        image: `${process.env.REACT_APP_API_URL}/${image}`,
+      }));
 
       dispatch(gameboardsLoadSuccessAction(gameboards));
     } catch (error) {
@@ -77,10 +72,10 @@ const useGameboards = () => {
     dispatch(gameboardsLoadAction());
 
     try {
-      const { gameboard: gameboardResponse } = (await fetchApi.postGameboard(
+      const { gameboard: gameboardResponse } = await fetchApi.postGameboard(
         token,
         gameboard
-      )) as GameboardResponse;
+      );
 
       const openDialogPayload: OpenDialogActionPayload = {
         type: "success",

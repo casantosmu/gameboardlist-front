@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import FetchApi, { GameboardResponse } from "../../services/FetchApi";
+import FetchApi from "../../services/FetchApi";
 import { useAppSelector } from "../hooks";
 import { closeLoadingAction, showLoadingAction } from "../ui/uiSlice";
 import {
@@ -21,13 +21,13 @@ const useGameboard = () => {
       dispatch(gameboardLoadAction());
 
       try {
-        const response = (await fetchApi.getGameboard(
+        const { gameboard: gameboardResponse } = await fetchApi.getGameboard(
           token,
           id
-        )) as GameboardResponse;
+        );
         const gameboard = {
-          ...response.gameboard,
-          image: `${process.env.REACT_APP_API_URL}/${response.gameboard.image}`,
+          ...gameboardResponse,
+          image: `${process.env.REACT_APP_API_URL}/${gameboardResponse.image}`,
         };
 
         dispatch(gameboardLoadSuccessAction(gameboard));
