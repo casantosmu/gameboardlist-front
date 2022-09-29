@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import useGameboards from "../../store/gameboards/useGameboards";
-import { Gameboard } from "../../types/interfaces";
+import { Gameboard } from "../../types/gameboards";
 import RatingTile from "../RatingTile/RatingTile";
 import StyledGameboardCard from "./StyledGameboardCard";
 

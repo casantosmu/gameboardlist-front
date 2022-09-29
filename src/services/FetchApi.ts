@@ -1,5 +1,5 @@
 import config from "../config";
-import { Gameboard, Gameboards } from "../types/interfaces";
+import { Gameboard, Gameboards } from "../types/gameboards";
 import { UserLogin, UserRegister } from "../types/user";
 
 export interface GameboardResponse {

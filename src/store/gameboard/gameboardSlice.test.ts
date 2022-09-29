@@ -1,4 +1,4 @@
-import { Gameboard } from "../../types/interfaces";
+import { Gameboard } from "../../types/gameboards";
 import { fakeGameboard1 } from "../../utils/mocks/fakeData";
 import gameboardSlice, {
   gameboardLoadAction,

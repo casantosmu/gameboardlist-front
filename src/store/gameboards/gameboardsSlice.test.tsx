@@ -1,4 +1,4 @@
-import { Gameboards } from "../../types/interfaces";
+import { Gameboards } from "../../types/gameboards";
 import {
   fakeGameboard1,
   fakeGameboard2,

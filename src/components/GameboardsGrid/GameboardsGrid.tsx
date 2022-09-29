@@ -1,4 +1,4 @@
-import { Gameboards } from "../../types/interfaces";
+import { Gameboards } from "../../types/gameboards";
 import GameboardCard from "../GameboardCard/GameboardCard";
 import StyledGameboardsGrid from "./StyledGameboardsGrid";
 
