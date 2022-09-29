@@ -48,10 +48,15 @@ class FetchApi {
     });
   }
 
-  private post<T>(pathUrl: string, body: Object) {
+  private post<T>(
+    pathUrl: string,
+    body: Object,
+    options: HttpClientOptions = {}
+  ) {
     const postOptions = {
-      method: "POST",
+      ...options,
       body: JSON.stringify(body),
+      method: "POST",
     };
 
     return this.setHeader("Content-Type", "application/json").fetchJson<T>(
@@ -60,30 +65,37 @@ class FetchApi {
     );
   }
 
-  private postData<T>(pathUrl: string, data: FormData) {
+  private postData<T>(
+    pathUrl: string,
+    data: FormData,
+    options: HttpClientOptions = {}
+  ) {
     const postOptions = {
-      method: "POST",
+      ...options,
       body: data,
+      method: "POST",
     };
 
     return this.fetchJson<T>(pathUrl, postOptions);
   }
 
-  private get<T>(pathUrl: string) {
+  private get<T>(pathUrl: string, options: HttpClientOptions = {}) {
     const getOptions = {
+      ...options,
       method: "GET",
     };
 
     return this.fetchJson<T>(pathUrl, getOptions);
   }
 
-  private delete<T>(pathUrl: string) {
-    const getOptions = {
+  private delete<T>(pathUrl: string, options: HttpClientOptions = {}) {
+    const deleteOptions = {
       parseResponse: false,
+      ...options,
       method: "DELETE",
     };
 
-    return this.fetchJson<T>(pathUrl, getOptions);
+    return this.fetchJson<T>(pathUrl, deleteOptions);
   }
 
   private setHeader(key: string, value: string) {
@@ -97,9 +109,7 @@ class FetchApi {
   }
 
   loginUser(user: UserLogin) {
-    return this.post<LoginResponse>(config.endpoints.loginPath, {
-      user,
-    });
+    return this.post<LoginResponse>(config.endpoints.loginPath, { user });
   }
 
   registerUser(user: UserRegister) {
