@@ -30,34 +30,19 @@ const uiSlice = createSlice({
   initialState: initialState as UiState,
   reducers: {
     openDialog(state, action: PayloadAction<OpenDialogActionPayload>) {
-      return {
-        ...state,
-        dialog: {
-          isOpen: true,
-          ...action.payload,
-        },
+      state.dialog = {
+        isOpen: true,
+        ...action.payload,
       };
     },
     closeDialog(state) {
-      return {
-        ...state,
-        dialog: {
-          ...state.dialog,
-          isOpen: false,
-        },
-      };
+      state.dialog.isOpen = false;
     },
     showLoading(state) {
-      return {
-        ...state,
-        isLoading: true,
-      };
+      state.isLoading = true;
     },
     closeLoading(state) {
-      return {
-        ...state,
-        isLoading: false,
-      };
+      state.isLoading = false;
     },
   },
 });
