@@ -16,12 +16,16 @@ export interface LoginResponse {
   };
 }
 
+interface HttpClientOptions extends RequestInit {
+  parseResponse?: boolean;
+}
+
 class FetchApi {
   private baseUrl = config.endpoints.base;
   private headers: Record<string, string> = {};
 
-  private fetchJson<T>(pathUrl: string, options: RequestInit) {
-    return new Promise<T | void>(async (resolve, reject) => {
+  private fetchJson<T>(pathUrl: string, options: HttpClientOptions) {
+    return new Promise<T | null>(async (resolve, reject) => {
       try {
         const response = await fetch(this.baseUrl + pathUrl, {
           ...options,
@@ -31,12 +35,13 @@ class FetchApi {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
-        if (response.status === 204) {
-          resolve(undefined);
+
+        if (options.parseResponse === false || response.status === 204) {
+          resolve(null);
+          return;
         }
 
-        const data = await response.json();
-        resolve(data);
+        resolve(response.json());
       } catch (error) {
         reject(error);
       }
@@ -72,13 +77,13 @@ class FetchApi {
     return this.fetchJson<T>(pathUrl, getOptions);
   }
 
-  private delete(pathUrl: string) {
+  private delete<T>(pathUrl: string) {
     const getOptions = {
       parseResponse: false,
       method: "DELETE",
     };
 
-    return this.fetchJson(pathUrl, getOptions);
+    return this.fetchJson<T>(pathUrl, getOptions);
   }
 
   private setHeader(key: string, value: string) {
@@ -115,7 +120,7 @@ class FetchApi {
   }
 
   deleteGameboard(token: string, id: string) {
-    return this.setBearerAuth(token).delete(
+    return this.setBearerAuth(token).delete<null>(
       `${config.endpoints.gameboardsPath}/${id}`
     );
   }
