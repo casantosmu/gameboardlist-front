@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Gameboard } from "../../types/interfaces";
+import { Gameboard } from "../../types/gameboards";
 
 interface InitialState {
   status: "idle" | "loading" | "succeeded" | "failed";

@@ -1,4 +1,4 @@
-import { Gameboard, Gameboards } from "../../types/interfaces";
+import { Gameboard, Gameboards } from "../../types/gameboards";
 
 export const fakeGameboard1: Gameboard = {
   id: "1",

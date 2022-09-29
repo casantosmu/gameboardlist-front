@@ -1,4 +1,4 @@
-import { GameboardsCategories, MinMax } from "../../types/interfaces";
+import { GameboardsCategories, MinMax } from "../../types/gameboards";
 import { capitalizeFirstLetter } from "../../utils/utils";
 import RatingTile from "../RatingTile/RatingTile";
 import StyledGameboardTable from "./StyledGameboardTable";

@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import renderWithProviders from "../../utils/test-utils";
 import GameboardCard from "./GameboardCard";
 import userEvent from "@testing-library/user-event";
-import { Gameboard } from "../../types/interfaces";
+import { Gameboard } from "../../types/gameboards";
 
 const mockDeleteGameboards = jest.fn();
 jest.mock("../../store/gameboards/useGameboards", () => () => ({

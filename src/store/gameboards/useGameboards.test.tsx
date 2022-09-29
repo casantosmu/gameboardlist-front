@@ -4,7 +4,6 @@ import { setupStore } from "../store";
 import { Provider } from "react-redux";
 import useGameboards from "./useGameboards";
 import FetchApi from "../../services/FetchApi";
-import { Gameboards } from "../../types/interfaces";
 import {
   openDialogAction,
   OpenDialogActionPayload,
@@ -15,6 +14,7 @@ import {
   gameboardsDeleteAction,
   gameboardsLoadSuccessAction,
 } from "./gameboardsSlice";
+import { Gameboards } from "../../types/gameboards";
 
 const preloadedState = {
   user: {
