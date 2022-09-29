@@ -18,11 +18,8 @@ const gameboardSlice = createSlice({
   initialState,
   reducers: {
     gameboardLoad: (state) => {
-      return {
-        status: "loading",
-        error: false,
-        gameboard: state.gameboard,
-      };
+      state.status = "loading";
+      state.error = false;
     },
     gameboardLoadSuccess: (_, action: PayloadAction<Gameboard>) => {
       return {

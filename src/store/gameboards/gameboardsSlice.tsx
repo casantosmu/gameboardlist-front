@@ -18,11 +18,8 @@ const gameboardsSlice = createSlice({
   initialState,
   reducers: {
     gameboardsLoad: (state) => {
-      return {
-        status: "loading",
-        error: false,
-        gameboards: state.gameboards,
-      };
+      state.status = "loading";
+      state.error = false;
     },
     gameboardsLoadSuccess: (_, action: PayloadAction<Gameboards>) => {
       return {
@@ -39,18 +36,12 @@ const gameboardsSlice = createSlice({
       };
     },
     gameboardsDelete: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        gameboards: state.gameboards.filter(
-          (gameboard) => gameboard.id !== action.payload
-        ),
-      };
+      state.gameboards = state.gameboards.filter(
+        (gameboard) => gameboard.id !== action.payload
+      );
     },
     gameboardsAdd: (state, action: PayloadAction<Gameboard>) => {
-      return {
-        ...state,
-        gameboards: [...state.gameboards, action.payload],
-      };
+      state.gameboards = [...state.gameboards, action.payload];
     },
   },
 });
