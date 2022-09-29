@@ -16,7 +16,7 @@ export interface LoginResponse {
   };
 }
 
-interface HttpClientOptions extends RequestInit {
+interface FetchApiOptions extends RequestInit {
   parseResponse?: boolean;
 }
 
@@ -24,7 +24,7 @@ class FetchApi {
   private baseUrl = config.endpoints.base;
   private headers: Record<string, string> = {};
 
-  private fetchJson<T>(pathUrl: string, options: HttpClientOptions) {
+  private fetchJson<T>(pathUrl: string, options: FetchApiOptions) {
     return new Promise<T | null>(async (resolve, reject) => {
       try {
         const response = await fetch(this.baseUrl + pathUrl, {
@@ -51,7 +51,7 @@ class FetchApi {
   private post<T>(
     pathUrl: string,
     body: Object,
-    options: HttpClientOptions = {}
+    options: FetchApiOptions = {}
   ) {
     const postOptions = {
       ...options,
@@ -68,7 +68,7 @@ class FetchApi {
   private postData<T>(
     pathUrl: string,
     data: FormData,
-    options: HttpClientOptions = {}
+    options: FetchApiOptions = {}
   ) {
     const postOptions = {
       ...options,
@@ -79,7 +79,7 @@ class FetchApi {
     return this.fetchJson<T>(pathUrl, postOptions);
   }
 
-  private get<T>(pathUrl: string, options: HttpClientOptions = {}) {
+  private get<T>(pathUrl: string, options: FetchApiOptions = {}) {
     const getOptions = {
       ...options,
       method: "GET",
@@ -88,7 +88,7 @@ class FetchApi {
     return this.fetchJson<T>(pathUrl, getOptions);
   }
 
-  private delete<T>(pathUrl: string, options: HttpClientOptions = {}) {
+  private delete<T>(pathUrl: string, options: FetchApiOptions = {}) {
     const deleteOptions = {
       parseResponse: false,
       ...options,
