@@ -17,8 +17,10 @@ const HomePage = (): JSX.Element => {
   );
 
   useEffect(() => {
-    getGameboards();
-  }, [getGameboards]);
+    if (status === "idle") {
+      getGameboards();
+    }
+  }, [getGameboards, status]);
 
   if (error) {
     return <Error />;
