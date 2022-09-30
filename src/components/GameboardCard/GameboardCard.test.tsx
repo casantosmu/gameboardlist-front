@@ -251,11 +251,11 @@ describe("Given a GameboardCard", () => {
 
       renderWithProviders(<GameboardCard {...gameboard} />);
 
-      const image = screen.getByRole("button", {
+      const button = screen.getByRole("button", {
         name: buttonText,
       });
 
-      await user.click(image);
+      await user.click(button);
 
       expect(mockDeleteGameboards).toHaveBeenCalledWith(id);
     });

@@ -10,16 +10,29 @@ jest.mock("../../store/gameboard/useGameboard", () => () => ({
   getGameboard: mockGetGameboard,
 }));
 
+const mockDeleteGameboards = jest.fn();
+jest.mock("../../store/gameboards/useGameboards", () => () => ({
+  getGameboards: jest.fn().mockResolvedValue(true),
+  deleteGameboards: mockDeleteGameboards,
+}));
+
+const mockedUseNavigate = jest.fn();
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockedUseNavigate,
+}));
+
 describe("Given a GameboardDetailsPage component", () => {
   describe("When its rendered and status is not loading and error", () => {
     test("Then it should render a heading with gameboard name from store", () => {
-      const expectedHeadingText = fakeGameboard1.name;
+      const storeGameboard = fakeGameboard1;
+      const expectedHeadingText = storeGameboard.name;
 
       renderWithProviders(<DetailsPage />, {
         preloadedState: {
           gameboard: {
             error: false,
-            gameboard: fakeGameboard1,
+            gameboard: storeGameboard,
             status: "succeeded",
           },
         },
@@ -32,30 +45,82 @@ describe("Given a GameboardDetailsPage component", () => {
 
       expect(heading).toBeInTheDocument();
     });
-  });
 
-  test("Then it should render a link 'Back to collection'", async () => {
-    const user = userEvent.setup();
+    test("Then it should render a link 'Back to collection'", async () => {
+      const user = userEvent.setup();
 
-    const createPath = "/";
-    const linkText = "Back to collection";
+      const createPath = "/";
+      const linkText = "Back to collection";
 
-    renderWithProviders(<DetailsPage />, {
-      preloadedState: {
-        gameboard: {
-          error: false,
-          gameboard: fakeGameboard1,
-          status: "succeeded",
+      renderWithProviders(<DetailsPage />, {
+        preloadedState: {
+          gameboard: {
+            error: false,
+            gameboard: fakeGameboard1,
+            status: "succeeded",
+          },
         },
-      },
+      });
+
+      const link = screen.getByRole("link", {
+        name: linkText,
+      });
+
+      await user.click(link);
+      expect(link).toHaveAttribute("href", createPath);
     });
 
-    const link = screen.getByRole("link", {
-      name: linkText,
-    });
+    describe("When user clicks on 'Delete' button", () => {
+      test("Then it should call the function deleteGameboard returned by useGameboard with the gameboard id from store", async () => {
+        const user = userEvent.setup();
 
-    await user.click(link);
-    expect(link).toHaveAttribute("href", createPath);
+        const storeGameboard = fakeGameboard1;
+        const id = storeGameboard.id;
+        const buttonText = "Delete";
+
+        renderWithProviders(<DetailsPage />, {
+          preloadedState: {
+            gameboard: {
+              error: false,
+              gameboard: storeGameboard,
+              status: "succeeded",
+            },
+          },
+        });
+
+        const button = screen.getByRole("button", {
+          name: buttonText,
+        });
+
+        await user.click(button);
+
+        expect(mockDeleteGameboards).toHaveBeenCalledWith(id);
+      });
+
+      test("Then it should call the function returned by useNavigate with root path", async () => {
+        const user = userEvent.setup();
+        const expectedPath = "/";
+        const buttonText = "Delete";
+
+        renderWithProviders(<DetailsPage />, {
+          preloadedState: {
+            gameboard: {
+              error: false,
+              gameboard: fakeGameboard1,
+              status: "succeeded",
+            },
+          },
+        });
+
+        const button = screen.getByRole("button", {
+          name: buttonText,
+        });
+
+        await user.click(button);
+
+        expect(mockedUseNavigate).toHaveBeenCalledWith(expectedPath);
+      });
+    });
   });
 
   describe("When its rendered and there is an error on gameboard store", () => {

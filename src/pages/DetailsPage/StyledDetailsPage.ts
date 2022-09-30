@@ -6,6 +6,12 @@ const StyledDetailsPage = styled.main`
 
   .gameboard-detail__header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .gameboard-detail__header-col {
+    display: flex;
     align-items: center;
     gap: 16px;
   }
