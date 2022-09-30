@@ -15,7 +15,7 @@ const GameboardCard = ({
   players,
   weight,
 }: Gameboard): JSX.Element => {
-  const { deleteGameboards, getGameboards } = useGameboards();
+  const { deleteGameboards } = useGameboards();
 
   return (
     <StyledGameboardCard>
@@ -66,7 +66,6 @@ const GameboardCard = ({
               className="gameboard-card__footer-action"
               onClick={async () => {
                 await deleteGameboards(id);
-                await getGameboards();
               }}
             >
               Delete
