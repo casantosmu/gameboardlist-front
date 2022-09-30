@@ -35,7 +35,8 @@ const gameboardsSlice = createSlice({
         gameboards: [],
       };
     },
-    gameboardsDelete: (state, action: PayloadAction<string>) => {
+    gameboardsDeleteSuccess: (state, action: PayloadAction<string>) => {
+      state.status = "succeeded";
       state.gameboards = state.gameboards.filter(
         (gameboard) => gameboard.id !== action.payload
       );
@@ -50,7 +51,7 @@ export const {
   gameboardsLoad: gameboardsLoadAction,
   gameboardsLoadSuccess: gameboardsLoadSuccessAction,
   gameboardsLoadFailure: gameboardsLoadFailureAction,
-  gameboardsDelete: gameboardsDeleteAction,
+  gameboardsDeleteSuccess: gameboardsDeleteSuccessAction,
   gameboardsAdd: gameboardsAddAction,
 } = gameboardsSlice.actions;
 export default gameboardsSlice.reducer;
