@@ -90,3 +90,16 @@ export const fakeGameboards: Gameboards = [
   { ...fakeGameboard3 },
   { ...fakeGameboard4 },
 ];
+
+export const fakeGameboardFormData = new FormData();
+fakeGameboardFormData.append("image", fakeGameboard1.image);
+fakeGameboardFormData.append("rating", `${fakeGameboard1.rating}`);
+fakeGameboardFormData.append("name", fakeGameboard1.name);
+fakeGameboardFormData.append("year", `${fakeGameboard1.year}`);
+fakeGameboardFormData.append("category", fakeGameboard1.category);
+fakeGameboardFormData.append("weight", `${fakeGameboard1.weight}`);
+fakeGameboardFormData.append("players[min]", `${fakeGameboard1.players.min}`);
+fakeGameboardFormData.append("players[max]", `${fakeGameboard1.players.max}`);
+fakeGameboardFormData.append("time[min]", `${fakeGameboard1.time.min}`);
+fakeGameboardFormData.append("time[max]", `${fakeGameboard1.time.max}`);
+fakeGameboardFormData.append("authorship", fakeGameboard1.authorship);

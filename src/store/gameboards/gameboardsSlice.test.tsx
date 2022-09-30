@@ -6,7 +6,7 @@ import {
 } from "../../utils/mocks/fakeData";
 import gameboardsSlice, {
   gameboardsAddAction,
-  gameboardsDeleteAction,
+  gameboardsDeleteSuccessAction,
   gameboardsLoadAction,
   gameboardsLoadFailureAction,
   gameboardsLoadSuccessAction,
@@ -80,8 +80,8 @@ describe("Given a gameboardsSlice function", () => {
     });
   });
 
-  describe("When it is called with action type gameboardsDelete with id 1", () => {
-    test("Then it should return the initial state and all gameboards without id 1", () => {
+  describe("When it is called with action type gameboardsDeleteSuccess with id 1", () => {
+    test("Then it should return the initial state, with status 'success' and all gameboards without id 1", () => {
       const initialState: InitialState = {
         gameboards: [fakeGameboard1, fakeGameboard2],
         status: "idle",
@@ -89,12 +89,12 @@ describe("Given a gameboardsSlice function", () => {
       };
       const expectedResult: InitialState = {
         gameboards: [fakeGameboard2],
-        status: "idle",
+        status: "succeeded",
         error: false,
       };
       const id = fakeGameboard1.id;
 
-      const action = gameboardsDeleteAction(id);
+      const action = gameboardsDeleteSuccessAction(id);
       const result = gameboardsSlice(initialState, action);
 
       expect(result).toStrictEqual(expectedResult);

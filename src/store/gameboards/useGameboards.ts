@@ -10,7 +10,7 @@ import {
 } from "../ui/uiSlice";
 import {
   gameboardsAddAction,
-  gameboardsDeleteAction,
+  gameboardsDeleteSuccessAction,
   gameboardsLoadAction,
   gameboardsLoadFailureAction,
   gameboardsLoadSuccessAction,
@@ -48,12 +48,11 @@ const useGameboards = () => {
     const fetchApi = new FetchApi();
 
     dispatch(showLoadingAction());
-    dispatch(gameboardsLoadAction());
 
     try {
       await fetchApi.deleteGameboard(token, id);
 
-      dispatch(gameboardsDeleteAction(id));
+      dispatch(gameboardsDeleteSuccessAction(id));
     } catch {
       const openDialogPayload: OpenDialogActionPayload = {
         text: "Ups! Shomething went wrong",
@@ -69,7 +68,6 @@ const useGameboards = () => {
     const fetchApi = new FetchApi();
 
     dispatch(showLoadingAction());
-    dispatch(gameboardsLoadAction());
 
     try {
       const { gameboard: gameboardResponse } = await fetchApi.postGameboard(
