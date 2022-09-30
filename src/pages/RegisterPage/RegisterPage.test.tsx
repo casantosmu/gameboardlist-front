@@ -25,5 +25,16 @@ describe("Given a LoginPage component", () => {
 
       expect(form).toBeInTheDocument();
     });
+
+    test("Then it should render a 'Back to login' link to '/login'", () => {
+      const expectedLinkText = "Back to login";
+      const expectedLinkHref = "/login";
+
+      renderWithProviders(<RegisterPage />);
+
+      const link = screen.getByRole("link", { name: expectedLinkText });
+
+      expect(link).toHaveAttribute("href", expectedLinkHref);
+    });
   });
 });
