@@ -71,7 +71,7 @@ describe("Given a GameboardDetailsPage component", () => {
     });
 
     describe("When user clicks on 'Delete' button", () => {
-      test("Then it should call the function deleteGameboard returned by useGameboard with the gameboard id from store", async () => {
+      test("Then it should call the function deleteGameboards returned by useGameboard with the gameboard id from store", async () => {
         const user = userEvent.setup();
 
         const storeGameboard = fakeGameboard1;

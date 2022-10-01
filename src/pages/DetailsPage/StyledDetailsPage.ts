@@ -6,8 +6,14 @@ const StyledDetailsPage = styled.main`
 
   .gameboard-detail__header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.small}) {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
   .gameboard-detail__header-col {
