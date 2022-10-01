@@ -41,16 +41,6 @@ const DetailsPage = (): JSX.Element => {
           <StyledGameboardDetailsPage>
             <header className="gameboard-detail__header">
               <div className="gameboard-detail__header-col">
-                <Link to={"/"} className="gameboard-detail__icon">
-                  <FontAwesomeIcon icon={faArrowLeft} size="lg" />
-                  <VisuallyHidden>Back to collection</VisuallyHidden>
-                </Link>
-                <h1 className="gameboard-detail__heading">{gameboard.name}</h1>
-                <span className="gameboard-detail__heading-label">
-                  {gameboard.year}
-                </span>
-              </div>
-              <div className="gameboard-detail__header-col">
                 <Button
                   semantic="secondary"
                   onClick={async () => {
@@ -60,6 +50,16 @@ const DetailsPage = (): JSX.Element => {
                 >
                   Delete
                 </Button>
+              </div>
+              <div className="gameboard-detail__header-col">
+                <Link to={"/"} className="gameboard-detail__icon">
+                  <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+                  <VisuallyHidden>Back to collection</VisuallyHidden>
+                </Link>
+                <h1 className="gameboard-detail__heading">{gameboard.name}</h1>
+                <span className="gameboard-detail__heading-label">
+                  {gameboard.year}
+                </span>
               </div>
             </header>
             <div className="gameboard-detail__content">
